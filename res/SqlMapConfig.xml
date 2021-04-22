@@ -33,6 +33,7 @@
 <!-- ★중요 (쿼리 XML 연결부분)★ -->
 <!-- 처리할 SQL 문 xml 생성 후 <sqlMap resource="경로명/파일명.xml"/> 사용하여 연결 
 	xml 분리 예) 마이페이지, Qna, 공지사항 등 (게시판 CRUD 별로 쿼리 분리)-->
+		<sqlMap resource="kr/or/ddit/sqlmap/atchFile.xml" />
 		<sqlMap resource="kr/or/ddit/sqlmap/commBoard.xml" />
 		<sqlMap resource="kr/or/ddit/sqlmap/qnaBoard.xml" />
 </sqlMapConfig>

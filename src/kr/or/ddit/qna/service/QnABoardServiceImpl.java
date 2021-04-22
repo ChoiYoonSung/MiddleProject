@@ -85,10 +85,10 @@ public class QnABoardServiceImpl implements IQnABoardService{
 	}
 
 	@Override
-	public QnABoardVO getQnA(String userId) {
+	public QnABoardVO getQnA(String boardSeq) {
 		QnABoardVO qna = null;
 		try {
-			qna = qnaDao.getQnA(smc, userId);
+			qna = qnaDao.getQnA(smc, boardSeq);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

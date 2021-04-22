@@ -6,11 +6,10 @@
 <sqlMap namespace="commBoard">
 
  
- 	<insert id = "insertMember" parameterClass="kr.or.ddit.commBoard.vo.CommBoardVO">
- 	
-	 	insert into TB_COMM_BOARD
-	 		  	  (code, board_seq, user_id, board_title, board_date, board_content)
-        	values('#code#',commBoardNo_seq.nextval,#userId#,#boardTitle#, sysdate, #boardContent#);
+ 	<insert id = "insertBoard" parameterClass="kr.or.ddit.commBoard.vo.CommBoardVO">
+        INSERT INTO TB_COMM_BOARD
+	 		  	  (CODE, BOARD_SEQ, USER_ID, BOARD_TITLE, BOARD_DATE, BOARD_CONTENT, ATCH_FILE_ID)
+        	VALUES(#code#,SEQ_COMM_BOARD.NEXTVAL,#userId#,#boardTitle#, SYSDATE, #boardContent#, #atchFileId#)
  	</insert>
 	
 <!--  	<select id="getAllBoardList" parameterClass="kr.or.ddit.commBoard.vo.CommBoardVO" resultClass="kr.or.ddit.commBoard.vo.CommBoardVO"> -->
@@ -28,7 +27,7 @@
 			  ,BOARD_DELETE  boardDelete 
  		FROM TB_COMM_BOARD
  		ORDER BY BOARD_SEQ DESC) AA)BB
- 		WHERE RONUM BETWEEN #firstRecNo# and #lastRecNo#
+ 		WHERE ROWNUM BETWEEN #firstRecNo# and #lastRecNo#
  		
  	</select>
  	
@@ -38,8 +37,17 @@
 	 		from TB_COMM_BOARD
 	 </select>
  	
- 	<select id="getBoardInfo" >
- 		select *  FROM TB_COMM_BOARD where user_id = #userId#
+ 	<select id="getBoardInfo" parameterClass="String" resultClass="kr.or.ddit.commBoard.vo.CommBoardVO">
+ 		select CODE          code         
+			  ,BOARD_SEQ     boardSeqNum    
+			  ,USER_ID       userId      
+			  ,BOARD_TITLE   boardTitle  
+			  ,BOARD_DATE    boardDate   
+			  ,BOARD_CONTENT boardContent
+			  ,ATCH_FILE_ID  atchFileId 
+			  ,BOARD_HITS    boardHitsNumber   
+			  ,BOARD_DELETE  boardDelete 
+		  FROM TB_COMM_BOARD where user_id = #userId#
  	</select>
  	
 </sqlMap>			

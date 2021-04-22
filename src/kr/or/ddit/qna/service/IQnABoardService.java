@@ -15,5 +15,5 @@ public interface IQnABoardService {
 	
 	public List<QnABoardVO> getQnABoard(QnABoardVO qna);
 	
-	public QnABoardVO getQnA(String userId);
+	public QnABoardVO getQnA(String boardSeq);
 }

@@ -14,10 +14,9 @@ import kr.or.ddit.qna.vo.QnABoardVO;
 
 public class DeleteQnABoardHandler implements CommandHandler{
 	
-	private static final String VIEW_PAGE = "/WEB-INF/view/qna/deleteQnA.jsp";
 	@Override
 	public boolean isRedirect(HttpServletRequest req) {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -27,16 +26,8 @@ public class DeleteQnABoardHandler implements CommandHandler{
 		QnABoardVO qna = new QnABoardVO();
 		BeanUtils.populate(qna, req.getParameterMap());
 		
-		int cnt = qnaService.deleteQnABoard(qna);
-		
-		String msg = "";
-		if(cnt > 0) {
-			msg = "성공";
-		}else {
-			msg = "실패";
-		}
-		
-		String redirectUrl = req.getContextPath() + "/qna/listQnA.jsp?msg=" + URLEncoder.encode(msg,"UTF-8");
+		qnaService.deleteQnABoard(qna);
+		String redirectUrl = req.getContextPath() + "/qnaBoard/list.do?msg=";
 		return redirectUrl;
 	}
 }

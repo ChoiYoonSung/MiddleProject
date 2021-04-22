@@ -58,8 +58,8 @@ public class QnABoardDaoImpl implements IQnABoardDao{
 	}
 
 	@Override
-	public QnABoardVO getQnA(SqlMapClient smc, String userId) throws SQLException {
-		QnABoardVO qna = (QnABoardVO) smc.queryForList("qna.getQnA", userId);
+	public QnABoardVO getQnA(SqlMapClient smc, String boardSeq) throws SQLException {
+		QnABoardVO qna = (QnABoardVO) smc.queryForObject("qna.getQnA", boardSeq);
 		return qna;
 	}
 	

@@ -1,7 +1,5 @@
 package kr.or.ddit.qna.handler;
 
-import java.net.URLEncoder;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +12,7 @@ import kr.or.ddit.qna.vo.QnABoardVO;
 
 public class UpdateQnABoardHandler implements CommandHandler{
 	
-	private static final String VIEW_PAGE = "/WEB-INF/view/updateQnA.jsp";
+	private static final String VIEW_PAGE = "/WEB-INF/view/qnaBoard/updateQnA.jsp";
 	
 	@Override
 	public boolean isRedirect(HttpServletRequest req) {
@@ -28,16 +26,16 @@ public class UpdateQnABoardHandler implements CommandHandler{
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		if(req.getMethod().equals("GET")) {
-			String userId = req.getParameter("userId");
+			String boardSeq = req.getParameter("boardSeq");
 			
 			IQnABoardService qnaService = QnABoardServiceImpl.getInstance();
-			QnABoardVO qna = qnaService.getQnA(userId);
+			QnABoardVO qna = qnaService.getQnA(boardSeq);
 			
 			req.setAttribute("qnaVO", qna);
 			return VIEW_PAGE;
 		}else {
+			long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
 			String userId = req.getParameter("userId");				//ID
-			String boardType = req.getParameter("boardType");		//유형
 			String boardTitle = req.getParameter("boardTitle");		//제목
 			String boardContent = req.getParameter("boardContent");	//내용
 			String boardSecret = req.getParameter("boardSecret");	//비공개
@@ -47,17 +45,17 @@ public class UpdateQnABoardHandler implements CommandHandler{
 			IQnABoardService qnaService = QnABoardServiceImpl.getInstance();
 			
 			QnABoardVO qna = new QnABoardVO();
-			BeanUtils.populate(qna, req.getParameterMap());
+			qna.setBoardSeq(boardSeq);
+			qna.setUserId(userId);
+			qna.setBoardTitle(boardTitle);
+			qna.setBoardContent(boardContent);
+			qna.setBoardSecret(boardSecret);
+			qna.setBoardPw(boardPw);
+			qna.setAtchFileId(atchFileId);
 			
-			int cnt = qnaService.updateQnABoard(qna);
-			String msg = "";
-			if(cnt > 0) {
-				msg = "성공";
-			}else {
-				msg = "실패";
-			}
+			qnaService.updateQnABoard(qna);
 			
-			String redirectUrl = req.getContextPath() + "/qna/listQnA.jsp?msg=" + URLEncoder.encode(msg,"UTF-8");
+			String redirectUrl = req.getContextPath() + "/qnaBoard/select.do?boardSeq=" + boardSeq;
 			
 			return redirectUrl;
 		}

@@ -1,21 +1,19 @@
-<%@page import="java.util.List"%>
 <%@page import="kr.or.ddit.qna.vo.QnABoardVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
-	List<QnABoardVO> qnaList = (List<QnABoardVO>)request.getAttribute("qnaList");
-
-	String msg = request.getParameter("msg") == null ? "" : request.getParameter("msg");
+	QnABoardVO qnaVO = (QnABoardVO)request.getAttribute("qnaVO");
 %>
-<html lang="kr">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>관리자 페이지</title>
+        <title>게시글 쓰기</title>
         <link href="<%=request.getContextPath() %>/adminView/css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
@@ -119,86 +117,39 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4 mb-4">Board Administration</h1>
+                    
+                    
+                        <h1 class="mt-4 mb-4">글 보기 테스트</h1>
                         
-                        <ul class="nav nav-pills mb-4">
-						  <li class="nav-item">
-						    <a class="nav-link" href="boardAdmin.html">전체</a>
-						  </li>
-						  <li class="nav-item">
-						    <a class="nav-link" href="noticeAdmin.html">공지</a>
-						  </li>
-						  <li class="nav-item">
-						    <a class="nav-link" href="faqAdmin.html">FAQ</a>
-						  </li>
-						  <li class="nav-item">
-						    <a class="nav-link active" href="qnaAdmin.html">문의</a>
-						  </li>
-						  <li class="nav-item">
-						    <a class="nav-link" href="eventAdmin.html">홍보/이벤트</a>
-						  </li>
-						  <li class="nav-item">
-						    <a class="nav-link" href="commuAdmin.html">커뮤니티</a>
-						  </li>
-						  <li class="nav-item">
-						    <a class="nav-link" href="partyAdmin.html">파티</a>
-						  </li>
-						</ul>
 						<div class="card mb-4">
                             <div class="card-body">
-                               문의 게시판 테스트용 임시 페이지 입니다.
-                               <a type="button" class="btn btn-outline-danger btn-sm" href="insert.do">글쓰기</a>
+                               중프 게시판 테스트용 임시 페이지 입니다.
                             </div>
                         </div>
-                        
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table mr-1"></i>
-                                문의 게시판
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>제목</th>
-                                                <th>작성자</th>
-                                                <th>작성일</th>
-                                                <th>조회수</th>
-                                                <th>작성 게시판</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <%
-                                       	int qnaSize = qnaList.size();
-                                       
-                                       	if(qnaSize > 0){
-                                       		for(int i = 0; i < qnaSize; i++){
-                                   			%>
-                                   			<tr>
-                                   				<td><%= qnaList.get(i).getBoardSeq() %></td>
-                                   				<td><a href="select.do?boardSeq=<%=qnaList.get(i).getBoardSeq() %>"><%=qnaList.get(i).getBoardTitle() %></a></td>
-                                   				<td><%= qnaList.get(i).getUserId() %></td>
-                                   				<td><%= qnaList.get(i).getBoardDate() %></td>
-                                   				<td><%= qnaList.get(i).getBoardHits() %></td>
-                                   				<td><%= qnaList.get(i).getBoardType() %></td>
-                                   			</tr>
-                                   			<%
-                                       		}
-                                       	}else{
-                                       		%>
-                                       		<tr align="center">
-                                       			<td colspan="5">게시글이 없습니다.</td>
-                                       		</tr>
-                                       		<%
-                                       	}
-                                        %>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                        <form id="fm" method="post" enctype="multipart/form-data">
+	                        <input type="hidden" value="<%=qnaVO.getUserId() %>">
+	                        <input type="hidden" value="<%=qnaVO.getBoardSeq() %>">
+							<div class="input-group mb-3 col-md-10">
+							  <span class="input-group-text" id="basic-addon3">제목</span>
+							  <input type="text" class="form-control" id="boardTitle" aria-describedby="basic-addon3" readonly="readonly" value="<%=qnaVO.getBoardTitle() %>">
+							</div>
+							
+							<div class="input-group mb-3 col-md-10">
+							  <span class="input-group-text">내용</span>
+							  <textarea class="form-control" id="boardContent" aria-label="With textarea" rows="10" readonly="readonly"><%=qnaVO.getBoardContent() %></textarea>
+							</div>
+							
+							<div class="input-group mb-3 col-md-10">
+							  <span class="input-group-text" name="atchFile">첨부파일</span>
+							  <input type="file" class="form-control" disabled="disabled">
+							</div>
+							
+							<div class="col-12">
+							   <button type="reset" class="btn btn-outline-secondary btn-sm">초기화</button>
+							   <a type="button" class="btn btn-outline-primary btn-sm" href='update.do?boardSeq=<%=request.getParameter("boardSeq") %>'>수정</a>
+							   <a type="button" class="btn btn-outline-info btn-sm" href="list.do">목록으로</a>
+						    </div>
+                        </form>
                    	</div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -224,5 +175,7 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="<%=request.getContextPath() %>/adminView/assets/demo/datatables-demo.js"></script>
+         <script type="text/javascript">
+        </script>
     </body>
 </html>

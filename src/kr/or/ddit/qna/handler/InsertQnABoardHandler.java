@@ -5,10 +5,16 @@ import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
+
 import kr.or.ddit.common.handler.CommandHandler;
+import kr.or.ddit.common.service.AtchFileServiceImpl;
+import kr.or.ddit.common.service.IAtchFileService;
+import kr.or.ddit.common.vo.AtchFileVO;
 import kr.or.ddit.qna.service.IQnABoardService;
 import kr.or.ddit.qna.service.QnABoardServiceImpl;
 import kr.or.ddit.qna.vo.QnABoardVO;
+import kr.or.ddit.util.FileUploadRequestWrapper;
 
 public class InsertQnABoardHandler implements CommandHandler{
 	
@@ -28,6 +34,13 @@ public class InsertQnABoardHandler implements CommandHandler{
 		if(req.getMethod().equals("GET")) {
 			return VIEW_PAGE;
 		}else {
+			FileItem item = ((FileUploadRequestWrapper)req).getFileItem("atchFile");
+			
+			AtchFileVO atchFileVO = new AtchFileVO();
+			
+			IAtchFileService fileService = AtchFileServiceImpl.getInstance();
+			atchFileVO = fileService.saveAtchFile(item); // AtchFile 넣음
+			
 			String userId = req.getParameter("userId");				//ID
 			String boardType = req.getParameter("boardType");		//유형
 			String boardTitle = req.getParameter("boardTitle");		//제목
@@ -47,15 +60,9 @@ public class InsertQnABoardHandler implements CommandHandler{
 			qna.setBoardPw(boardPw);
 			qna.setAtchFileId(atchFileId);
 			
-			int cnt = qnaService.insertQnABoard(qna);
+			qnaService.insertQnABoard(qna);
 			
-			String msg = "";
-			if(cnt > 0) {
-				msg = "성공";
-			}else {
-				msg = "실패";
-			}
-			String redirectUrl = req.getContextPath() + "/qna/listQnA.jsp?msg=" + URLEncoder.encode(msg,"UTF-8");
+			String redirectUrl = req.getContextPath() + "/qnaBoard/list.do";
 			
 			return redirectUrl;
 		}

@@ -12,7 +12,7 @@ import kr.or.ddit.qna.vo.QnABoardVO;
 
 public class GetQnABoardHandler implements CommandHandler{
 	
-	private static final String VIEW_PAGE = "/WEB-INF/view/qna/selectQnA.jsp";
+	private static final String VIEW_PAGE = "/WEB-INF/view/qnaBoard/selectQnA.jsp";
 	@Override
 	public boolean isRedirect(HttpServletRequest req) {
 			return false;
@@ -20,9 +20,11 @@ public class GetQnABoardHandler implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		String boardSeq = req.getParameter("boardSeq");
 		
 		IQnABoardService qnaService = QnABoardServiceImpl.getInstance();
-		QnABoardVO qna = new QnABoardVO();
+		QnABoardVO qna = qnaService.getQnA(boardSeq);
+		
 		BeanUtils.populate(qna, req.getParameterMap());
 		
 		qnaService.getQnABoard(qna);

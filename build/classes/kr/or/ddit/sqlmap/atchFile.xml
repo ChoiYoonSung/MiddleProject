@@ -4,7 +4,7 @@
 			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="atchFile">
-	<resultMap class="kr.or.ddit.member.vo.AtchFileVO" id="atchFileDetailMap">
+	<resultMap class="kr.or.ddit.common.vo.AtchFileVO" id="atchFileDetailMap">
 		<result property= "atchFileId"         column="ATCH_FILE_ID" />
 		<result property= "fileSn"         column="FILE_SN" />
 		<result property= "fileStreCours"         column="FILE_STRE_COURS" />
@@ -17,14 +17,14 @@
 	
 	<select id="getAtchFileList" resultMap="atchFileDetailMap">	
 		
-		select * from atch_file_detail
+		select * from tb_atch_file_detail
 		where atch_file_id =#atchFileId#
 		
 	</select>	
 	
 	<select id="getAtchFileDetail" resultMap="atchFileDetailMap">
 
-		select * from atch_file_detail
+		select * from tb_atch_file_detail
 		where atch_file_id = #atchFileId#
 		and file_sn =#fileSn#
 	
@@ -33,10 +33,10 @@
 	<insert id="insertAtchFile">
 		<selectKey keyProperty="atchFileId" resultClass="long">
 		
-		select ATCH_FILE_SEQ.nextval from dual
+		select seq_ATCH_FILE.nextval from dual
 		</selectKey>
 	
-		insert into atch_file
+		insert into tb_atch_file
 		( atch_file_id
 		, creat_dt
 		, use_at
@@ -53,7 +53,7 @@
 		
 	<insert id="insertAtchFileDetail">
 	
-		insert into atch_file_detail
+		insert into tb_atch_file_detail
 		(
 		ATCH_FILE_ID
 		, FILE_SN
@@ -69,7 +69,7 @@
 		#atchFileId#
 		, (
 			select nvl(max(file_sn), 0) +1
-			from atch_file_detail
+			from tb_atch_file_detail
 			where atch_file_id = #atchFileId#
 			)
 		,#fileStreCours#

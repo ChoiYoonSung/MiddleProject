@@ -124,25 +124,33 @@
                             </div>
                         </div>
                         <form id="fm" method="post" enctype="multipart/form-data">
+                        	<input type="hidden"  id="boardSeq" name="boardSeq" value="">
+                        	<input type="hidden"  id="userId" name="userId" value="">
 							<div class="input-group mb-3 col-md-10">
 							  <span class="input-group-text" id="basic-addon3">제목</span>
-							  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+							  <input type="text" class="form-control" id="boardTitle" name="boardTitle" aria-describedby="basic-addon3" value="">
 							</div>
 							
 							<div class="input-group mb-3 col-md-10">
 							  <span class="input-group-text">내용</span>
-							  <textarea class="form-control" aria-label="With textarea" rows="10"></textarea>
+							  <textarea class="form-control" id="boardContent" name="boardContent" aria-label="With textarea" rows="10"></textarea>
 							</div>
 							
 							<div class="input-group mb-3 col-md-10">
-								<input type="checkbox" class="" id="qnaSecret">비밀글
-								<input type="text" class="" id="qnaPassword" style="display: none">
+							  <span class="input-group-text">첨부파일</span>
+							  <input type="file" class="form-control" id="atchFileId" name="atchFileId">
+							</div>
+							
+							
+							<div class="input-group mb-3 col-md-10">
+								비밀글<input type="checkbox" class="" id="boardSecret" name="boardSecret" onchange="secret()" value="N">
+								비밀번호<input type="text" class="" id="boardPw" name="boardPw">
 							</div>
 							
 							<div class="col-12">
-							   <button type="submit" class="btn btn-outline-primary btn-sm">등록</button>
 							   <button type="reset" class="btn btn-outline-secondary btn-sm">초기화</button>
-							   <a type="button" class="btn btn-outline-info btn-sm" href="boardAdmin.html">목록으로</a>
+							   <button type="submit" class="btn btn-outline-primary btn-sm">등록</button>
+							   <a type="button" class="btn btn-outline-info btn-sm" href="list.do">목록으로</a>
 						    </div>
                         </form>
                    	</div>
@@ -171,13 +179,13 @@
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="<%=request.getContextPath() %>/adminView/assets/demo/datatables-demo.js"></script>
         <script type="text/javascript">
-        	$(document).ready(function(){
-        		if($('#qnaSecret').is(":checked") == true){
-        			$('#qnaPassword').show();
-        		}else{
-        			$('#qnaPassword').hide();
-        		}
-        	})
-        </script>
+	        function secret(){
+	       	 if($('#boardSecret').prop("checked")){
+	       		 $('#boardSecret').val('Y');
+	       	 }else{
+	       		 $('#boardSecret').val('N');
+	       	 }
+	        }
+       </script>
     </body>
 </html>
