@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+         PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+         "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="adminBoard">
+	<insert id="insertAdminBoard" parameterClass="kr.or.ddit.adminBoard.vo.AdminBoardVO">
+		insert into TB_ADMIN_BOARD(CODE
+                    , BOARD_SEQ
+                    , USER_ID
+                    , BOARD_TITLE
+                    , BOARD_DATE
+                    , BOARD_CONTENT
+                    , ATCH_FILE_ID
+                    , BOARD_HITS)
+<!--                     , BOARD_DELETE) -->
+		VALUES(#code#
+				, SEQ_ADMIN_BOARD.NEXTVAL
+				, 'admin'
+				, #boardTitle#
+				, sysdate
+				, #boardContent#
+				, #atchFileId#
+				, #boardHits#);
+<!-- 				, ); -->
+	</insert>
+	
+	<update id="updateAdminBoard" parameterClass="kr.or.ddit.adminBoard.vo.AdminBoardVO">
+		update TB_ADMIN_BOARD set BOARD_TITLE = #boardTitle#,
+								  BOARD_CONTENT = #boardContent#,
+								  ATCH_FILE_ID = #atchFileId#
+				WHERE BOARD_SEQ = #boardSeq#;
+	</update>
+	
+	<update id="deleteAdminBoard" parameterClass="kr.or.ddit.adminBoard.vo.AdminBoardVO">
+		update TB_ADMIN_BOARD set BOARD_DELETE = 'Y'
+				WHERE BOARD_SEQ = #boardSeq#;
+	</update>
+	
+	<resultMap class="kr.or.ddit.adminBoard.vo.AdminBoardVO" id="abMap">
+		<result property="code" column="CODE"/>
+		<result property="boardSeq" column="BOARD_SEQ"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="boardTitle" column="BOARD_TITLE"/>
+		<result property="boardDate" column="BOARD_DATE"/>
+		<result property="boardHits" column="BOARD_HITS"/>
+		<result property="boardDelete" column="BOARD_DELETE"/>
+	</resultMap>
+	<select id="getAllAdminBoardList" resultMap="abMap">
+		select 	*
+		from TB_ADMIN_BOARD
+		where CODE = #code#
+		and BOARD_DELETE = 'N'
+	</select>
+	
+	<select id="getSearchAdminBoard" resultMap="abMap">
+		select 	*
+		from TB_ADMIN_BOARD
+		where BOARD_DELETE = 'N'
+		and CODE = #code#
+		<isNotEmpty>
+			and BOARD_SEQ = #boardSeq#
+		</isNotEmpty>
+	</select>
+	
+	<select id="getAdminBoard" parameterClass="kr.or.ddit.adminBoard.vo.AdminBoardVO">
+		select  CODE
+			,	BOARD_SEQ
+			,	USER_ID
+			,	BOARD_TITLE
+			,	BOARD_DATE
+			,	BOARD_CONTENT
+			,	ATCH_FILE_ID
+			,	BOARD_HITS
+			,	BOARD_DELETE
+		from TB_ADMIN_BOARD
+		where BOARD_SEQ = #boardSeq#
+		and BOARD_DELETE = 'N'
+		and CODE = #code#
+	</select>
+	<select id="checkAdminBoard" parameterClass="Long" resultClass="int">
+		select count(*) as cnt
+		from TB_ADMIN_BOARD
+		where BOARD_SEQ = #boardSeq#
+	</select>
+</sqlMap>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="qna">
+
+	<insert id="insertQnABoard" parameterClass="kr.or.ddit.qna.vo.QnABoardVO">
+		insert into TB_QNA_BOARD (
+			CODE
+			, BOARD_SEQ		boardSeq
+			, USER_ID		userId
+			, BOARD_TYPE	boardType
+			, BOARD_TITLE	boardTitle
+			, BOARD_CONTENT	boardConetnet
+			, BOARD_DATE	boardDate
+			, BOARD_SECRET	boardSecret
+			<isNotEmpty property="boardPw">
+			, BOARD_PW		boardPw
+			</isNotEmpty>
+			, BOARD_ANSWER	boardAnswer
+			<isNotEmpty property="atchFileId">
+			, ATCH_FILE_ID	atchFileId
+			</isNotEmpty>
+			<isNotEmpty property="boardHits">
+			, BOARD_HITS	boardHits
+			</isNotEmpty>
+			<isNotEmpty property="boardDelete">
+			, BOARD_DELETE	boardDelete
+			</isNotEmpty>
+			)
+		values(
+			'QNA'
+			, BOARD_SEQ.NEXTVAL
+			, #userId#
+			, #boardType#
+			, #boardTitle#
+			, #boardContent#
+			, sysdate
+			, #boardSecret#
+			<isNotEmpty property="boardPw">
+			, #boardPw#
+			 </isNotEmpty>
+			, 'N'
+			<isNotEmpty property="atchFileId">
+			, #atchFileId#
+			</isNotEmpty>
+			<isNotEmpty property="boardHits">
+			, #boardHits#
+			</isNotEmpty>
+			<isNotEmpty property="boardDelete">
+			, #boardDelete#
+			</isNotEmpty>
+		)
+	</insert>
+	
+	<update id="updateQnABoard" parameterClass="kr.or.ddit.qna.vo.QnABoardVO">
+		update TB_QNA_BOARD(
+				BOARD_TITLE		boardTitle
+				, BOARD_CONTENT	boardContent
+				, BOARD_DATE	boardDate
+				, BOARD_SECRET	boardSecret
+				<isNotEmpty property="boardSecret">
+				, BOARD_PW		boardPw
+				</isNotEmpty>
+				, ATCH_FILE_ID	atchFileId
+				)
+		   set (
+		   		#boardTitle#
+		   		, #boardContent#
+		   		, sysdate
+		   		, #boardSecret#
+				<isNotEmpty property="boardSecret">
+				, #boardPw#
+		   		</isNotEmpty>
+				, #atchFileId#
+		   		)
+		 where USER_ID = #userId#
+		   and BOARD_SEQ = #boardSeq#
+	</update>
+	
+	<delete id="deleteQnABoard" parameterClass="kr.or.ddit.qna.vo.QnABoardVO">
+		delete from TB_QNA_BOARD 
+		where USER_ID = #userId# 
+		and BOARD_SEQ = #boardSeq#
+	</delete>
+	
+	<resultMap class="kr.or.ddit.qna.vo.QnABoardVO" id="qnaMap">
+ 		<result property="boardSeq" column="board_seq"/>
+ 		<result property="userId" column="user_id"/>
+ 		<result property="boardType" column="board_type"/>
+ 		<result property="boardTitle" column="board_title"/>
+ 		<result property="boardContent" column="board_content"/>
+ 		<result property="boardDate" column="board_date"/>
+ 		<result property="boardSecret" column="board_secret"/>
+ 		<result property="boardPw" column="board_pw"/>
+ 		<result property="boardAnswer" column="board_answer"/>
+ 		<result property="atchFileId" column="atch_file_id"/>
+ 		<result property="boardHits" column="board_hits"/>
+ 		<result property="boardDelete" column="board_delete"/>
+ 	</resultMap>
+	
+	<select id="getAllQnABoard" resultMap="qnaMap">
+		select * 
+		from TB_QNA_BOARD 
+	</select>
+	
+	<select id="getQnABoard" parameterClass="kr.or.ddit.qna.vo.QnABoardVO" resultMap="qnaMap">
+		select * 
+		from TB_QNA_BOARD
+		where 1=1
+		<isNotEmpty property="userId">
+		and user_id = #userId#
+		</isNotEmpty>
+		<isNotEmpty property="boardSeq">
+		and board_seq = #boardSeq#
+		</isNotEmpty>
+		<isNotEmpty property="boardTitle">
+		and board_Title = #boardTitle#
+		</isNotEmpty>
+	</select>
+	
+	<select id="getQnA" resultMap="qnaMap">
+		select * from TB_QNA_BOARD where user_id = #userId#
+	</select>
+</sqlMap>

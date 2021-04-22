@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="commBoard">
+
+ 
+ 	<insert id = "insertMember" parameterClass="kr.or.ddit.commBoard.vo.CommBoardVO">
+ 	
+	 	insert into TB_COMM_BOARD
+	 		  	  (code, board_seq, user_id, board_title, board_date, board_content)
+        	values('#code#',commBoardNo_seq.nextval,#userId#,#boardTitle#, sysdate, #boardContent#);
+ 	</insert>
+	
+<!--  	<select id="getAllBoardList" parameterClass="kr.or.ddit.commBoard.vo.CommBoardVO" resultClass="kr.or.ddit.commBoard.vo.CommBoardVO"> -->
+ 	<select id="getAllBoardList" parameterClass="kr.or.ddit.common.vo.PagingVO" resultClass="kr.or.ddit.commBoard.vo.CommBoardVO">
+ 		SELECT BB.* FROM (SELECT AA.*, ROWNUM 
+ 		FROM
+ 		(SELECT CODE          code         
+			  ,BOARD_SEQ     boardSeqNum    
+			  ,USER_ID       userId      
+			  ,BOARD_TITLE   boardTitle  
+			  ,BOARD_DATE    boardDate   
+			  ,BOARD_CONTENT boardContent
+			  ,ATCH_FILE_ID  atchFileId 
+			  ,BOARD_HITS    boardHitsNumber   
+			  ,BOARD_DELETE  boardDelete 
+ 		FROM TB_COMM_BOARD
+ 		ORDER BY BOARD_SEQ DESC) AA)BB
+ 		WHERE RONUM BETWEEN #firstRecNo# and #lastRecNo#
+ 		
+ 	</select>
+ 	
+ 	
+ 	<select id="getBoardAllCount" resultClass="int">
+	 		select count(*)
+	 		from TB_COMM_BOARD
+	 </select>
+ 	
+ 	<select id="getBoardInfo" >
+ 		select *  FROM TB_COMM_BOARD where user_id = #userId#
+ 	</select>
+ 	
+</sqlMap>			
