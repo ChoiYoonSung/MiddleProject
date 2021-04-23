@@ -12,7 +12,7 @@ public class QnABoardVO extends ConstVO{
 	private String boardSecret;
 	private String boardPw;
 	private String boardAnswer;
-	private long atchFileId = -1;
+	private String atchFileId;
 	private String boardHits;
 	private String boardDelete;
 	
@@ -70,10 +70,10 @@ public class QnABoardVO extends ConstVO{
 	public void setBoardAnswer(String boardAnswer) {
 		this.boardAnswer = boardAnswer;
 	}
-	public long getAtchFileId() {
+	public String getAtchFileId() {
 		return atchFileId;
 	}
-	public void setAtchFileId(long atchFileId) {
+	public void setAtchFileId(String atchFileId) {
 		this.atchFileId = atchFileId;
 	}
 	public String getBoardHits() {

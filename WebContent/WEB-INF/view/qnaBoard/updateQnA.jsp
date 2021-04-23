@@ -16,7 +16,6 @@
         <title>게시글 수정</title>
         <link href="<%=request.getContextPath() %>/adminView/css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -147,30 +146,13 @@
 							
 							
 							<div class="input-group mb-3 col-md-10">
-								
-								<%
-								String boardSecret = qnaVO.getBoardSecret();
-								String boardSecretChecked = "";
-								if("Y".equals(boardSecret)) {
-									boardSecretChecked = "checked=\"checked\"";
-								}
-								%>
-								비밀글<input type="checkbox" class="" id="boardSecret" name="boardSecret" value="<%=boardSecret %>" onchange="secret()" <%=boardSecretChecked %>>
-								<%
-									String boardPw = qnaVO.getBoardPw();
-									String boardPwVal = "";
-									if("null".equals(boardPw)){
-										boardPwVal = " ";
-									}else{
-										boardPwVal = boardPw;
-									}
-								%>
-								비밀번호<input type="text" class="" id="boardPw" name="boardPw" value="<%=boardPwVal %>">
+								비밀글<input type="checkbox" class="" id="boardSecret" name="boardSecret" value="N" onchange="secret()">
+								비밀번호<input type="text" class="" id="boardPw" name="boardPw">
 							</div>
 							
 							<div class="col-12">
 							   <button type="reset" class="btn btn-outline-secondary btn-sm">초기화</button>
-							   <button type="submit" class="btn btn-outline-primary btn-sm">저장</button>
+							   <button type="submit" class="btn btn-outline-primary btn-sm">수정</button>
 							   <a type="button" class="btn btn-outline-primary btn-sm" href='delete.do?userId=<%=qnaVO.getUserId() %>&boardSeq=<%=qnaVO.getBoardSeq() %>'>삭제</a>
 							   <a type="button" class="btn btn-outline-info btn-sm" href="list.do">목록으로</a>
 						    </div>
@@ -200,14 +182,14 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="<%=request.getContextPath() %>/adminView/assets/demo/datatables-demo.js"></script>
-        <script type="text/javascript">
-        function secret() {
-        	if ($('#boardSecret').prop("checked")) {
-        		$('#boardSecret').val('Y');
-        	} else {
-        		$('#boardSecret').val('N');
-        	}
-        }
+         <script type="text/javascript">
+         function secret(){
+        	 if($('#boardSecret').prop("checked")){
+        		 $('#boardSecret').val('Y');
+        	 }else{
+        		 $('#boardSecret').val('N');
+        	 }
+         }
         </script>
     </body>
 </html>

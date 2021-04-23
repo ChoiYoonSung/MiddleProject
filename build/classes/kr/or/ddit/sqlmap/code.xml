@@ -54,6 +54,7 @@
 			 , DESCRIPTION    description
 			 , USE_YN         useYn
 	 	FROM TB_CODE
+	 	WHERE USE_YN = 'Y'
 
 	</select>
 
@@ -65,7 +66,7 @@
 			 , DESCRIPTION    description
 			 , USE_YN         useYn
 	 	FROM TB_CODE
-	 	WHERE GROUP_CODE = #groupCode#
+	 	WHERE USE_YN = 'Y' AND GROUP_CODE = #groupCode#
 
 	</select>
 

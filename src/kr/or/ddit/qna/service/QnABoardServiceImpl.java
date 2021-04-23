@@ -94,17 +94,4 @@ public class QnABoardServiceImpl implements IQnABoardService{
 		}
 		return qna;
 	}
-
-	@Override
-	public int countHitsQnABoard(String boardSeq) {
-		int cnt = 0;
-		try {
-			cnt = qnaDao.countHitsQnABoard(smc, boardSeq);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return cnt;
-	}
-	
-	
 }

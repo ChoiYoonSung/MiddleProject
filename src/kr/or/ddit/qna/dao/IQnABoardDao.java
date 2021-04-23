@@ -19,7 +19,5 @@ public interface IQnABoardDao {
 	public List<QnABoardVO> getQnABoard(SqlMapClient smc, QnABoardVO qna)throws SQLException;
 	
 	public QnABoardVO getQnA(SqlMapClient smc, String boardSeq) throws SQLException;
-
-	public int countHitsQnABoard(SqlMapClient smc, String boardSeq) throws SQLException;
 	
 }

@@ -34,13 +34,12 @@ public class InsertQnABoardHandler implements CommandHandler{
 		if(req.getMethod().equals("GET")) {
 			return VIEW_PAGE;
 		}else {
-			FileItem item = ((FileUploadRequestWrapper)req).getFileItem("atchFile")==null?null:((FileUploadRequestWrapper)req).getFileItem("atchFile");
+			FileItem item = ((FileUploadRequestWrapper)req).getFileItem("atchFile");
 			
 			AtchFileVO atchFileVO = new AtchFileVO();
-			if(item != null) {
-				IAtchFileService fileService = AtchFileServiceImpl.getInstance();
-				atchFileVO = fileService.saveAtchFile(item); // AtchFile 넣음
-			}
+			
+			IAtchFileService fileService = AtchFileServiceImpl.getInstance();
+			atchFileVO = fileService.saveAtchFile(item); // AtchFile 넣음
 			
 			String userId = req.getParameter("userId");				//ID
 			String boardType = req.getParameter("boardType");		//유형
@@ -48,6 +47,7 @@ public class InsertQnABoardHandler implements CommandHandler{
 			String boardContent = req.getParameter("boardContent");	//내용
 			String boardSecret = req.getParameter("boardSecret");	//비공개
 			String boardPw = req.getParameter("boardPw");			//글비밀번호
+			String atchFileId = req.getParameter("atchFileId");		//첨부파일ID
 			
 			IQnABoardService qnaService = QnABoardServiceImpl.getInstance();
 			
@@ -58,7 +58,7 @@ public class InsertQnABoardHandler implements CommandHandler{
 			qna.setBoardContent(boardContent);
 			qna.setBoardSecret(boardSecret);
 			qna.setBoardPw(boardPw);
-			qna.setAtchFileId(atchFileVO.getAtchFileId());
+			qna.setAtchFileId(atchFileId);
 			
 			qnaService.insertQnABoard(qna);
 			

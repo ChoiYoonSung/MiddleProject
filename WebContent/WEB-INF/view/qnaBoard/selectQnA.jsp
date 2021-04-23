@@ -1,11 +1,9 @@
-<%@page import="kr.or.ddit.common.vo.AtchFileVO"%>
 <%@page import="kr.or.ddit.qna.vo.QnABoardVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	QnABoardVO qnaVO = (QnABoardVO)request.getAttribute("qnaVO");
-	List<AtchFileVO> atchFileList = (List<AtchFileVO>) request.getAttribute("atchFileList");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -143,21 +141,7 @@
 							
 							<div class="input-group mb-3 col-md-10">
 							  <span class="input-group-text" name="atchFile">첨부파일</span>
-								<%
-						         if(atchFileList != null) {
-						            for(AtchFileVO atchFileVO : atchFileList){
-						         %>
-						            <div><a href="<%=request.getContextPath() %>/filedownload.do?fileId=<%=atchFileVO.getAtchFileId() %>
-						            &fileSn=<%=atchFileVO.getFileSn() %>">
-						            <%=atchFileVO.getOrignlFileNm() %></a></div>
-						         <%       
-						            }
-						         }else{
-						        	 %>
-						        	 <input type="text" readonly="readonly" value="첨부파일이 없습니다.">
-						        	 <%
-						         }
-						         %>
+							  <input type="file" class="form-control" disabled="disabled">
 							</div>
 							
 							<div class="col-12">
