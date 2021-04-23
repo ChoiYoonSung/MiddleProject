@@ -1,11 +1,16 @@
 package kr.or.ddit.qna.handler;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 
 import kr.or.ddit.common.handler.CommandHandler;
+import kr.or.ddit.common.service.AtchFileServiceImpl;
+import kr.or.ddit.common.service.IAtchFileService;
+import kr.or.ddit.common.vo.AtchFileVO;
 import kr.or.ddit.qna.service.IQnABoardService;
 import kr.or.ddit.qna.service.QnABoardServiceImpl;
 import kr.or.ddit.qna.vo.QnABoardVO;
@@ -27,6 +32,17 @@ public class GetQnABoardHandler implements CommandHandler{
 		
 		BeanUtils.populate(qna, req.getParameterMap());
 		
+		if(qna.getAtchFileId()>0) {
+			AtchFileVO fileVO = new AtchFileVO();
+			fileVO.setAtchFileId(qna.getAtchFileId());
+			
+			IAtchFileService atchFileService = AtchFileServiceImpl.getInstance();
+			List<AtchFileVO> atchFileList = atchFileService.getAtchFileList(fileVO);
+			
+			req.setAttribute("atchFileList", atchFileList);
+		}
+		
+		qnaService.countHitsQnABoard(boardSeq);
 		qnaService.getQnABoard(qna);
 		req.setAttribute("qnaVO", qna);
 		return VIEW_PAGE;

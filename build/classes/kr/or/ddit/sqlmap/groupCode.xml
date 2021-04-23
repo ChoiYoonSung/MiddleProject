@@ -5,16 +5,14 @@
 
 <sqlMap namespace="groupCode">
 
-	<insert id = "insertGroupCdoe" parameterClass="kr.or.ddit.groupCode.vo.GroupCodeInfoVO">
+	<insert id = "insertGroupCode" parameterClass="kr.or.ddit.groupCode.vo.GroupCodeInfoVO">
 
 		INSERT INTO TB_GROUP_CODE_INFO (
 			GROUP_CODE
 			, GROUP_CODE_NAME
-			, USE_YN
-		) VALUE (
+		) VALUES (
 			#groupCode#
 			, #groupCodeName#
-			, 'Y'
 		)
 
 	</insert>

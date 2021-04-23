@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="event">
+
+	<insert id="insertEvent" parameterClass="kr.or.ddit.event.vo.EventVO">
+		Insert into TB_EVENT_BOARD(
+				  CODE
+				, BOARD_SEQ
+				, USER_ID
+				, BOARD_TYPE
+				, BOARD_TITLE
+				, BOARD_CONTENT
+				, BOARD_DATE
+				, BOARD_START
+				, BOARD_END
+				, ATCH_FILE_ID
+				, BOARD_HITS
+				, BOARD_DELETE 
+				)
+		Values(
+				  'EVENT'		
+				, SEQ_EVENT_BOARD.NEXTVAL
+				, 'yoonsung'	<!-- 변경 필수 -->
+				, 'EVE'			<!-- 변경 필수 -->
+				, #boardTitle#
+				, #boardContent#
+				, SYSDATE
+				, SYSDATE
+				, #boardEnd#
+				, #atchFileId#
+				, 0
+				, 'N'
+				)
+	</insert>
+	
+	<update id="updateEvent" parameterClass="kr.or.ddit.event.vo.EventVO">
+		Update TB_EVENT_BOARD
+		Set   BOARD_TITLE = #boardTitle#
+			, BOARD_CONTENT = #boardContent#
+			, BOARD_DATE = SYSDATE
+			, BOARD_END = #boardEnd#
+			, ATCH_FILE_ID = #atchFileId#
+		Where BOARD_SEQ = #boardSeq#
+		and USER_ID = #userId#
+	</update>
+	
+	<delete id="deleteEvent" parameterClass="kr.or.ddit.event.vo.EventVO">
+		Update TB_EVENT_BOARD
+		Set BOARD_DELETE = 'Y'
+		Where BOARD_SEQ = #boardSeq#
+	</delete>
+	
+	<select id="getAllEvent" resultClass="kr.or.ddit.event.vo.EventVO">
+		Select 
+			  CODE			code
+			, BOARD_SEQ		boardSeq
+			, USER_ID		userId
+			, BOARD_TYPE	boardType
+			, BOARD_TITLE	boardTitle
+			, BOARD_CONTENT	boardContent
+			, BOARD_DATE	boardDate
+			, BOARD_START	boardStart
+			, BOARD_END		boardEnd
+			, ATCH_FILE_ID	atchFileId
+			, BOARD_HITS	boardHits
+			, BOARD_DELETE 	boardDelete
+		From TB_EVENT_BOARD
+		Where BOARD_DELETE = 'N'
+	</select>
+	
+	<!-- 조회수 -->
+	<update id="countHitsEvent" parameterClass="String">
+		update TB_EVENT_BOARD
+		set BOARD_HITS = (BOARD_HITS + 1)
+		where BOARD_SEQ = #boardSeq#
+	</update>
+	
+	<select id="selectEvent" parameterClass="kr.or.ddit.event.vo.EventVO" resultClass="kr.or.ddit.event.vo.EventVO">
+		Select
+			  CODE			code
+			, BOARD_SEQ		boardSeq
+			, USER_ID		userId
+			, BOARD_TYPE	boardType
+			, BOARD_TITLE	boardTitle
+			, BOARD_CONTENT	boardContent
+			, BOARD_DATE	boardDate
+			, BOARD_START	boardStart
+			, BOARD_END		boardEnd
+			, ATCH_FILE_ID	atchFileId
+			, BOARD_HITS	boardHits
+			, BOARD_DELETE 	boardDelete
+		From TB_EVENT_BOARD
+		Where 1=1
+		<isNotEmpty property="userId">
+		and USER_ID = #userId#
+		</isNotEmpty>
+		<isNotEmpty property="boardSeq">
+		and BOARD_SEQ = #boardSeq#
+		</isNotEmpty>
+		<isNotEmpty property="boardTitle">
+		and BOARD_TITLE = #boardTitle# 
+		</isNotEmpty>
+	</select>
+	
+	<select id="getEvent" parameterClass="String" resultClass="kr.or.ddit.event.vo.EventVO">
+		Select
+		  	  CODE			code
+			, BOARD_SEQ		boardSeq
+			, USER_ID		userId
+			, BOARD_TYPE	boardType
+			, BOARD_TITLE	boardTitle
+			, BOARD_CONTENT	boardContent
+			, BOARD_DATE	boardDate
+			, BOARD_START	boardStart
+			, BOARD_END		boardEnd
+			, ATCH_FILE_ID	atchFileId
+			, BOARD_HITS	boardHits
+			, BOARD_DELETE 	boardDelete
+		From TB_EVENT_BOARD
+		Where BOARD_SEQ = #boardSeq#
+	</select>
+
+</sqlMap>

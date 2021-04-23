@@ -36,6 +36,7 @@
 		<sqlMap resource="kr/or/ddit/sqlmap/atchFile.xml" />
 		<sqlMap resource="kr/or/ddit/sqlmap/commBoard.xml" />
 		<sqlMap resource="kr/or/ddit/sqlmap/qnaBoard.xml" />
+		<sqlMap resource="kr/or/ddit/sqlmap/eventBoard.xml" />
 </sqlMapConfig>
 
 

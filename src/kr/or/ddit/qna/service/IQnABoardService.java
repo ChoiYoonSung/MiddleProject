@@ -16,4 +16,6 @@ public interface IQnABoardService {
 	public List<QnABoardVO> getQnABoard(QnABoardVO qna);
 	
 	public QnABoardVO getQnA(String boardSeq);
+	
+	public int countHitsQnABoard(String boardSeq);
 }

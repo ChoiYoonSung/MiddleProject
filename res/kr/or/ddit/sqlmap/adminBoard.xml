@@ -13,47 +13,54 @@
                     , ATCH_FILE_ID
                     , BOARD_HITS)
 <!--                     , BOARD_DELETE) -->
-		VALUES(#code#
+		VALUES('NOTICE'
 				, SEQ_ADMIN_BOARD.NEXTVAL
 				, 'admin'
 				, #boardTitle#
 				, sysdate
 				, #boardContent#
 				, #atchFileId#
-				, #boardHits#);
+				, #boardHits#)
 <!-- 				, ); -->
 	</insert>
 	
 	<update id="updateAdminBoard" parameterClass="kr.or.ddit.adminBoard.vo.AdminBoardVO">
-		update TB_ADMIN_BOARD set BOARD_TITLE = #boardTitle#,
-								  BOARD_CONTENT = #boardContent#,
-								  ATCH_FILE_ID = #atchFileId#
-				WHERE BOARD_SEQ = #boardSeq#;
+		update TB_ADMIN_BOARD set BOARD_TITLE = #boardTitle#
+								  ,BOARD_CONTENT = #boardContent#
+								  ,ATCH_FILE_ID = #atchFileId#
+				WHERE BOARD_SEQ = #boardSeq#
 	</update>
 	
-	<update id="deleteAdminBoard" parameterClass="kr.or.ddit.adminBoard.vo.AdminBoardVO">
+	<update id="deleteAdminBoard" parameterClass="long">
 		update TB_ADMIN_BOARD set BOARD_DELETE = 'Y'
-				WHERE BOARD_SEQ = #boardSeq#;
+				WHERE BOARD_SEQ = #boardSeq#
 	</update>
 	
-	<resultMap class="kr.or.ddit.adminBoard.vo.AdminBoardVO" id="abMap">
-		<result property="code" column="CODE"/>
-		<result property="boardSeq" column="BOARD_SEQ"/>
-		<result property="userId" column="USER_ID"/>
-		<result property="boardTitle" column="BOARD_TITLE"/>
-		<result property="boardDate" column="BOARD_DATE"/>
-		<result property="boardHits" column="BOARD_HITS"/>
-		<result property="boardDelete" column="BOARD_DELETE"/>
-	</resultMap>
-	<select id="getAllAdminBoardList" resultMap="abMap">
-		select 	*
+	<select id="getAllAdminBoardList" parameterClass="kr.or.ddit.adminBoard.vo.AdminBoardVO" resultClass="kr.or.ddit.adminBoard.vo.AdminBoardVO">
+		select CODE             code
+		     , BOARD_SEQ        boardSeq
+		     , USER_ID          userId
+		     , BOARD_TITLE      boardTitle
+		     , BOARD_DATE       boardDate
+		     , BOARD_CONTENT    boardContent
+		     , ATCH_FILE_ID     atchFileId
+		     , BOARD_HITS       boardHits
+		     , BOARD_DELETE     boardDelete
 		from TB_ADMIN_BOARD
-		where CODE = #code#
-		and BOARD_DELETE = 'N'
+		where code = 'NOTICE'
+		AND BOARD_DELETE = 'N'
 	</select>
 	
-	<select id="getSearchAdminBoard" resultMap="abMap">
-		select 	*
+	<select id="getSearchAdminBoard" parameterClass="kr.or.ddit.adminBoard.vo.AdminBoardVO" resultClass="kr.or.ddit.adminBoard.vo.AdminBoardVO">
+		select 	CODE                   code        
+			,	BOARD_SEQ              boardSeq    
+			,	USER_ID                userId      
+			,	BOARD_TITLE            boardTitle  
+			,	BOARD_DATE             boardDate   
+			,	BOARD_CONTENT          boardContent
+			,	ATCH_FILE_ID           atchFileId  
+			,	BOARD_HITS             boardHits   
+			,	BOARD_DELETE           boardDelete 
 		from TB_ADMIN_BOARD
 		where BOARD_DELETE = 'N'
 		and CODE = #code#
@@ -62,20 +69,19 @@
 		</isNotEmpty>
 	</select>
 	
-	<select id="getAdminBoard" parameterClass="kr.or.ddit.adminBoard.vo.AdminBoardVO">
-		select  CODE
-			,	BOARD_SEQ
-			,	USER_ID
-			,	BOARD_TITLE
-			,	BOARD_DATE
-			,	BOARD_CONTENT
-			,	ATCH_FILE_ID
-			,	BOARD_HITS
-			,	BOARD_DELETE
+	<select id="getAdminBoard" parameterClass="long" resultClass="kr.or.ddit.adminBoard.vo.AdminBoardVO">
+		select  CODE             code        
+			,	BOARD_SEQ        boardSeq    
+			,	USER_ID          userId      
+			,	BOARD_TITLE      boardTitle  
+			,	BOARD_DATE       boardDate   
+			,	BOARD_CONTENT    boardContent
+			,	ATCH_FILE_ID     atchFileId  
+			,	BOARD_HITS       boardHits   
+			,	BOARD_DELETE     boardDelete 
 		from TB_ADMIN_BOARD
 		where BOARD_SEQ = #boardSeq#
 		and BOARD_DELETE = 'N'
-		and CODE = #code#
 	</select>
 	<select id="checkAdminBoard" parameterClass="Long" resultClass="int">
 		select count(*) as cnt
