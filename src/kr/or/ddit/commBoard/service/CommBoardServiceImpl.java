@@ -9,6 +9,7 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 import kr.or.ddit.commBoard.dao.CommBoardDaoImpl;
 import kr.or.ddit.commBoard.dao.ICommBoardDao;
 import kr.or.ddit.commBoard.vo.CommBoardVO;
+import kr.or.ddit.common.vo.PagingVO;
 import kr.or.ddit.util.SqlMapClientUtil;
 
 public class CommBoardServiceImpl implements ICommBoardService{
@@ -47,17 +48,28 @@ public class CommBoardServiceImpl implements ICommBoardService{
 	}
 
 	@Override
-	public List<CommBoardVO> getAllBoardList() {
+	public List<CommBoardVO> getAllBoardList(PagingVO pagingVO) {
 
 		List<CommBoardVO> boardList = new ArrayList<>();
 		
 		try {
-			boardList = boardDao.GetAllBoardList(smc);
+			boardList = boardDao.getAllBoardList(smc, pagingVO);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		return boardList;
+	}
+	
+	@Override
+	public int getAllBoardListCount() {
+		int cnt = 0;
+		try {
+			cnt = boardDao.getAllBoardListCount(smc);
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		return cnt;
 	}
 
 	@Override
@@ -72,11 +84,11 @@ public class CommBoardServiceImpl implements ICommBoardService{
 	}
 
 	@Override
-	public int deleteBoard(String userId) {
+	public int deleteBoard(CommBoardVO cv) {
 		int cnt = 0;
 		
 		try {
-			cnt = boardDao.deleteBoard(smc, userId);
+			cnt = boardDao.deleteBoard(smc, cv);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -102,12 +114,11 @@ public class CommBoardServiceImpl implements ICommBoardService{
 	}
 
 	@Override
-	public CommBoardVO getBoard(String userId) {
-		
+	public CommBoardVO getBoard(long boardSeq) {
 		CommBoardVO cv = null;
 		
 		try {
-			cv = boardDao.getBoard(smc, userId);
+			cv = boardDao.getBoard(smc, boardSeq);
 				
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -115,5 +126,6 @@ public class CommBoardServiceImpl implements ICommBoardService{
 		
 		return cv;
 	}
+
 
 }

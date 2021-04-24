@@ -2,29 +2,30 @@ package kr.or.ddit.commBoard.vo;
 
 import java.sql.Date;
 
-public class CommBoardVO {
+import kr.or.ddit.common.vo.PagingVO;
+
+public class CommBoardVO extends PagingVO {
 
 	private String code;
-	private int boardSeqNum;
+	private long boardSeq;
 	private String userId;
 	private String boardTitle;
 	private Date boardDate;
 	private String boardContent;
-	private String atchFileId;
-	private int boardHitsNumber;
+	private long atchFileId;
+	private long boardHitsNumber;
 	private String boardDelete;
-	
 	public String getCode() {
 		return code;
 	}
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public int getBoardSeqNum() {
-		return boardSeqNum;
+	public long getBoardSeq() {
+		return boardSeq;
 	}
-	public void setBoardSeqNum(int boardSeqNum) {
-		this.boardSeqNum = boardSeqNum;
+	public void setBoardSeq(long boardSeq) {
+		this.boardSeq = boardSeq;
 	}
 	public String getUserId() {
 		return userId;
@@ -50,16 +51,16 @@ public class CommBoardVO {
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
-	public String getAtchFileId() {
+	public long getAtchFileId() {
 		return atchFileId;
 	}
-	public void setAtchFileId(String atchFileId) {
+	public void setAtchFileId(long atchFileId) {
 		this.atchFileId = atchFileId;
 	}
-	public int getBoardHitsNumber() {
+	public long getBoardHitsNumber() {
 		return boardHitsNumber;
 	}
-	public void setBoardHitsNumber(int boardHitsNumber) {
+	public void setBoardHitsNumber(long boardHitsNumber) {
 		this.boardHitsNumber = boardHitsNumber;
 	}
 	public String getBoardDelete() {
@@ -68,6 +69,8 @@ public class CommBoardVO {
 	public void setBoardDelete(String boardDelete) {
 		this.boardDelete = boardDelete;
 	}
+	
+	
 	
 	
 }

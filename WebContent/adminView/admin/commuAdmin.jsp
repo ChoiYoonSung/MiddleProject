@@ -1,4 +1,4 @@
-<%-- <%@page import="kr.or.ddit.common.vo.PagingVO"%> --%>
+<%@page import="kr.or.ddit.common.vo.PagingVO"%>
 <%@page import="kr.or.ddit.commBoard.vo.CommBoardVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,7 +9,10 @@
 	
 	String msg = request.getParameter("msg") == null ? "" : request.getParameter("msg");
 
-// 	PagingVO pagingVO = (PagingVO)request.getAttribute("pagingVO");
+	PagingVO pagingVO = (PagingVO)request.getAttribute("pagingVO");
+	System.out.print("pagingVO");
+	System.out.print(pagingVO.getFirstRecNo());
+	System.out.print(pagingVO.getLastRecNo());
 %>
 <!DOCTYPE html>
 <html lang="kr">
@@ -116,7 +119,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        êµ¿ë¼ì ë¨¹ ê´ë¦¬ì
+                        굿끼제먹
                     </div>
                 </nav>
             </div>
@@ -191,7 +194,7 @@
 						System.out.print(boardList.get(i).toString());
 	%>
                                             <tr>
-                                                <td><%=boardList.get(i).getBoardSeqNum()%></td>
+                                                <td><%=boardList.get(i).getBoardSeq()%></td>
                                                 <td><%=boardList.get(i).getBoardTitle() %></td>
                                                 <td><a href="select.do?memId=<%=boardList.get(i).getUserId()%>"> </a><%=boardList.get(i).getUserId() %></td>
                                                 <td><%=boardList.get(i).getBoardDate() %></td>
@@ -200,23 +203,23 @@
                                             </tr>
  		<%
 					} %>
-<!-- 		<!-- 페이징 처리 시작 --> -->
-<%-- 		<%if(pagingVO.getTotalCount() > 0) {%> --%>
-<!-- 			<tr> -->
-<!-- 				<td colspan="4" align="center"> -->
-<%-- 					<%if(pagingVO.getFirstPageNo() > pagingVO.getPageSize()) { %> --%>
-<%-- 					<a href="list.do?pageNo=<%=pagingVO.getFirstPageNo() - pagingVO.getPageSize() %>">[이전]</a> --%>
-<%-- 					<%} %> --%>
-<%-- 					<%for(int pNo = pagingVO.getFirstPageNo(); pNo <= pagingVO.getLastPageNo(); pNo++) { %> --%>
-<%-- 						<a <%if(pNo == pagingVO.getCurrentPageNo()){ %> style="color:orange;"<%} %> href="list.do?pageNo=<%=pNo %>">[<%=pNo %>]</a> --%>
-<%-- 					<%} %> --%>
-<%-- 					<%if(pagingVO.getLastPageNo() < pagingVO.getTotalPageCount()) {%> --%>
-<%-- 					<a href="list.do?pageNo=<%=pagingVO.getFirstPageNo() + pagingVO.getPageSize() %>">[다음]</a> --%>
-<%-- 					<%} %> --%>
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<%-- 		<%} %> --%>
-<!-- 		<!-- 페이징 처리 끝 -->				 -->
+		<!-- 페이징 처리 시작 -->
+		<%if(pagingVO.getTotalCount() > 0) {%>
+			<tr>
+				<td colspan="4" align="center">
+					<%if(pagingVO.getFirstPageNo() > pagingVO.getPageSize()) { %>
+					<a href="list.do?pageNo=<%=pagingVO.getFirstPageNo() - pagingVO.getPageSize() %>">[이전]</a>
+					<%} %>
+					<%for(int pNo = pagingVO.getFirstPageNo(); pNo <= pagingVO.getLastPageNo(); pNo++) { %>
+						<a <%if(pNo == pagingVO.getCurrentPageNo()){ %> style="color:orange;"<%} %> href="list.do?pageNo=<%=pNo %>">[<%=pNo %>]</a>
+					<%} %>
+					<%if(pagingVO.getLastPageNo() < pagingVO.getTotalPageCount()) {%>
+					<a href="list.do?pageNo=<%=pagingVO.getFirstPageNo() + pagingVO.getPageSize() %>">[다음]</a>
+					<%} %>
+				</td>
+			</tr>
+		<%} %>
+		<!-- 페이징 처리 끝 -->				
 					
 					
 					

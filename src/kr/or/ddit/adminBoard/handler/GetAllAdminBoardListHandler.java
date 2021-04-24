@@ -11,23 +11,52 @@ import kr.or.ddit.adminBoard.vo.AdminBoardVO;
 import kr.or.ddit.common.handler.CommandHandler;
 
 public class GetAllAdminBoardListHandler implements CommandHandler{
-	private static final String VIEW_PAGE = "/WEB-INF/view/adminBoard/getAll.jsp";
+	private static String VIEW_PAGE = "";
 
+	
+	
 	@Override
 	public boolean isRedirect(HttpServletRequest req) {
-
+		String firstURI = req.getRequestURI();
+		String secondURI[] = firstURI.split("/", 4);
+		String thirdURI[] = secondURI[3].split("\\.");
+		String finalURI = thirdURI[0].substring(0, 3);
+		
+		String code = "";
+		if("not".equals(finalURI)) {
+			VIEW_PAGE = "/WEB-INF/view/adminBoard/noticeGetAll.jsp";
+			code = "NOTICE";
+		}else if("faq".equals(finalURI)){
+			VIEW_PAGE = "/WEB-INF/view/adminBoard/faqGetAll.jsp";
+			code = "FAQ";
+		}
 		return false;
 	}
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		String firstURI = req.getRequestURI();
+		String secondURI[] = firstURI.split("/", 4);
+		String thirdURI[] = secondURI[3].split("\\.");
+		String finalURI = thirdURI[0].substring(0, 3);
+		
+		String code = "";
+		if("not".equals(finalURI)) {
+			VIEW_PAGE = "/WEB-INF/view/adminBoard/noticeGetAll.jsp";
+			code = "NOTICE";
+		}else if("faq".equals(finalURI)){
+			VIEW_PAGE = "/WEB-INF/view/adminBoard/faqGetAll.jsp";
+			code = "FAQ";
+		}
 		//1. 서비스 객체 생성
 		IAdminBoardService boardService = AdminBoardServiceImpl.getInstance();
 		
 		//2. 게시글 정보 조회
-		List<AdminBoardVO> boardList = boardService.getAllAdminBoardList();
+		List<AdminBoardVO> boardList = boardService.getAllAdminBoardList(code);
 		
+//		VIEW_PAGE = "/WEB-INF/view/adminBoard/"+ pageVal +"GetAll.jsp";
 		req.setAttribute("boardList", boardList);
+		req.setAttribute("code", code);
 		return VIEW_PAGE;
 	}
 }

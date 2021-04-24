@@ -3,6 +3,7 @@ package kr.or.ddit.commBoard.service;
 import java.util.List;
 
 import kr.or.ddit.commBoard.vo.CommBoardVO;
+import kr.or.ddit.common.vo.PagingVO;
 
 /**
  * 게시판 정보 처리를 수행하는 서비스
@@ -22,8 +23,13 @@ public interface ICommBoardService {
 	 * 
 	 * @return
 	 */
-	public List<CommBoardVO> getAllBoardList();
+	public List<CommBoardVO> getAllBoardList(PagingVO pagingVO);
 	
+	/**
+	 * 전체 회원수를 반환하는 메서드
+	 * @return 전체 회원 수
+	 */
+	public int getAllBoardListCount();
 	
 	/**게시판 정보를 수정하는 메서드 
 	 * 
@@ -36,7 +42,7 @@ public interface ICommBoardService {
 	 * @param uerId
 	 * @return
 	 */
-	public int deleteBoard(String userId);
+	public int deleteBoard(CommBoardVO cv);
 	
 	/**
 	 * CommBoardVO 자료를 이용하여 회원을 검색하는 메서드
@@ -50,7 +56,7 @@ public interface ICommBoardService {
 	 * @param userId
 	 * @return
 	 */
-	public CommBoardVO getBoard(String userId);
+	public CommBoardVO getBoard(long boardSeq);
 	
 	
 	

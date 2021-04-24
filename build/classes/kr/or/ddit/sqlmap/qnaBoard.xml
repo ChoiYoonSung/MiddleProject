@@ -21,20 +21,18 @@
 			, BOARD_PW
 			</isNotEmpty>
 			, BOARD_ANSWER
-			<isNotEmpty property="atchFileId">
 			, ATCH_FILE_ID
-			</isNotEmpty>
 			,BOARD_HITS
 			,BOARD_DELETE
 			)
 		values(
 			'QNA'
 			, SEQ_QNA_BOARD.NEXTVAL
-			, 'yoonsung'
-			, '문의'
+			, 'yoonsung' <!-- 변경 필수 -->
+			, 'INQUERY' <!-- 변경 필수 -->
 			, #boardTitle#
 			, #boardContent#
-			, sysdate
+			, SYSDATE
 			<isNotEmpty property="boardSecret">
 			, #boardSecret#
 			 </isNotEmpty>
@@ -42,9 +40,7 @@
 			, #boardPw#
 			 </isNotEmpty>
 			, 'N'
-			<isNotEmpty property="atchFileId">
 			, #atchFileId#
-			</isNotEmpty>
 			, 0
 			, 'N'
 		)
@@ -93,6 +89,13 @@
 		from TB_QNA_BOARD 
 		where board_delete = 'N'
 	</select>
+	
+	<!-- 조회수 -->
+<!-- 	<update id="countHitsQnABoard" parameterClass="String">
+		update tb_qna_board
+		set board_hits = (board_hits +1)
+		where board_seq = #boardSeq#
+	</update> -->
 	
 	<select id="getQnABoard" parameterClass="kr.or.ddit.qna.vo.QnABoardVO" resultMap="qnaMap">
 		select * 

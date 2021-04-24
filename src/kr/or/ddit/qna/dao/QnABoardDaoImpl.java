@@ -62,5 +62,11 @@ public class QnABoardDaoImpl implements IQnABoardDao{
 		QnABoardVO qna = (QnABoardVO) smc.queryForObject("qna.getQnA", boardSeq);
 		return qna;
 	}
+
+	@Override
+	public int countHitsQnABoard(SqlMapClient smc, String boardSeq) throws SQLException {
+		int cnt = (int)smc.update("qna.countHitsQnABoard", boardSeq);
+		return cnt;
+	}
 	
 }

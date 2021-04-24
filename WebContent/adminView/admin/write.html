@@ -130,11 +130,6 @@
 							  <textarea class="form-control" aria-label="With textarea" rows="10"></textarea>
 							</div>
 							
-							<div class="input-group mb-3 col-md-10">
-								<input type="checkbox" class="" id="qnaSecret">비밀글
-								<input type="text" class="" id="qnaPassword" style="display: none">
-							</div>
-							
 							<div class="col-12">
 							   <button type="submit" class="btn btn-outline-primary btn-sm">등록</button>
 							   <button type="reset" class="btn btn-outline-secondary btn-sm">초기화</button>
@@ -166,14 +161,5 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="../assets/demo/datatables-demo.js"></script>
-        <script type="text/javascript">
-        	$(document).ready(function(){
-        		if($('#qnaSecret').is(":checked") == true){
-        			$('#qnaPassword').show();
-        		}else{
-        			$('#qnaPassword').hide();
-        		}
-        	})
-        </script>
     </body>
 </html>

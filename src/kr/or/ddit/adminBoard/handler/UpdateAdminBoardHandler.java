@@ -11,7 +11,7 @@ import kr.or.ddit.adminBoard.vo.AdminBoardVO;
 import kr.or.ddit.common.handler.CommandHandler;
 
 public class UpdateAdminBoardHandler implements CommandHandler{
-	private static final String VIEW_PAGE = "";
+	private static final String VIEW_PAGE = "/WEB-INF/view/adminBoard/update.jsp";
 	@Override
 	public boolean isRedirect(HttpServletRequest req) {
 		if(req.getMethod().equals("GET")) { // GET 방식인 경우 redirect를 하지 않는다.
@@ -25,18 +25,21 @@ public class UpdateAdminBoardHandler implements CommandHandler{
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		if(req.getMethod().equals("GET")) { // GET 방식인 경우 redirect를 하지 않는다.
 			long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
+//			String boardTitle = req.getParameter("boardTitle");
+//			String boardContent = req.getParameter("boardContent");
 			
 			//서비스 객체 생성
 			IAdminBoardService adminBoardService = AdminBoardServiceImpl.getInstance();
 			
 			AdminBoardVO abv = adminBoardService.getAdminBoard(boardSeq);
-			
+			System.out.println("getAdminBoard(boardSeq)>>>>>" + abv);
 			//정보등록
 			req.setAttribute("adminBoardVO", abv);
 			return VIEW_PAGE;
 		}else { // POST 방식인 경우
 			
 			//요청 파라미터 정보 가져오기
+			long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
 			String userId = req.getParameter("userId");
 			String boardTitle = req.getParameter("boardTitle");
 			String boardContent = req.getParameter("boardContent");
@@ -46,6 +49,7 @@ public class UpdateAdminBoardHandler implements CommandHandler{
 			
 			//게시글 등록하기
 			AdminBoardVO abv = new AdminBoardVO();
+			abv.setBoardSeq(boardSeq);
 			abv.setUserId(userId);
 			abv.setBoardTitle(boardTitle);
 			abv.setBoardContent(boardContent);
@@ -61,7 +65,7 @@ public class UpdateAdminBoardHandler implements CommandHandler{
 			}
 			
 			//목록조회 화면으로 이동
-			String redirectUrl = req.getContextPath() + "adminBoard/get.do?msg=" + URLEncoder.encode(msg,"UTF-8");
+			String redirectUrl = req.getContextPath() + "/adminBoard/getAll.do?msg=" + URLEncoder.encode(msg,"UTF-8");
 			return redirectUrl;
 		}
 	}

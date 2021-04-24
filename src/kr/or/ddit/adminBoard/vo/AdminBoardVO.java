@@ -65,4 +65,10 @@ public class AdminBoardVO {
 	public void setBoardDelete(String boardDelete) {
 		this.boardDelete = boardDelete;
 	}
+	@Override
+	public String toString() {
+		return "AdminBoardVO [code=" + code + ", boardSeq=" + boardSeq + ", userId=" + userId + ", boardTitle="
+				+ boardTitle + ", boardDate=" + boardDate + ", boardContent=" + boardContent + ", atchFileId="
+				+ atchFileId + ", boardHits=" + boardHits + ", boardDelete=" + boardDelete + "]";
+	}
 }

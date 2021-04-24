@@ -6,6 +6,7 @@ import java.util.List;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.or.ddit.commBoard.vo.CommBoardVO;
+import kr.or.ddit.common.vo.PagingVO;
 
 public class CommBoardDaoImpl implements ICommBoardDao{
 
@@ -26,7 +27,7 @@ public class CommBoardDaoImpl implements ICommBoardDao{
 	public int insertBoard(SqlMapClient smc, CommBoardVO cv) throws SQLException {
 		int cnt = 0;
 		
-		Object obj = smc.insert("commBoard.inserBoard", cv);
+		Object obj = smc.insert("commBoard.insertBoard", cv);
 		
 		if(obj == null) {
 			cnt = 1;
@@ -36,13 +37,28 @@ public class CommBoardDaoImpl implements ICommBoardDao{
 	}
 
 	@Override
-	public List<CommBoardVO> GetAllBoardList(SqlMapClient smc) throws SQLException {
+	public List<CommBoardVO> getAllBoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException {
 		
-		List<CommBoardVO> boardList = smc.queryForList("commBoard.getAllBoardList");
+		System.out.println("가기전에 이것");
+		
+		System.out.println(pagingVO.getFirstRecNo());
+		
+		List<CommBoardVO> boardList = smc.queryForList("commBoard.getAllBoardList", pagingVO);
+		
+		System.out.println("갔다와서 이것");
+		
+		System.out.println(pagingVO.getFirstRecNo());
+		
 		
 		return boardList;
 	}
-
+	
+	@Override
+	public int getAllBoardListCount(SqlMapClient smc) throws SQLException {
+		int cnt = (int)smc.queryForObject("commBoard.getBoardAllCount");
+		return cnt;
+	}
+	
 	@Override
 	public int updateBoard(SqlMapClient smc, CommBoardVO cv) throws SQLException {
 		
@@ -54,9 +70,9 @@ public class CommBoardDaoImpl implements ICommBoardDao{
 	}
 
 	@Override
-	public int deleteBoard(SqlMapClient smc, String userId) throws SQLException {
+	public int deleteBoard(SqlMapClient smc, CommBoardVO cv) throws SQLException {
 
-		int cnt = smc.delete("commBoard.deleteBoard", userId);
+		int cnt = smc.delete("commBoard.deleteBoard", cv);
 		
 		return cnt;
 	}
@@ -70,11 +86,12 @@ public class CommBoardDaoImpl implements ICommBoardDao{
 	}
 
 	@Override
-	public CommBoardVO getBoard(SqlMapClient smc, String userId) throws SQLException {
-
-		CommBoardVO cv = (CommBoardVO)smc.queryForObject("commBoard.getBoardInfo", userId); 
-		
+	public CommBoardVO getBoard(SqlMapClient smc, long boardSeq) throws SQLException {
+		CommBoardVO cv = (CommBoardVO)smc.queryForObject("commBoard.getBoard", boardSeq);
+	
 		return cv;
 	}
+
+
 
 }

@@ -24,7 +24,7 @@ public interface IAdminBoardService {
 	 * 전체 게시글 정보 조회 메서드
 	 * @return 작업 완료된 게시글 정보를 담고있는 List객체
 	 */
-	public List<AdminBoardVO> getAllAdminBoardList();
+	public List<AdminBoardVO> getAllAdminBoardList(String code);
 	
 	/**
 	 * 하나의 게시글 정보를 수정하는 메서드
@@ -39,7 +39,7 @@ public interface IAdminBoardService {
 	 * @param abv 게시글 정보 객체
 	 * @return 작업 성공 1, 작업 실패 0
 	 */
-	public int deleteAdminBoard(AdminBoardVO abv);
+	public int deleteAdminBoard(long boardSeq);
 	
 	/**
 	 * 게시글 정보 검색

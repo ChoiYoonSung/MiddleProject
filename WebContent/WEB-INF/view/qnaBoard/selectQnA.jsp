@@ -1,9 +1,13 @@
+<%@page import="kr.or.ddit.common.vo.AtchFileVO"%>
 <%@page import="kr.or.ddit.qna.vo.QnABoardVO"%>
 <%@page import="java.util.List"%>
+<%@ page import="kr.or.ddit.comment.vo.CommentVO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	QnABoardVO qnaVO = (QnABoardVO)request.getAttribute("qnaVO");
+	QnABoardVO qnaVO = (QnABoardVO) request.getAttribute("qnaVO");
+	List<CommentVO> commentList = (List<CommentVO>) request.getAttribute("commentList");
+	List<AtchFileVO> atchFileList = (List<AtchFileVO>) request.getAttribute("atchFileList");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -117,10 +121,10 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                    
-                    
+
+
                         <h1 class="mt-4 mb-4">글 보기 테스트</h1>
-                        
+
 						<div class="card mb-4">
                             <div class="card-body">
                                중프 게시판 테스트용 임시 페이지 입니다.
@@ -133,24 +137,50 @@
 							  <span class="input-group-text" id="basic-addon3">제목</span>
 							  <input type="text" class="form-control" id="boardTitle" aria-describedby="basic-addon3" readonly="readonly" value="<%=qnaVO.getBoardTitle() %>">
 							</div>
-							
+
 							<div class="input-group mb-3 col-md-10">
 							  <span class="input-group-text">내용</span>
 							  <textarea class="form-control" id="boardContent" aria-label="With textarea" rows="10" readonly="readonly"><%=qnaVO.getBoardContent() %></textarea>
 							</div>
-							
+
 							<div class="input-group mb-3 col-md-10">
 							  <span class="input-group-text" name="atchFile">첨부파일</span>
-							  <input type="file" class="form-control" disabled="disabled">
+								<%
+						         if(atchFileList != null) {
+						            for(AtchFileVO atchFileVO : atchFileList){
+						         %>
+						            <div><a href="<%=request.getContextPath() %>/filedownload.do?fileId=<%=atchFileVO.getAtchFileId() %>
+						            &fileSn=<%=atchFileVO.getFileSn() %>">
+						            <%=atchFileVO.getOrignlFileNm() %></a></div>
+						         <%
+						            }
+						         }else{
+						        	 %>
+						        	 <input type="text" readonly="readonly" value="첨부파일이 없습니다.">
+						        	 <%
+						         }
+						         %>
 							</div>
-							
+
 							<div class="col-12">
 							   <button type="reset" class="btn btn-outline-secondary btn-sm">초기화</button>
-							   <a type="button" class="btn btn-outline-primary btn-sm" href='update.do?boardSeq=<%=request.getParameter("boardSeq") %>'>수정</a>
+							   <a type="button" class="btn btn-outline-primary btn-sm" href='update.do?userId=<%=request.getParameter("userId") %>&boardSeq=<%=request.getParameter("boardSeq") %>'>수정</a>
 							   <a type="button" class="btn btn-outline-info btn-sm" href="list.do">목록으로</a>
 						    </div>
                         </form>
                    	</div>
+                    <div>
+                        댓글 목록!
+                        <%
+                            for (CommentVO commentVO : commentList) {
+                        %>
+                        <div>
+                            <span><%=commentVO.getReplyContent() %></span>
+                        </div>
+                        <%
+                            }
+                        %>
+                    </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">

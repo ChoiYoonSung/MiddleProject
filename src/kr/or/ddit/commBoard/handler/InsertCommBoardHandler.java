@@ -36,26 +36,26 @@ public class InsertCommBoardHandler implements CommandHandler{
 			return VIEW_PAGE;
 		}else {
 			
-			FileItem item = ((FileUploadRequestWrapper) req).getFileItem("atchFile");
+			FileItem item = ((FileUploadRequestWrapper) req).getFileItem("atchFileId")
+					==null?null:((FileUploadRequestWrapper)req).getFileItem("atchFile");
 			
 			AtchFileVO atchFileVO = new AtchFileVO();
-			IAtchFileService fileService = AtchFileServiceImpl.getInstance();//?
-			atchFileVO = fileService.saveAtchFile(item);
-	
+			if(item != null) {
+				IAtchFileService fileService = AtchFileServiceImpl.getInstance();//?
+				atchFileVO = fileService.saveAtchFile(item);
+			
+			}
 			//요청 파라미터 가져오기.? sql에서 주는건?
-			String code = req.getParameter("");
-			String userId = req.getParameter("");
-			String boardTitle = req.getParameter("");
-			String boardContent = req.getParameter("");
-			String atchFileId = req.getParameter("");
-			String boardDelete = req.getParameter("");
+			String code = req.getParameter("code");
+			String userId = req.getParameter("userId");
+			String boardTitle = req.getParameter("boardTitle");
+			String boardContent = req.getParameter("boardContent");
 			
 			ICommBoardService boardService = CommBoardServiceImpl.getInstance();
 			
 			CommBoardVO cv = new CommBoardVO();
-			cv.setAtchFileId(atchFileId);
+			cv.setAtchFileId(atchFileVO.getAtchFileId());
 			cv.setBoardContent(boardContent);
-			cv.setBoardDelete(boardDelete);
 			cv.setBoardTitle(boardTitle);
 			cv.setCode(code);
 			cv.setUserId(userId);
@@ -70,7 +70,7 @@ public class InsertCommBoardHandler implements CommandHandler{
 				msg = "실패";
 			}
 			
-			String redirectUrl = req.getContextPath() + "/board/list.do?msg" + URLEncoder.encode(msg, "UTF-8");
+			String redirectUrl = req.getContextPath() + "/commBoard/list.do?msg" + URLEncoder.encode(msg, "UTF-8");
 			
 			return redirectUrl;
 		}

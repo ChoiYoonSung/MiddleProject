@@ -13,13 +13,13 @@ import kr.or.ddit.util.SqlMapClientUtil;
 
 public class AdminBoardServiceImpl implements IAdminBoardService{
 	//사용할 DAO의 객체 변수 선언
-	private IAdminBoardDao adminBdao;
+	private IAdminBoardDao adminBoardDao;
 	private SqlMapClient smc;
 	
 	private static IAdminBoardService service;
 	
 	private AdminBoardServiceImpl() {
-		adminBdao = AdminBoardDaoImpl.getinstance();
+		adminBoardDao = AdminBoardDaoImpl.getinstance();
 			smc = SqlMapClientUtil.getInstance();
 	}
 	
@@ -35,7 +35,7 @@ public class AdminBoardServiceImpl implements IAdminBoardService{
 		int cnt = 0;
 		
 		try {
-			cnt = adminBdao.insertAdminBoard(smc, abv);
+			cnt = adminBoardDao.insertAdminBoard(smc, abv);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -47,7 +47,7 @@ public class AdminBoardServiceImpl implements IAdminBoardService{
 		boolean chk = false;
 		
 		try {
-			chk = adminBdao.checkAdminBoard(smc, boardSeq);
+			chk = adminBoardDao.checkAdminBoard(smc, boardSeq);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -55,10 +55,10 @@ public class AdminBoardServiceImpl implements IAdminBoardService{
 	}
 
 	@Override
-	public List<AdminBoardVO> getAllAdminBoardList() {
+	public List<AdminBoardVO> getAllAdminBoardList(String code) {
 		List<AdminBoardVO> boardList = new ArrayList<AdminBoardVO>();
 		try {
-			boardList = adminBdao.getAllAdminBoardList(smc);
+			boardList = adminBoardDao.getAllAdminBoardList(smc, code);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -69,7 +69,7 @@ public class AdminBoardServiceImpl implements IAdminBoardService{
 	public int updateAdminBoard(AdminBoardVO abv) {
 		int cnt = 0;
 		try {
-			cnt = adminBdao.updateAdminBoard(smc, abv);
+			cnt = adminBoardDao.updateAdminBoard(smc, abv);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -77,10 +77,10 @@ public class AdminBoardServiceImpl implements IAdminBoardService{
 	}
 
 	@Override
-	public int deleteAdminBoard(AdminBoardVO abv) {
+	public int deleteAdminBoard(long boardSeq) {
 		int cnt = 0;
 		try {
-			cnt = adminBdao.deleteAdminBoard(smc, abv);
+			cnt = adminBoardDao.deleteAdminBoard(smc, boardSeq);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -92,7 +92,7 @@ public class AdminBoardServiceImpl implements IAdminBoardService{
 		List<AdminBoardVO> boardList = new ArrayList<>();
 		
 		try {
-			boardList = adminBdao.getSearchAdminBoard(smc, abv);
+			boardList = adminBoardDao.getSearchAdminBoard(smc, abv);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -104,7 +104,7 @@ public class AdminBoardServiceImpl implements IAdminBoardService{
 		AdminBoardVO abv = null;
 		
 		try {
-			abv = adminBdao.getAdminBoard(smc, boardSeq);
+			abv = adminBoardDao.getAdminBoard(smc, boardSeq);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

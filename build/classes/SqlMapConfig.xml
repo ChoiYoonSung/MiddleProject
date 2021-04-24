@@ -16,7 +16,8 @@
 	
 	<!-- 패키지 경로 Alias로 지정-->
 	<!-- 형식) <typeAlias alias="alias명" type="클래스의 풀네임"/>	 -->
- 	<typeAlias alias="memVO" type="kr.or.ddit.member.vo.MemberVO"/> 
+ 	<typeAlias alias="userAllVO" type="kr.or.ddit.userAll.vo.UserAllVO"/>
+ 	<typeAlias alias="userDditVO" type="kr.or.ddit.userDdit.vo.UserDditVO"/>
 
 	<!-- SqlMapConfig.properties 내 설정한 DB 연결 정보와 매핑 -->
 	<transactionManager type="JDBC">
@@ -35,7 +36,11 @@
 	xml 분리 예) 마이페이지, Qna, 공지사항 등 (게시판 CRUD 별로 쿼리 분리)-->
 		<sqlMap resource="kr/or/ddit/sqlmap/atchFile.xml" />
 		<sqlMap resource="kr/or/ddit/sqlmap/commBoard.xml" />
+		<sqlMap resource="kr/or/ddit/userAll/userAll.xml" />
+		<sqlMap resource="kr/or/ddit/userDdit/userDdit.xml" />
+		<sqlMap resource="kr/or/ddit/sqlmap/adminBoard.xml" />
 		<sqlMap resource="kr/or/ddit/sqlmap/qnaBoard.xml" />
+      	<sqlMap resource="kr/or/ddit/sqlmap/eventBoard.xml" />
 </sqlMapConfig>
 
 

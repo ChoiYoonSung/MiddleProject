@@ -9,16 +9,41 @@ import kr.or.ddit.adminBoard.vo.AdminBoardVO;
 import kr.or.ddit.common.handler.CommandHandler;
 
 public class GetAdminBoardHandler implements CommandHandler{
-private static final String VIEW_PAGE = "";
+	private static String VIEW_PAGE = "";
 	
 	@Override
 	public boolean isRedirect(HttpServletRequest req) {
+		String firstURI = req.getRequestURI();
+		String secondURI[] = firstURI.split("/", 4);
+		String thirdURI[] = secondURI[3].split("\\.");
+		String finalURI = thirdURI[0].substring(0, 3);
+		
+		String code = "";
+		if("not".equals(finalURI)) {
+			VIEW_PAGE = "/WEB-INF/view/adminBoard/noticeGet.jsp";
+			code = "NOTICE";
+		}else if("faq".equals(finalURI)){
+			VIEW_PAGE = "/WEB-INF/view/adminBoard/faqGet.jsp";
+			code = "FAQ";
+		}
 		return false;
 	}
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		String firstURI = req.getRequestURI();
+		String secondURI[] = firstURI.split("/", 4);
+		String thirdURI[] = secondURI[3].split("\\.");
+		String finalURI = thirdURI[0].substring(0, 3);
 		
+		String code = "";
+		if("not".equals(finalURI)) {
+			VIEW_PAGE = "/WEB-INF/view/adminBoard/noticeGet.jsp";
+			code = "NOTICE";
+		}else if("faq".equals(finalURI)){
+			VIEW_PAGE = "/WEB-INF/view/adminBoard/faqGet.jsp";
+			code = "FAQ";
+		}
 		long boardSeq = Long.parseLong(req.getParameter("boardSeq"));//사용자 정보를 화면에 뿌려주기 위함
 		
 		
@@ -40,7 +65,7 @@ private static final String VIEW_PAGE = "";
 //			
 //		}
 		
-		req.setAttribute("AdminBoardVO", abv);
+		req.setAttribute("adminBoardVO", abv);
 		return VIEW_PAGE;
 	}
 }

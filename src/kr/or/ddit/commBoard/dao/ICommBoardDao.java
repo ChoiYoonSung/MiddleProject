@@ -6,6 +6,7 @@ import java.util.List;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.or.ddit.commBoard.vo.CommBoardVO;
+import kr.or.ddit.common.vo.PagingVO;
 
 
 /**
@@ -30,7 +31,15 @@ public interface ICommBoardDao {
 	 * @return 게시판 정보를 담는 List객체
 	 * @throws SQLException
 	 */
-	public List<CommBoardVO> GetAllBoardList(SqlMapClient smc) throws SQLException;
+	public List<CommBoardVO> getAllBoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException;
+	
+	/**
+	 * 전체 회원수를 반환하는 메서드
+	 * @param smc SqlMapClient 객체
+	 * @return 전체 회원 수
+	 */
+	public int getAllBoardListCount(SqlMapClient smc) throws SQLException;
+	
 	
 	/**
 	 * 게시판 정보 DB를 update하는 메서드
@@ -48,7 +57,7 @@ public interface ICommBoardDao {
 	 * @return 작업성공 1, 실패 0
 	 * @throws SQLException
 	 */
-	public int deleteBoard(SqlMapClient smc, String userId) throws SQLException;
+	public int deleteBoard(SqlMapClient smc, CommBoardVO cv) throws SQLException;
 	
 	/**
 	 * CommBoardVO 객체에 담긴 자료를 이용하여 게시물을 검색하는 메서드
@@ -65,7 +74,9 @@ public interface ICommBoardDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public CommBoardVO getBoard(SqlMapClient smc, String userId) throws SQLException;
+	public CommBoardVO getBoard(SqlMapClient smc, long boardSeq) throws SQLException;
+	
+
 	
 	
 }

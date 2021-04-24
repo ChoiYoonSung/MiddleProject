@@ -81,11 +81,11 @@
 
 					// Images (in the format of 'url': 'alignment').
 						images: {
-							'images/gimbok.jpg': 'center',
-							'images/gimpi.jpg': 'center',
-							'images/sam.jpg': 'center',
-							'images/budae.jpg': 'center',
-							'images/care.jpg': 'center'
+							'/DPJ/assets/images/gimbok.jpg': 'center',
+							'/DPJ/assets/images/gimpi.jpg': 'center',
+							'/DPJ/assets/images/sam.jpg': 'center',
+							'/DPJ/assets/images/budae.jpg': 'center',
+							'/DPJ/assets/images/care.jpg': 'center'
 						},
 
 					// Delay.

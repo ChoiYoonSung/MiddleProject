@@ -6,7 +6,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <!-- 	<css> -->
 		<link rel="stylesheet" href="/DPJ/assets/css/intro.css?v=1" />
-<!-- 	<js> -->						
+<!-- 	<js> -->
+		<script type="text/javascript" src="/DPJ/assets/js/main/main.js"></script>						
 	</head>
 	
 	<body class="is-preload">
@@ -27,9 +28,9 @@
 
 		<!-- Signup Form -->
 			<form id="signup-form" method="post" action="#">
-				<input type="button" value="홈페이지 바로가기">
-				<input type="button" value="로그인">
-				<input type="button" value="회원가입">				
+				<input type="button" value="홈페이지 바로가기" onclick="movePageByGet('/DPJ/main/main.do')">
+				<input type="button" value="로그인" onclick="movePageByGet('/DPJ/logInOut/login.do')">
+				<input type="button" value="회원가입" onclick="movePageByGet('/DPJ/register/registerType.do')">				
 			</form>
 			
 

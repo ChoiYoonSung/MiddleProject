@@ -15,7 +15,7 @@ public interface IAdminBoardDao {
 	 * @return 회원정보를 담고있는 List객체
 	 * @throws SQLException SQL예외객체
 	 */
-	public List<AdminBoardVO> getAllAdminBoardList(SqlMapClient smc)
+	public List<AdminBoardVO> getAllAdminBoardList(SqlMapClient smc, String code)
 			throws SQLException;
 	
 	/**
@@ -57,7 +57,7 @@ public interface IAdminBoardDao {
 	 * @return DB에 작업 성공시 1 반환, 실패시 0 반환
 	 * @throws SQLException SQL예외객체
 	 */
-	public int deleteAdminBoard(SqlMapClient smc, AdminBoardVO abv)
+	public int deleteAdminBoard(SqlMapClient smc, long boardSeq)
 			throws SQLException;
 	
 	/**
