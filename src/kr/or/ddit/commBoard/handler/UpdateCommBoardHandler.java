@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
 
 import kr.or.ddit.commBoard.service.CommBoardServiceImpl;
@@ -35,6 +36,7 @@ public class UpdateCommBoardHandler implements CommandHandler{
 		
 		if(req.getMethod().equals("GET")) {
 			long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
+			System.out.println("boardSeq : " + boardSeq);
 			
 			ICommBoardService service = CommBoardServiceImpl.getInstance();
 			
@@ -51,7 +53,6 @@ public class UpdateCommBoardHandler implements CommandHandler{
 				req.setAttribute("atchFileList", atchFileList);
 				
 			}
-			
 			req.setAttribute("CommBoardVO", cv);
 			
 			return VIEW_PAGE;
@@ -60,7 +61,6 @@ public class UpdateCommBoardHandler implements CommandHandler{
 			
 			//FileItem 추출
 			FileItem item = ((FileUploadRequestWrapper)req).getFileItem("atchFile");
-			//apache.common.
 			
 			AtchFileVO atchFileVO = new AtchFileVO();
 			
@@ -74,19 +74,19 @@ public class UpdateCommBoardHandler implements CommandHandler{
 				atchFileVO = fileService.saveAtchFile(item); //첨부파일 저장 
 			}
 			
-			
-			
-			
-			// 1. 요청파라미터 정보 가져오기
+			Long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
 			String userId = req.getParameter("userId");
 			String boardTitle = req.getParameter("boardTitle");
 			String boardContent = req.getParameter("boardContent");
-			
+			String code = req.getParameter("code");
+
 			// 2. 서비스 객체 생성하기
 			ICommBoardService boardService = CommBoardServiceImpl.getInstance();
 			
 			// 3. 회원정보 등록하기
 			CommBoardVO cv = new CommBoardVO();
+			cv.setCode(code);
+			cv.setBoardSeq(boardSeq);
 			cv.setUserId(userId);
 			cv.setBoardTitle(boardTitle);
 			cv.setBoardContent(boardContent);
@@ -104,7 +104,7 @@ public class UpdateCommBoardHandler implements CommandHandler{
 			
 			// 4. 목록 조회화면으로 이동
 			String redirectUrl = req.getContextPath() +
-					"/commBoard/select.do?msg=" + URLEncoder.encode(msg, "UTF-8");
+					"/commBoard/select.do?boardSeq="+ boardSeq;
 			
 			return redirectUrl;
 		}

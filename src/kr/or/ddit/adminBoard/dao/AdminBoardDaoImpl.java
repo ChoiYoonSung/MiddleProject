@@ -23,12 +23,9 @@ public class AdminBoardDaoImpl implements IAdminBoardDao{
 	}
 
 	@Override
-	public List<AdminBoardVO> getAllAdminBoardList(SqlMapClient smc, String code) throws SQLException {
+	public List<AdminBoardVO> getAllAdminBoardList(SqlMapClient smc, AdminBoardVO abv) throws SQLException {
 		
-		List<AdminBoardVO> boardList = smc.queryForList("adminBoard.getAllAdminBoardList", code);
-		System.out.println("DaoImpl>> " + boardList);
-		System.out.println(smc.queryForList("adminBoard.getAllAdminBoardList"));
-		
+		List<AdminBoardVO> boardList = smc.queryForList("adminBoard.getAllAdminBoardList", abv);
 		return boardList;
 	}
 
@@ -58,7 +55,7 @@ public class AdminBoardDaoImpl implements IAdminBoardDao{
 	@Override
 	public int deleteAdminBoard(SqlMapClient smc, long boardSeq) throws SQLException {
 		int cnt = smc.delete("adminBoard.deleteAdminBoard", boardSeq);
-		return 0;
+		return cnt;
 	}
 	
 	@Override
@@ -73,6 +70,7 @@ public class AdminBoardDaoImpl implements IAdminBoardDao{
 	@Override
 	public AdminBoardVO getAdminBoard(SqlMapClient smc, long boardSeq) throws SQLException {
 		AdminBoardVO abv = (AdminBoardVO) smc.queryForObject("adminBoard.getAdminBoard", boardSeq);
+		int cnt = smc.update("adminBoard.countAdminBoard", boardSeq);
 		return abv;
 	}
 

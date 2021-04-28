@@ -14,6 +14,7 @@ import kr.or.ddit.common.vo.AtchFileVO;
 import kr.or.ddit.event.service.EventServiceImpl;
 import kr.or.ddit.event.service.IEventService;
 import kr.or.ddit.event.vo.EventVO;
+import kr.or.ddit.restInfo.vo.RestInfoVO;
 
 public class SelectEventHandler implements CommandHandler{
 	private static final String VIEW_PAGE = "/WEB-INF/view/eventBoard/selectEvent.jsp";
@@ -25,19 +26,13 @@ public class SelectEventHandler implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		String boardSeq = req.getParameter("boardSeq");
+		long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
 		IEventService eventService = EventServiceImpl.getInstance();
 		
 		EventVO event = eventService.selectEvent(boardSeq);
-		if(event.getAtchFileId()>0) {
-			AtchFileVO fileVO = new AtchFileVO();
-			fileVO.setAtchFileId(event.getAtchFileId());
-
-			IAtchFileService atchFileService = AtchFileServiceImpl.getInstance();
-			List<AtchFileVO> atchFileList = atchFileService.getAtchFileList(fileVO);
-
-			req.setAttribute("atchFileList", atchFileList);
-		}
+		
+		RestInfoVO rest = eventService.selectRest(event.getUserId());
+		req.setAttribute("restVO", rest);
 		req.setAttribute("eventVO", event);
 		return VIEW_PAGE;
 	}

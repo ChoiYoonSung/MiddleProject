@@ -98,17 +98,34 @@ public class CommentServiceImpl implements ICommentService {
 	}
 
 	@Override
-	public List<CommentVO> getCommentCount(CommentVO cv) {
+	public int getCommentCount(CommentVO cv) {
 
-		List<CommentVO> commentCount = new ArrayList<>();
+		int cnt = 0;
 		
 		try {
-			commentCount = commentDao.getCommentCount(smc, cv);
+			cnt = commentDao.getCommentCount(smc, cv);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return commentCount;
+		return cnt;
+	}
+	
+	
+	// 관리자 영역
+	
+	@Override
+	public List<CommentVO> getAllCommentList() {
+
+		List<CommentVO> allCommentList = new ArrayList<>();
+		
+		try {
+			allCommentList = commentDao.getAllCommentList(smc);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return allCommentList;
 	}
 
 }

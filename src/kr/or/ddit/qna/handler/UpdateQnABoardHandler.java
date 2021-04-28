@@ -33,10 +33,10 @@ public class UpdateQnABoardHandler implements CommandHandler{
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		if(req.getMethod().equals("GET")) {
-			String boardSeq = req.getParameter("boardSeq");
+			Long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
 			
 			IQnABoardService qnaService = QnABoardServiceImpl.getInstance();
-			QnABoardVO qna = qnaService.getQnA(boardSeq);
+			QnABoardVO qna = qnaService.getQnABoard(boardSeq);
 			
 			if(qna.getAtchFileId() > 0) { //첨부파일이 존재하면
 		         //첨부파일 정보 조회
@@ -47,7 +47,6 @@ public class UpdateQnABoardHandler implements CommandHandler{
 		         List<AtchFileVO> atchFileList = atchFileService.getAtchFileList(fileVO);
 		         
 		         req.setAttribute("atchFileList", atchFileList);
-		         
 		      }
 			
 			req.setAttribute("qnaVO", qna);
@@ -59,30 +58,21 @@ public class UpdateQnABoardHandler implements CommandHandler{
 			AtchFileVO atchFileVO = new AtchFileVO();
 			
 			// 기존의 첨부파일아이디 정보 가져오기
-			atchFileVO.setAtchFileId(req.getParameter("atchFile") == null ? -1
-					: Long.parseLong(req.getParameter("atchFile")));
+			atchFileVO.setAtchFileId(req.getParameter("atchFileId") == null ? -1
+					: Long.parseLong(req.getParameter("atchFileId")));
 			
 			if(item != null && item.getName().equals("")) {
 				IAtchFileService fileService = AtchFileServiceImpl.getInstance();
 				atchFileVO = fileService.saveAtchFile(item);	// 첨부파일 저장
 			}
 						
-			long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
-			String userId = req.getParameter("userId");				//ID
-			String boardTitle = req.getParameter("boardTitle");		//제목
-			String boardContent = req.getParameter("boardContent");	//내용
-			String boardSecret = req.getParameter("boardSecret");	//비공개
-			String boardPw = req.getParameter("boardPw");			//글비밀번호
-			
+			Long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
 			IQnABoardService qnaService = QnABoardServiceImpl.getInstance();
 			
 			QnABoardVO qna = new QnABoardVO();
-			qna.setBoardSeq(boardSeq);
-			qna.setUserId(userId);
-			qna.setBoardTitle(boardTitle);
-			qna.setBoardContent(boardContent);
-			qna.setBoardSecret((qna.getBoardSecret()==null)?"N":qna.getBoardSecret());
-			qna.setBoardPw(("".equals(qna.getBoardPw()))?"N":qna.getBoardPw());
+			BeanUtils.populate(qna, req.getParameterMap());
+			qna.setBoardSecret((qna.getBoardSecret() == null)?"N":qna.getBoardSecret());
+			qna.setBoardPw((qna.getBoardPw() == null)?"0000":qna.getBoardPw());
 			qna.setAtchFileId(atchFileVO.getAtchFileId());
 			
 			qnaService.updateQnABoard(qna);

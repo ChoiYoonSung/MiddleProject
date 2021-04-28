@@ -13,19 +13,7 @@ public class GetAdminBoardHandler implements CommandHandler{
 	
 	@Override
 	public boolean isRedirect(HttpServletRequest req) {
-		String firstURI = req.getRequestURI();
-		String secondURI[] = firstURI.split("/", 4);
-		String thirdURI[] = secondURI[3].split("\\.");
-		String finalURI = thirdURI[0].substring(0, 3);
 		
-		String code = "";
-		if("not".equals(finalURI)) {
-			VIEW_PAGE = "/WEB-INF/view/adminBoard/noticeGet.jsp";
-			code = "NOTICE";
-		}else if("faq".equals(finalURI)){
-			VIEW_PAGE = "/WEB-INF/view/adminBoard/faqGet.jsp";
-			code = "FAQ";
-		}
 		return false;
 	}
 

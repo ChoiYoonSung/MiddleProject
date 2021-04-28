@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
+import kr.or.ddit.userAll.vo.UserAllVO;
 import kr.or.ddit.userDdit.dao.IUserDditDao;
 import kr.or.ddit.userDdit.dao.UserDditDaoImpl;
 import kr.or.ddit.userDdit.vo.UserDditVO;
@@ -90,5 +91,14 @@ public class UserDditServiceImpl implements IUserDditService{
 		} catch (SQLException ex) { ex.printStackTrace(); }
 		return userDditList;
 	}
+	
 
+	@Override
+	public UserDditVO getUserDdit(String userId) {
+		UserDditVO userDdit = null;
+		try {
+			userDdit = userDditDao.getUserDdit(smc, userId);
+		} catch (SQLException ex) { ex.printStackTrace(); }
+		return userDdit;
+	}
 }

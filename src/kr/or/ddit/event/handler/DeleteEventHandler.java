@@ -18,7 +18,7 @@ public class DeleteEventHandler implements CommandHandler{
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		IEventService eventService = EventServiceImpl.getInstance();
-		String boardSeq = req.getParameter("boardSeq");
+		Long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
 		
 		eventService.deleteEvent(boardSeq);
 		String redirectUrl = req.getContextPath() + "/eventBoard/list.do";

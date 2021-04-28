@@ -124,10 +124,10 @@
 						    <a class="nav-link" href="boardAdmin.html">전체</a>
 						  </li>
 						  <li class="nav-item">
-						    <a class="nav-link active" href="getAll.do">공지</a>
+						    <a class="nav-link" href="noticeGetAll.do">공지</a>
 						  </li>
 						  <li class="nav-item">
-						    <a class="nav-link" href="faqGetAll.do">FAQ</a>
+						    <a class="nav-link active" href="faqGetAll.do">FAQ</a>
 						  </li>
 						  <li class="nav-item">
 						    <a class="nav-link" href="qnaAdmin.html">문의</a>
@@ -159,9 +159,7 @@
 							</div>
 	                        <div class="input-group mb-3 col-md-10">
 							  	<span class="input-group-text">내용</span>
-							  	<textarea class="form-control" rows="10" id="boardContent" name="boardContent">
-							  		"<%=abv.getBoardContent() %>"
-							  	</textarea>
+							  	<textarea class="form-control" rows="10" id="boardContent" name="boardContent"><%=abv.getBoardContent() %></textarea>
 							</div>
 							<div class="col-12">
 							   	<button type="submit" class="btn btn-outline-primary btn-sm">수정완료</button>

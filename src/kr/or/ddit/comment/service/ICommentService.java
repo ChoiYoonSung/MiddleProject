@@ -46,6 +46,11 @@ public interface ICommentService {
 	 * @param cv 댓글 정보 가져오는 기준
 	 * @return
 	 */
-	public List<CommentVO> getCommentCount(CommentVO cv);
+	public int getCommentCount(CommentVO cv);
 	
+	/**
+	 * 관리자가 조회하는 홈페이지 전체 댓글
+	 * @return
+	 */
+	public List<CommentVO> getAllCommentList();
 }

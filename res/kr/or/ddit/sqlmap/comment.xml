@@ -16,10 +16,10 @@
 			, BOARD_SEQ
 		) VALUES (
 			#code#	
-			, #replySeq#	
+			, SEQ_COMMENT.NEXTVAL	
 			, #userId#	
-			, #replyDate#	
 			, SYSDATE	
+			, #replyContent#	
 			, #boardSeq#
 		)
 		
@@ -30,7 +30,7 @@
 		UPDATE TB_COMMENT
 		SET	   REPLY_CONTENT = #replyContent#
 			 , REPLY_DATE = SYSDATE
-		WHERE  BOARD_SEQ = #boardSeq# 
+		WHERE  REPLY_SEQ = #replySeq# 
 	
 	</update>
 	
@@ -39,7 +39,7 @@
 	
 		UPDATE TB_COMMENT
 		SET	   REPLY_DELETE = 'Y'
-		WHERE  BOARD_SEQ = #boardSeq#
+		WHERE  REPLY_SEQ = #replySeq#
 	
 	</delete>
 	
@@ -54,15 +54,18 @@
 	
 	</select>
 	
+	<!-- 일반회원이 보는 게시글 속 댓글 목록 -->
 	<select id="getCommentList" parameterClass="kr.or.ddit.comment.vo.CommentVO" resultClass="kr.or.ddit.comment.vo.CommentVO">
 	
 		SELECT USER_ID         userId
-			 , REPLY_DATE      replyDate
+			 , TO_CHAR(REPLY_DATE, 'YY/MM/DD HH24:MM')      replyDate
 			 , REPLY_CONTENT   replyContent
+			 , REPLY_SEQ	   replySeq
 		FROM   TB_COMMENT
 		WHERE  CODE = #code#
 		AND    BOARD_SEQ = #boardSeq#
 		AND	   REPLY_DELETE = 'N'
+		ORDER BY REPLY_SEQ
 	
 	</select>
 	
@@ -72,8 +75,52 @@
 		FROM   TB_COMMENT
 		WHERE  CODE = #code#
 		AND    BOARD_SEQ = #boardSeq#
+		AND	   REPLY_DELETE = 'N'
 		
 	</select>
 	
+	<!-- 관리자가 보는 게시글 속 댓글 목록  / 구현 아직, dao, service 없음 -->
+	<select id="getCommentListAdmin" parameterClass="kr.or.ddit.comment.vo.CommentVO" resultClass="kr.or.ddit.comment.vo.CommentVO">
+	
+		SELECT USER_ID         userId
+			 , TO_CHAR(REPLY_DATE, 'YY/MM/DD HH24:MM')      replyDate
+			 , REPLY_CONTENT   replyContent
+			 , REPLY_SEQ	   replySeq
+		FROM   TB_COMMENT
+		WHERE  CODE = #code#
+		AND    BOARD_SEQ = #boardSeq#
+		ORDER BY REPLY_SEQ
+	
+	</select>
+	
+	<!-- 관리자가 보는 게시판별 / 구현 아직, dao, service 없음 -->
+	<select id="getBoardCommentList" parameterClass="String" resultClass="kr.or.ddit.comment.vo.CommentVO">
+	
+		SELECT USER_ID         userId
+			 , TO_CHAR(REPLY_DATE, 'YY/MM/DD HH24:MM')      replyDate
+			 , REPLY_CONTENT   replyContent
+			 , REPLY_SEQ	   replySeq
+			 , REPLY_DELETE    replyDelete
+		FROM   TB_COMMENT
+		WHERE  1 = 1
+		AND	   CODE = #code#
+		ORDER BY REPLY_SEQ DESC
+	
+	</select>
+	
+	<!-- 관리자가 보는 전체 댓글 / 구현 아직, dao, service 없음 -->
+	<select id="getAllCommentList" parameterClass="kr.or.ddit.comment.vo.CommentVO" resultClass="kr.or.ddit.comment.vo.CommentVO">
+	
+		SELECT USER_ID         userId
+			 , TO_CHAR(REPLY_DATE, 'MM/DD')      replyDate
+			 , REPLY_CONTENT   replyContent
+			 , REPLY_SEQ	   replySeq
+			 , REPLY_DELETE    replyDelete
+			 , CODE			   code
+			 , BOARD_SEQ	   boardSeq
+		FROM   TB_COMMENT
+		ORDER BY REPLY_SEQ DESC
+	
+	</select>
 	
 </sqlMap>

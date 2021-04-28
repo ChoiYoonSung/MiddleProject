@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+         PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+         "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="mypage">
+		
+	<!-- 마이페이지 내가 쓴 문의 게시글 목록 -->
+	<select id="listMyPageQna" parameterClass="kr.or.ddit.qna.vo.QnABoardVO" resultClass="kr.or.ddit.qna.vo.QnABoardVO">
+		select 
+				  USER_ID       userId      
+				, BOARD_SEQ     boardSeq    
+				, BOARD_TYPE    boardType   
+				, BOARD_TITLE   boardTitle  
+				, BOARD_CONTENT boardContent
+				, BOARD_DATE    boardDate   
+				, BOARD_SECRET  boardSecret 
+				, BOARD_PW      boardPw     
+				, BOARD_ANSWER  boardAnswer 
+				, ATCH_FILE_ID  atchFileId 
+				, BOARD_HITS    boardHits   
+				, BOARD_DELETE  boardDelete 
+			from TB_QNA_BOARD
+		where BOARD_DELETE = 'N' AND  USER_ID = #userId#
+	</select>
+</sqlMap>

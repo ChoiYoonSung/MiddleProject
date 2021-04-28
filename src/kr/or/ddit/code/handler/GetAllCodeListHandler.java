@@ -10,10 +10,10 @@ import kr.or.ddit.code.service.ICodeService;
 import kr.or.ddit.code.vo.CodeVO;
 import kr.or.ddit.common.handler.CommandHandler;
 
-public class GetAllCodeListHandler implements CommandHandler {
-
-	private static final String VIEW_PAGE = "/WEB-INF/view/code/codeList.jsp";
-
+public class GetAllCodeListHandler implements CommandHandler{
+	
+	private static final String VIEW_PAGE = "/WEB-INF/view/code/getAllCode.jsp";
+	
 	@Override
 	public boolean isRedirect(HttpServletRequest req) {
 		return false;
@@ -22,19 +22,13 @@ public class GetAllCodeListHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
-		// String user = (String) req.getSession().getAttribute("user");
-		// if (user == null) return "리다이렉트 페이지";
-		// req.getSession().invalidate();
-
-		String groupCode = req.getParameter("groupCode");
-
-		ICodeService codeService = CodeServiceImpl.getInstance();
-		List<CodeVO> codeList = codeService.getCodeList(groupCode);
-		req.setAttribute("codeList", codeList);
-
+		ICodeService service = CodeServiceImpl.getInstance();
+		
+		List<CodeVO> cv = service.getAllCodeList();
+		
+		req.setAttribute("codeList", cv);
+		
 		return VIEW_PAGE;
 	}
-
-
-
+	
 }

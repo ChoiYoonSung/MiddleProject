@@ -13,7 +13,7 @@
 			, CODE_NAME
 			, DESCRIPTION
 			, USE_YN
-		) VALUE (
+		) VALUES (
 			#groupCode#
 			, #code#
 			, #codeName#
@@ -26,18 +26,15 @@
 	<update id="updateCode" parameterClass="kr.or.ddit.code.vo.CodeVO">
 
 		UPDATE TB_CODE
-		SET GROUP_CODE = #groupCode#
-			, CODE = #code#
+		SET CODE = #code#
 			, CODE_NAME = #codeName#
-			, DESCRIPTION = #description#
 		WHERE 1 = 1
-		AND GROUP_CODE = #groupCode#
 		AND CODE = #code#
 
 	</update>
 
 	<!-- deleteCode지만 USE_YN을 N으로 업데이트 -->
-	<update id="deleteCode" parameterClass="kr.or.ddit.code.vo.CodeVO">
+	<update id="deleteCode" parameterClass="String">
 
 		UPDATE TB_CODE
 		SET USE_YN = 'N'
@@ -54,10 +51,11 @@
 			 , DESCRIPTION    description
 			 , USE_YN         useYn
 	 	FROM TB_CODE
+	 	ORDER BY GROUP_CODE, CODE
 
 	</select>
 
-	<select id="getCodeList" parameterClass="java.lang.String" resultClass="kr.or.ddit.code.vo.CodeVO">
+	<select id="getCodeList" parameterClass="String" resultClass="kr.or.ddit.code.vo.CodeVO">
 
 		SELECT GROUP_CODE     groupCode
 			 , CODE           code
@@ -66,10 +64,11 @@
 			 , USE_YN         useYn
 	 	FROM TB_CODE
 	 	WHERE GROUP_CODE = #groupCode#
+	 	ORDER BY CODE
 
 	</select>
 
-	<select id="getCode" parameterClass="kr.or.ddit.code.vo.CodeVO" resultClass="kr.or.ddit.code.vo.CodeVO">
+	<select id="getCode" parameterClass="String" resultClass="kr.or.ddit.code.vo.CodeVO">
 
 		SELECT GROUP_CODE     groupCode
 			 , CODE           code
@@ -78,10 +77,7 @@
 			 , USE_YN         useYn
 	 	FROM TB_CODE
 	 	WHERE 1 = 1
-	 	<isNotEmpty property="code">
 	 	AND CODE = #code#
-	 	</isNotEmpty>
-
 	</select>
 
 </sqlMap>

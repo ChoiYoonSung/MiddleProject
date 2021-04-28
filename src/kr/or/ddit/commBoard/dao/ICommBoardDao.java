@@ -32,6 +32,18 @@ public interface ICommBoardDao {
 	 * @throws SQLException
 	 */
 	public List<CommBoardVO> getAllBoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException;
+	public List<CommBoardVO> getAllDevBoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException;
+	public List<CommBoardVO> getAllJobBoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException;
+	public List<CommBoardVO> getAllSocialBoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException;
+	public List<CommBoardVO> getAllClassBoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException;
+	public List<CommBoardVO> getAll401BoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException;
+	public List<CommBoardVO> getAll402BoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException;
+	public List<CommBoardVO> getAll403BoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException;
+	public List<CommBoardVO> getAll404BoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException;
+	public List<CommBoardVO> getAll405BoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException;
+	public List<CommBoardVO> getAll406BoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException;
+	public List<CommBoardVO> getAll407BoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException;
+	public List<CommBoardVO> getAll408BoardList(SqlMapClient smc, PagingVO pagingVO) throws SQLException;
 	
 	/**
 	 * 전체 회원수를 반환하는 메서드
@@ -57,7 +69,7 @@ public interface ICommBoardDao {
 	 * @return 작업성공 1, 실패 0
 	 * @throws SQLException
 	 */
-	public int deleteBoard(SqlMapClient smc, CommBoardVO cv) throws SQLException;
+	public int deleteBoard(SqlMapClient smc, long boardSeq) throws SQLException;
 	
 	/**
 	 * CommBoardVO 객체에 담긴 자료를 이용하여 게시물을 검색하는 메서드

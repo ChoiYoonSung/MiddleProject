@@ -12,7 +12,8 @@ import kr.or.ddit.common.handler.CommandHandler;
 
 public class DeleteAdminBoardHandler implements CommandHandler{
 
-	private static final String VIEW_PAGE = "";
+	private static String VIEW_PAGE_de = "";
+	private static String VIEW_PAGE_ga = "";
 	
 	@Override
 	public boolean isRedirect(HttpServletRequest req) {
@@ -25,40 +26,35 @@ public class DeleteAdminBoardHandler implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		String firstURI = req.getRequestURI();
+		String secondURI[] = firstURI.split("/", 4);
+		String thirdURI[] = secondURI[3].split("\\.");
+		String finalURI = thirdURI[0].substring(0, 3);
+		
+		String code = "";
+		if("not".equals(finalURI)) {
+			VIEW_PAGE_de = "/WEB-INF/view/adminBoard/noticeGetAll.jsp";
+			VIEW_PAGE_ga = req.getContextPath() + "/adminBoard/noticeGetAll.do";
+			code = "NOTICE";
+		}else if("faq".equals(finalURI)){
+			VIEW_PAGE_de = "/WEB-INF/view/adminBoard/faqGetAll.jsp";
+			VIEW_PAGE_ga = req.getContextPath() + "/adminBoard/faqGetAll.do";
+			code = "FAQ";
+		}
 		if(req.getMethod().equals("GET")) { // GET 방식인 경우 redirect를 하지 않는다.
-//			long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
-//			
-//			IAdminBoardService boardService = AdminBoardServiceImpl.getInstance();
-//			
-////			AdminBoardVO abv = boardService.getAdminBoard(boardSeq);
-//			
-//			//정보등록
-//			req.setAttribute("AdminBoardVO", boardSeq);
-			return req.getContextPath() + "/adminBoard/getAll.do";
+			return VIEW_PAGE_de;
 		}else { // POST 방식인 경우
 			//1. 요청 파라미터 정보 가져오기
 			long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
-//			String boardDelete = req.getParameter("boardDelete");
 			
 			//2.서비스 객체 생성
 			IAdminBoardService boardService = AdminBoardServiceImpl.getInstance();
 			
 			//3. 정보 등록
-//			AdminBoardVO abv = new AdminBoardVO();
-//			abv.setBoardDelete(boardDelete);
 			
 			int cnt = boardService.deleteAdminBoard(boardSeq);
 			
-//			String msg = "";
-//			if(cnt > 0) {
-//				msg = "성공";
-//			} else {
-//				msg = "실패";
-//			}
-			
-			//화면 이동
-//			String redirectUrl = req.getContextPath() + "/adminBoard/getAll.do?msg=" + URLEncoder.encode(msg,"UTF-8");
-			return req.getContextPath() + "/adminBoard/getAll.do";
+			return VIEW_PAGE_ga;
 		}
 	}
 

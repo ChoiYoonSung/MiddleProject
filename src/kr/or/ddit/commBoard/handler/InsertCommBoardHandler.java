@@ -37,7 +37,7 @@ public class InsertCommBoardHandler implements CommandHandler{
 		}else {
 			
 			FileItem item = ((FileUploadRequestWrapper) req).getFileItem("atchFileId")
-					==null?null:((FileUploadRequestWrapper)req).getFileItem("atchFile");
+					==null?null:((FileUploadRequestWrapper)req).getFileItem("atchFileId");
 			
 			AtchFileVO atchFileVO = new AtchFileVO();
 			if(item != null) {
@@ -70,7 +70,7 @@ public class InsertCommBoardHandler implements CommandHandler{
 				msg = "실패";
 			}
 			
-			String redirectUrl = req.getContextPath() + "/commBoard/list.do?msg" + URLEncoder.encode(msg, "UTF-8");
+			String redirectUrl = req.getContextPath() + "/commBoard/main.do?msg" + URLEncoder.encode(msg, "UTF-8");
 			
 			return redirectUrl;
 		}

@@ -2,10 +2,6 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	
-	List<AdminBoardVO> boardList = (List<AdminBoardVO>)request.getAttribute("boardList");
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
     <head>
@@ -150,7 +146,6 @@
                         </div>
                         <form method="post" action="faqInsert.do">
                         <div class="input-group mb-3">
-                        	<input type="hidden" name="code" value="faq">
                         	<input type="hidden" name="userId" value="admin">
 						  	<div class="input-group-prepend">
 						    	<span class="input-group-text" id="basic-addon1">제목</span>
@@ -164,8 +159,9 @@
 						<div class="col-12">
 						   	<button type="submit" class="btn btn-outline-primary btn-sm">등록</button>
 						   	<button type="reset" class="btn btn-outline-secondary btn-sm">초기화</button>
-						   	<a type="button" class="btn btn-outline-info btn-sm" href="<%=request.getContextPath() %>/adminBoard/getAll.do">목록으로</a>
+						   	<a type="button" class="btn btn-outline-info btn-sm" href="<%=request.getContextPath() %>/adminBoard/faqGetAll.do">목록으로</a>
 					    </div>
+				        	<input type="hidden" id="boardList" name="boardSeq">
 					    </form>
                    	</div>
                 </main>
@@ -183,9 +179,6 @@
                 </footer>
             </div>
         </div>
-        <form id="fm" method="post">
-        	<input type="hidden" id="boardList" name="boardSeq">
-        </form>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="<%=request.getContextPath() %>/adminView/js/scripts.js"></script>

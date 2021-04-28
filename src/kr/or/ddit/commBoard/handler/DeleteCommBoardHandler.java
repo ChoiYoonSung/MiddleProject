@@ -12,55 +12,38 @@ import kr.or.ddit.common.handler.CommandHandler;
 
 public class DeleteCommBoardHandler implements CommandHandler{
 	
-	private static final String VIEW_PAGE = "/WEB-INF/view/commBoard/updateForm.jsp";
+	private static final String VIEW_PAGE = "/WEB-INF/view/commBoard/delete.jsp";
 	
 	@Override
 	public boolean isRedirect(HttpServletRequest req) {
-		if(req.getMethod().equals("GET")) { // GET 방식인 경우 redirect를 하지 않는다.
-			return false;
-		}else { // POST 방식인 경우
 			return true;
-		}
 	}
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		if(req.getMethod().equals("GET")) {
+		long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
 		
-			long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
-			
-			ICommBoardService boardService = CommBoardServiceImpl.getInstance();
-					
-			CommBoardVO cv = boardService.getBoard(boardSeq);
-			
-			req.setAttribute("CommBoardVO", cv);
-			
-		return VIEW_PAGE;
+		//2.삭제처리
+		ICommBoardService boardService = CommBoardServiceImpl.getInstance();
 		
-		}else {
-			
-			long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
-			
-			ICommBoardService boardService = CommBoardServiceImpl.getInstance();
-
-			CommBoardVO cv = new CommBoardVO();
+		int cnt = boardService.deleteBoard(boardSeq);
 		
-			cv.setBoardSeq(boardSeq);
-		
-		int cnt = boardService.deleteBoard(cv);
-		
-		String msg ="";
+		String msg = "";
 		
 		if(cnt > 0) {
-			msg ="성공";
+			msg = "성공";
 		}else {
 			msg = "실패";
 		}
 		
-		String redirectUrl = req.getContextPath() + "/commBoard/list.do?msg" + URLEncoder.encode(msg, "UTF-8");
+		// 4. 목록 조회화면으로 이동
+		String redirectUrl = req.getContextPath() +
+				"/commBoard/main.do?msg=" + URLEncoder.encode(msg, "UTF-8");
+//		resp.sendRedirect(redirectUrl); 나중에 핸들러에서 뷰로 보내줄 것.
+		
 		return redirectUrl;
 	}
 
-	}
+	
 }

@@ -13,7 +13,7 @@ import kr.or.ddit.common.vo.PagingVO;
 
 public class GetAllCommBoardHandler implements CommandHandler{
 
-	private static final String VIEW_PAGE = "/WEB-INF/view/commBoard/list.jsp";
+	private static final String VIEW_PAGE = "/WEB-INF/view/commBoard/allBoardListMain.jsp";
 	
 	@Override
 	public boolean isRedirect(HttpServletRequest req) {

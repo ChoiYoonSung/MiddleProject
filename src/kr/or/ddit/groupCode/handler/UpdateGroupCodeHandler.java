@@ -14,16 +14,16 @@ public class UpdateGroupCodeHandler implements CommandHandler{
 
 	@Override
 	public boolean isRedirect(HttpServletRequest req) {
-		if(req.getMethod().equals("GET")) { // GET 방식인 경우 redirect를 하지 않는다.
+		if(req.getMethod().equals("GET")) {
 			return false;
-		}else { // POST 방식인 경우
+		}else {
 			return true;
 		}
 	}
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		if(req.getMethod().equals("GET")) { // GET 방식인 경우 redirect를 하지 않는다.
+		if(req.getMethod().equals("GET")) {
 			
 			String groupCode = req.getParameter("groupCode");
 			String groupCodeName = req.getParameter("groupCodeName");
@@ -33,7 +33,7 @@ public class UpdateGroupCodeHandler implements CommandHandler{
 			req.setAttribute("groupCodeVO", gv);
 			
 			return VIEW_PAGE;
-		} else { // POST 방식인 경우
+		} else {
 			
 			//1. 요청 파라미터 정보 가져오기
 			GroupCodeInfoVO groupCodeInfoVO = new GroupCodeInfoVO();

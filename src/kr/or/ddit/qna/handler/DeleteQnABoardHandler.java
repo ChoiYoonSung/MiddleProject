@@ -19,13 +19,13 @@ public class DeleteQnABoardHandler implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		Long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
 		
 		IQnABoardService qnaService = QnABoardServiceImpl.getInstance();
-		QnABoardVO qna = new QnABoardVO();
-		BeanUtils.populate(qna, req.getParameterMap());
 		
-		qnaService.deleteQnABoard(qna);
-		String redirectUrl = req.getContextPath() + "/qnaBoard/list.do?msg=";
+		qnaService.deleteQnABoard(boardSeq);
+		String redirectUrl = req.getContextPath() + "/qnaBoard/list.do";
+		
 		return redirectUrl;
 	}
 }

@@ -9,13 +9,12 @@ public interface IQnABoardService {
 	
 	public int updateQnABoard(QnABoardVO qna);
 	
-	public int deleteQnABoard(QnABoardVO qna);
+	public int deleteQnABoard(long boardSeq);
 	
 	public List<QnABoardVO> getAllQnABoard();
 	
-	public List<QnABoardVO> getQnABoard(QnABoardVO qna);
+	public QnABoardVO selectQnABoard(long boardSeq);
 	
-	public QnABoardVO getQnA(String boardSeq);
+	public QnABoardVO getQnABoard(long boardSeq);
 	
-	public int countHitsQnABoard(String boardSeq);
 }

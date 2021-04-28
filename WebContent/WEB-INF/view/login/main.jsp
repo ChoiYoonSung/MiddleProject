@@ -1,3 +1,5 @@
+<%@page import="kr.or.ddit.event.vo.EventVO"%>
+<%@page import="kr.or.ddit.restInfo.vo.RestInfoVO"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.or.ddit.qna.vo.QnABoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,8 +8,29 @@
 	// 세션 출력 영역
 	String userId = (String) session.getAttribute("USERID");
 	String userType = (String) session.getAttribute("USERTYPE");
+	String userPhoto = (String) session.getAttribute("USERPHOTO");
 	String visitFlag = (String) session.getAttribute("VISITFLAG");
 	System.out.println("★★JSP VISITFLAG : "+visitFlag);
+	
+	if(userId == null) {
+		userId = "null";
+	}
+	
+	if(userType == null) {
+		userType = "비회원";
+	}
+	
+	if(userPhoto == null) {
+		userType = "null";
+	}
+	
+	if(visitFlag == null) {
+		visitFlag = "null";
+	}
+	
+	
+	List<RestInfoVO> restList = (List<RestInfoVO>)request.getAttribute("restList");
+	List<EventVO> eventList = (List<EventVO>)request.getAttribute("eventList");
 %>    
 <!DOCTYPE html>
 <html lang="kr">
@@ -36,15 +59,23 @@
         <script src="<%=request.getContextPath() %>/assets/mail/contact_me.js"></script>
         <!-- Core theme JS-->
         <script src="<%=request.getContextPath() %>/js/scripts.js"></script>
-        
+        <script>
+	        function movePageByGet(url){
+	        	  location.href = url;
+	        }
+			function logout(url){ 
+				alert("로그아웃 합니다.");
+				movePageByGet(url);
+			}
+        </script>
         <style type="text/css">
-        	h1, h2, li, a{
+        	h1, h2, li, a, th, td{
         		font-family: 'Jua', sans-serif;
+ 				font-size: 1.2em;
         	}
         	h3,h4,h5,h6, p{
  				font-family: 'Sunflower', sans-serif;
  				font-size: 1.2em;
-        	
         	}
         </style>
     </head>
@@ -54,7 +85,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container col-md-3">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top"><h1>굿끼제먹</h1><span>굿 ! 끼니는 제때 먹어야지!</span></a>
+                <a class="navbar-brand js-scroll-trigger" href="<%=request.getContextPath() %>/main/main.do"><h1>굿끼제먹</h1><span>굿 ! 끼니는 제때 먹어야지!</span></a>
                
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 		                메뉴
@@ -64,54 +95,38 @@
                          
             <div class="collapse navbar-collapse col-lg-7 h1" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">이벤트 게시판</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">식당검색</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Meal파티 게시판</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">커뮤니티 게시판</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">고객센터</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath() %>/eventBoard/list.do">이벤트</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath() %>/searchRest/list.do">식당검색</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath() %>/PARTY/main.do">Meal파티</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath() %>/commBoard/main.do">커뮤니티 게시판</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath() %>/adminBoardMain/noticeGetAll.do">고객센터</a></li>
+                        <% if("일반회원".equals(userType) || "식당회원".equals(userType)){ %>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath() %>/mypage/main.do">마이페이지</a></li>
+						<%} %>
                     </ul>
             </div>
 
             <div class="container col-sm-2">
             		<ul class="navbar-nav text-uppercase ml-auto">
 						<%
-							if(userId == null){
-								// visitFlag가 true이면
-								if(!"TRUE".equals(visitFlag)){
-								%>
-								
-									<script>
-										alert("비회원님 환영합니다.");
-									</script>
-								<%
-								}
-								%>            		
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">로그인</a></li>
-               	        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">회원가입</a></li>
+							if("null".equals(userId)){
+						%>            		
+	                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#" onclick="movePageByGet('/DPJ/logInOut/login.do')">로그인</a></li>
+							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#" onclick="movePageByGet('/DPJ/register/registerType.do')">회원가입</a></li>
                	        <%
 							} else {
-								if(!"TRUE".equals(visitFlag)){
-									String sessionResult = userType + "(" + userType + ")님 환영합니다.";
-								%> 
-									<script>
-										alert("<%=sessionResult%>");
-									</script>
-								<%
-								}
-								%>
-								<span>
-									<a href="#" onclick="logout('/DPJ/logInOut/logout.do')">로그아웃</a>&nbsp;&nbsp;&nbsp;
-									<%
-										if("관리자".equals(userType)){
-											%>
-											  <a href="#" onclick="movePageByGet('/DPJ/admin/main.do')">관리자메뉴</a>
-											<%
-										}
-									%>
-								<span>
-								<%
-							}
 						%>
+								<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#" onclick="movePageByGet('<%=request.getContextPath() %>/logInOut/logout.do')">로그아웃</a></li>
+							<%
+								if("관리자".equals(userType)){
+							%>
+								<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#" onclick="movePageByGet('<%=request.getContextPath() %>/admin/main.do')">관리자메뉴</a></li>
+							<%
+								}
+							%>
+						<%
+							}
+						%>	
                	    </ul>
 			</div>
         </nav>
@@ -168,90 +183,33 @@
                     		<br>김천 말고 주변에 이렇게 괜찮은 식당들이 있던거 몰랐죠?</p>
                 </div>
                 <div class="row">
+                    <%
+                    int cnt = 0;
+                    for(int i = 0; i < restList.size(); i++){
+                    	if("EVE".equals(eventList.get(i).getCode())){
+                    	%>
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <div class="portfolio-item">
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal<%=cnt+1 %>">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="<%=request.getContextPath() %>/assets/img/portfolio/01-thumbnail.jpg" alt="" />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">그리면</div>
-                                <div class="portfolio-caption-subheading">가격 : 5,000원 ~ 10,000원 <br>거리 : 5분 이내 <br>분류 : 한식</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal2">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                <div>
+	                                <img class="img-fluid" src="<%=request.getContextPath() %>/assets/img/restau/<%=restList.get(i).getRestCode() %>_rest.jpg" alt="" />
                                 </div>
-                                <img class="img-fluid" src="<%=request.getContextPath() %>/assets/img/portfolio/02-thumbnail.jpg" alt="" />
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">세호불백</div>
-                                <div class="portfolio-caption-subheading">가격 : 8,000원 ~ 10,000원 <br>거리 : 10분 이내 <br>분류 : 한식</div>
-                            </div>
+                                <div class="portfolio-caption-heading"><%=restList.get(i).getRestName() %></div>
+                                <div class="portfolio-caption-subheading">가격 : 8,000원 ~ 10,000원 <br>거리 : 10분 이내 <br>분류 : <%=restList.get(i).getRestType() %></div>
+                            </div>	
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="<%=request.getContextPath() %>/assets/img/portfolio/03-thumbnail.jpg" alt="" />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">소호차이나</div>
-                                <div class="portfolio-caption-subheading">가격 : 6,000원 ~ 15,000원 <br>거리 : 10분 이내 <br>분류 : 중식</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal4">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="<%=request.getContextPath() %>/assets/img/portfolio/04-thumbnail.jpg" alt="" />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">종로 손할머니 칼국수</div>
-                                <div class="portfolio-caption-subheading">가격 : 5,000원 ~ 10,000원 <br>거리 : 10분 이내 <br>분류 : 한식</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal5">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="<%=request.getContextPath() %>/assets/img/portfolio/05-thumbnail.jpg" alt="" />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">복수분식</div>
-                                <div class="portfolio-caption-subheading">가격 : 5,000원 ~ 10,000원 <br>거리 : 10분 이내 <br>분류 : 한식</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal6">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="<%=request.getContextPath() %>/assets/img/portfolio/06-thumbnail.jpg" alt="" />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">트루</div>
-                                <div class="portfolio-caption-subheading">가격 : 7,000원 ~ 15,000원 <br>거리 : 10분 이내 <br>분류 : 양식</div>
-                            </div>
-                        </div>
-                    </div>
+                    	<%
+                    	cnt ++;
+                    	if(cnt == 3) break;
+                    	}
+                    }
+                    %>
                 </div>
             </div>
         </section>
@@ -264,27 +222,27 @@
                 </div>
                 <ul class="timeline">
                     <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<%=request.getContextPath() %>/assets/img/about/1.jpg" alt="" /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<%=request.getContextPath() %>/assets/img/about/5.jpg" alt="" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4>1. 가격 설정하기</h4>
                                 <h4 class="subheading">가격은 5000원 부터 천원 단위</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">가격은 5000원 부터 천원 단위로 10,000원 이상까지 설정 가능합니다. </p></div>
+                            <div class="timeline-body"><p class="text-muted">가격은 5000원 부터 천원 단위로 10,000원 이상까지 설정 가능! </p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<%=request.getContextPath() %>/assets/img/about/2.jpg" alt="" /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<%=request.getContextPath() %>/assets/img/about/6.jpg" alt="" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4>2. 거리 설정하기</h4>
                                 <h4 class="subheading">거리는 3분 거리부터 15분까지!</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">3분거리 = 100m, 5분 거리 = 300m, <br>10분거리 600m, 15분거리 900m입니다.</p></div>
+                            <div class="timeline-body"><p class="text-muted">3분거리 = 100m, 5분 거리 = 300m, <br> 10분거리 600m, 15분거리 900m.</p></div>
                         </div>
                     </li>
                     <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<%=request.getContextPath() %>/assets/img/about/3.jpg" alt="" /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<%=request.getContextPath() %>/assets/img/about/7.jpg" alt="" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4>3. 분류 설정하기</h4>
@@ -294,13 +252,13 @@
                         </div>
                     </li>
                     <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<%=request.getContextPath() %>/assets/img/about/4.jpg" alt="" /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<%=request.getContextPath() %>/assets/img/about/8.jpg" alt="" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4>4. 같이 먹을 사람 모집하기 <h4>
                                 <h4 class="subheading">같이 밥먹으러 갈 사람. 통칭 밀파티</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">혼자 밥먹기 애매하면? <br>같이 먹을 친구를 구하면 되죠! <br> 메로나고려해서 4인까지만 모집합니다.</p></div>
+                            <div class="timeline-body"><p class="text-muted">혼자 밥먹기 애매하면? <br>같이 먹을 친구를 구하면 되죠! <br> 메로나고려해서 4인까지!</p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted ">
@@ -327,7 +285,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="<%=request.getContextPath() %>/assets/img/team/1.jpg" alt="" />
+                            <img class="mx-auto rounded-circle" src="<%=request.getContextPath() %>/assets/img/profile/0.jpg" alt="" />
                             <h4>Yujin Jung</h4>
                             <p class="text-muted">403호</p>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
@@ -337,7 +295,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="<%=request.getContextPath() %>/assets/img/team/2.jpg" alt="" />
+                            <img class="mx-auto rounded-circle" src="<%=request.getContextPath() %>/assets/img/profile/A.png" alt="" />
                             <h4>Ihyeon Kim</h4>
                             <p class="text-muted">402호</p>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
@@ -347,7 +305,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="<%=request.getContextPath() %>/assets/img/team/3.jpg" alt="" />
+                            <img class="mx-auto rounded-circle" src="<%=request.getContextPath() %>/assets/img/profile/1.png.jpg" alt="" />
                             <h4>Yeajim Park</h4>
                             <p class="text-muted">401호</p>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
@@ -362,25 +320,6 @@
                 </div>
             </div>
         </section>
-        <!-- Clients-->
-        <div class="py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/logos/envato.jpg" alt="" /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/logos/designmodo.jpg" alt="" /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/logos/themeforest.jpg" alt="" /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/logos/creative-market.jpg" alt="" /></a>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Contact-->
         <section class="page-section" id="contact">
             <div class="container">
@@ -390,30 +329,10 @@
                 </div>
                 <form id="contactForm" name="sentMessage" novalidate="novalidate">
                     <div class="row align-items-stretch mb-5">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input class="form-control" id="name" type="text" placeholder="Your Name *" required="required" data-validation-required-message="Please enter your name." />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" id="email" type="email" placeholder="Your Email *" required="required" data-validation-required-message="Please enter your email address." />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group mb-md-0">
-                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" required="required" data-validation-required-message="Please enter your phone number." />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group form-group-textarea mb-md-0">
-                                <textarea class="form-control" id="message" placeholder="Your Message *" required="required" data-validation-required-message="Please enter a message."></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
                     </div>
                     <div class="text-center">
                         <div id="success"></div>
-                        <button class="btn btn-primary btn-xl btn-info text-uppercase" id="sendMessageButton" type="submit">회원가입 하러가기!</button>
+                        <button class="btn btn-primary btn-xl btn-info text-uppercase" id="sendMessageButton" type="submit" onclick="movePageByGet('/DPJ/register/registerType.do')">회원가입 하러가기!</button>
                     </div>
                 </form>
             </div>
@@ -436,7 +355,13 @@
         </footer>
         <!-- Portfolio Modals-->
         <!-- Modal 1-->
-        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <%
+        int cntM = 0;
+        for(int i = 0; i < restList.size(); i++){
+        	if("EVE".equals(eventList.get(i).getCode())){
+	        cntM++;
+        %>
+        <div class="portfolio-modal modal fade" id="portfolioModal<%=cntM %>" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="close-modal" data-dismiss="modal"><img src="<%=request.getContextPath() %>/assets/img/close-icon.svg" alt="Close modal" /></div>
@@ -445,14 +370,13 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Project Details Go Here-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/portfolio/01-full.jpg" alt="" />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                    <h2 class="text-uppercase"><%=restList.get(i).getRestName() %></h2>
+                                    <p class="item-intro text-muted"><%=eventList.get(i).getBoardTitle() %></p>
+                                    <img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/restau/<%=cntM %>_rest.jpg" alt="" />
+                                    <p><%=eventList.get(i).getBoardContent() %></p>
                                     <ul class="list-inline">
-                                        <li>Date: January 2020</li>
-                                        <li>Client: Threads</li>
-                                        <li>Category: Illustration</li>
+                                        <li>이벤트 기간 : <%=(eventList.get(i).getBoardStart()) %> ~ <%=(eventList.get(i).getBoardEnd()) %></li>
+                                        <li>Category: <%=restList.get(i).getRestType() %></li>
                                     </ul>
                                     <button class="btn btn-primary" data-dismiss="modal" type="button">
                                         <i class="fas fa-times mr-1"></i>
@@ -465,166 +389,78 @@
                 </div>
             </div>
         </div>
-        <!-- Modal 2-->
-        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-dismiss="modal"><img src="<%=request.getContextPath() %>/assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <!-- Project Details Go Here-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/portfolio/02-full.jpg" alt="" />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                    <ul class="list-inline">
-                                        <li>Date: January 2020</li>
-                                        <li>Client: Explore</li>
-                                        <li>Category: Graphic Design</li>
-                                    </ul>
-                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                        <i class="fas fa-times mr-1"></i>
-                                        Close Project
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal 3-->
-        <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-dismiss="modal"><img src="<%=request.getContextPath() %>/assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <!-- Project Details Go Here-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/portfolio/03-full.jpg" alt="" />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                    <ul class="list-inline">
-                                        <li>Date: January 2020</li>
-                                        <li>Client: Finish</li>
-                                        <li>Category: Identity</li>
-                                    </ul>
-                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                        <i class="fas fa-times mr-1"></i>
-                                        Close Project
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal 4-->
-        <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-dismiss="modal"><img src="<%=request.getContextPath() %>/assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <!-- Project Details Go Here-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/portfolio/04-full.jpg" alt="" />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                    <ul class="list-inline">
-                                        <li>Date: January 2020</li>
-                                        <li>Client: Lines</li>
-                                        <li>Category: Branding</li>
-                                    </ul>
-                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                        <i class="fas fa-times mr-1"></i>
-                                        Close Project
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal 5-->
-        <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-dismiss="modal"><img src="<%=request.getContextPath() %>/assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <!-- Project Details Go Here-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/portfolio/05-full.jpg" alt="" />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                    <ul class="list-inline">
-                                        <li>Date: January 2020</li>
-                                        <li>Client: Southwest</li>
-                                        <li>Category: Website Design</li>
-                                    </ul>
-                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                        <i class="fas fa-times mr-1"></i>
-                                        Close Project
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal 6-->
-        <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-dismiss="modal"><img src="<%=request.getContextPath() %>/assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <!-- Project Details Go Here-->
-                                    <h2 class="text-uppercase">Project Name</h2>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/portfolio/06-full.jpg" alt="" />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                    <ul class="list-inline">
-                                        <li>Date: January 2020</li>
-                                        <li>Client: Window</li>
-                                        <li>Category: Photography</li>
-                                    </ul>
-                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                        <i class="fas fa-times mr-1"></i>
-                                        Close Project
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <%
+     	   if(cntM == 3) break;
+        	}
+        }
+        %>
+<!--         Modal 2 -->
+<!--         <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true"> -->
+<!--             <div class="modal-dialog"> -->
+<!--                 <div class="modal-content"> -->
+<%--                     <div class="close-modal" data-dismiss="modal"><img src="<%=request.getContextPath() %>/assets/img/close-icon.svg" alt="Close modal" /></div> --%>
+<!--                     <div class="container"> -->
+<!--                         <div class="row justify-content-center"> -->
+<!--                             <div class="col-lg-8"> -->
+<!--                                 <div class="modal-body"> -->
+<!--                                     Project Details Go Here -->
+<!--                                     <h2 class="text-uppercase">Project Name</h2> -->
+<!--                                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p> -->
+<%--                                     <img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/portfolio/02-full.jpg" alt="" /> --%>
+<!--                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p> -->
+<!--                                     <ul class="list-inline"> -->
+<!--                                         <li>Date: January 2020</li> -->
+<!--                                         <li>Client: Explore</li> -->
+<!--                                         <li>Category: Graphic Design</li> -->
+<!--                                     </ul> -->
+<!--                                     <button class="btn btn-primary" data-dismiss="modal" type="button"> -->
+<!--                                         <i class="fas fa-times mr-1"></i> -->
+<!--                                         Close Project -->
+<!--                                     </button> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--         Modal 3 -->
+<!--         <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true"> -->
+<!--             <div class="modal-dialog"> -->
+<!--                 <div class="modal-content"> -->
+<%--                     <div class="close-modal" data-dismiss="modal"><img src="<%=request.getContextPath() %>/assets/img/close-icon.svg" alt="Close modal" /></div> --%>
+<!--                     <div class="container"> -->
+<!--                         <div class="row justify-content-center"> -->
+<!--                             <div class="col-lg-8"> -->
+<!--                                 <div class="modal-body"> -->
+<!--                                     Project Details Go Here -->
+<!--                                     <h2 class="text-uppercase">Project Name</h2> -->
+<!--                                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p> -->
+<%--                                     <img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/portfolio/03-full.jpg" alt="" /> --%>
+<!--                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p> -->
+<!--                                     <ul class="list-inline"> -->
+<!--                                         <li>Date: January 2020</li> -->
+<!--                                         <li>Client: Finish</li> -->
+<!--                                         <li>Category: Identity</li> -->
+<!--                                     </ul> -->
+<!--                                     <button class="btn btn-primary" data-dismiss="modal" type="button"> -->
+<!--                                         <i class="fas fa-times mr-1"></i> -->
+<!--                                         Close Project -->
+<!--                                     </button> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </div> -->
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Third party plugin JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <!-- Contact form JS-->
-        <script src="<%=request.getContextPath() %>/assets/mail/jqBootstrapValidation.js"></script>
-        <script src="<%=request.getContextPath() %>/assets/mail/contact_me.js"></script>
         <!-- Core theme JS-->
         <script src="<%=request.getContextPath() %>/js/scripts.js"></script>
-        <script type="text/javascript" src="/DPJ/assets/js/main/main.js"></script>
+        
     </body>
 </html>

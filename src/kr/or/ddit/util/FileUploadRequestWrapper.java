@@ -23,8 +23,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  * mac : "/Users/macween/upload_files";
  */
 public class FileUploadRequestWrapper extends HttpServletRequestWrapper {
-    public static final String UPLOAD_DIRECTORY = "d:/D_Other/upload_files"; // 업로드 경로 설정
+    public static final String UPLOAD_DIRECTORY = "D:\\A_TeachingMaterial\\4.MiddleProject\\source\\DPJ\\WebContent\\assets\\downloadImg"; // 업로드 경로 설정
     private boolean multipart = false; // 멀티파트여부
+ 
 
     // 데이터 타입 별 Map 멤버변수 설정
     private Map<String, String[]> parameterMap;	// 폼필드(파라미터) 데이터를 담기 위한 맵 

@@ -1,169 +1,187 @@
-<%@page import="kr.or.ddit.event.vo.EventVO"%>
 <%@page import="java.util.List"%>
+<%@page import="kr.or.ddit.restInfo.vo.RestInfoVO"%>
+<%@page import="kr.or.ddit.event.vo.EventVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	List<EventVO> eventList = (List<EventVO>)request.getAttribute("eventList");
-	String msg = request.getParameter("msg") == null ? "" : request.getParameter("msg");
+	List<RestInfoVO> restList = (List<RestInfoVO>)request.getAttribute("restList");
 %>
-<html lang="kr">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>Enjoy your meal right on time! Main page</title>
-<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+<%@include file="/WEB-INF/view/common/mainNav.jsp"%>
 
-<!-- Font Awesome icons (free version)-->
-	<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js"crossorigin="anonymous"></script>
-<!-- Google fonts-->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"rel="stylesheet" type="text/css" />
-	<link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Jua&family=Sunflower:wght@300&display=swap" rel="stylesheet">
-<!-- Core theme CSS (includes Bootstrap)-->
-	<link href="<%=request.getContextPath() %>/css/styles.css" rel="stylesheet" />
-	<style type="text/css">
-		h1, h2, li, a {
-			font-family: 'Jua', sans-serif;
-		}
-		
-		h3, h4, h5, h6, p {
-			font-family: 'Sunflower', sans-serif;
-			font-size: 1.2em;
-		}
-		
-		body {
-			padding-top: 56px;
-		}
-	</style>
-</head>
-
-<body>
-	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand col-lg-2-h1" href="index.html">굿끼제먹</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarResponsive" aria-controls="navbarResponsive"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-
-			<div class="collapse navbar-collapse " id="navbarResponsive">
-				<ul class="navbar-nav ml-auto col-lg-7-h1">
-					<li class="nav-item"><a class="nav-link" href="#">이벤트 게시판</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#">식당검색</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Meal파티
-							게시판</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">커뮤니티 게시판</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#">고객 센터</a></li>
-				</ul>
-			</div>
-			<div class="container col-sm-3">
-				<ul class="navbar-nav text-uppercase ml-auto">
-					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="#contact">로그인</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="#contact">회원가입</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row">
-
 			<!-- Blog Entries Column -->
-			<div class="col-md-12">
+			<div class="col-md-8">
+			<div class="btn-group btn-group-toggle" data-toggle="buttons">
+			  <label class="btn active" role="button">
+			    <input type="radio" name="options" id="option1" value="1" required="required" onchange="divDis()"><span class="btn btn-warning" >이벤트</span>
+			  </label>
+			  <label class="btn" role="button">
+			    <input type="radio" name="options" id="option0" value="0" onchange="divDis()"><span class="btn btn-warning">홍보</span>
+			  </label>
+			</div>
+			<div id="divEve" >
 				<h1 class="my-4">
-					이벤트/홍보
+					이벤트 게시판
 				</h1>
-
 				<!-- Blog Post -->
 				<div class="card mb-4">
-
-					<div class="card-body">
-						<h2 class="card-title">게시판 목록</h2>
-						<p class="card-text">온통 너의 생각 뿐야~</p>
-						<table class="table" >
-							<tbody>
-								<tr class="d-flex text-center">
-									<th class="col-2">게시글번호</th>
-									<th class="col-3">제목</th>
-									<th class="col-2">작성자</th>
-									<th class="col-2">작성일</th>
+					<div class="card-footer text-muted col-12" >
+					<h2 class="card-title">이벤트중인 식당 목록</h2>
+						<table class="table col-12">
+							<tbody class="col-12">
+								<tr class="d-flex ">
+									<th class="col-3">식당이름</th>
+									<th class="col-7">제목</th>
 									<th class="col-2">종료일</th>
-									<th class="col-1">추천수</th>
 								</tr>
 								<%
 								int eventSize = eventList.size();
                                 
                                	if(eventSize > 0){
                                		for(int i = 0; i < eventSize; i++){
-										String date = eventList.get(i).getBoardDate().substring(0, 10);
-										String endDate = eventList.get(i).getBoardEnd().substring(0, 10);
+                               			if("EVE".equals(eventList.get(i).getCode())){
+										String endDate = eventList.get(i).getBoardEnd();
 								%>
-								<tr class="d-flex text-center">
-									<th class="col-2"><%=eventList.get(i).getBoardSeq() %></th>
-                              		<th class="col-3"><a href="select.do?boardSeq=<%=eventList.get(i).getBoardSeq() %>"><%=eventList.get(i).getBoardTitle() %></a></th>
-                              		<th class="col-2"><%=eventList.get(i).getUserId() %></th>
-                              		<th class="col-2"><%=date %></th>
-                              		<th class="col-2"><%=endDate %></th>
-                              		<th class="col-1"><%=eventList.get(i).getBoardHits() %></th>
+								<tr class="d-flex ">
+                              		<td class="col-3"><%=restList.get(i).getRestName() %></td>
+									<td class="col-7"><a href="select.do?boardSeq=<%=eventList.get(i).getBoardSeq() %>"><%=eventList.get(i).getBoardTitle() %></a></td>
+                              		<td class="col-2"><%=endDate %></td>
 								</tr>
-								<% }
+								<% 		}
+                              		}
                                 }else{ %>
-                                  		<tr class="d-fles text-center" align="center">
+										<tr class="d-flex justify-content-start">
+                                  			<td class="col-12">게시글이 없습니다.</td>
+                                  		</tr> 
+                                 <% } %>
+							</tbody>
+						</table>
+					</div>
+					<%
+ 					if("식당회원".equals(session.getAttribute("USERTYPE"))){
+						%>
+					<div>
+							<a type="button" class="btn btn-lg btn-secondary" href="insert.do">게시글 작성하기</a>
+					</div>
+						<%
+ 					}
+					%>
+				</div>
+
+			</div>
+			<div id="divPromo" style="display: none">
+				<h1 class="my-4">
+					홍보 게시판
+				</h1>
+				<!-- Blog Post -->
+				<div class="card mb-4">
+					<div class="card-footer text-muted col-12" >
+					<h2 class="card-title">홍보중인 식당 목록</h2>
+						<table class="table col-12">
+							<tbody class="col-12">
+								<tr class="d-flex">
+									<th class="col-3">식당이름</th>
+									<th class="col-7">제목</th>
+									<th class="col-2">종료일</th>
+								</tr>
+								<%
+                               	if(eventSize > 0){
+                               		for(int i = 0; i < eventSize; i++){
+                               			if("PROMO".equals(eventList.get(i).getCode())){
+                               				
+										String endDate = eventList.get(i).getBoardEnd();
+								%>
+								<tr class="d-flex justify-content-start">
+                              		<td class="col-3"><%=restList.get(i).getRestName() %></td>
+									<td class="col-7"><a href="select.do?boardSeq=<%=eventList.get(i).getBoardSeq() %>"><%=eventList.get(i).getBoardTitle() %></a></td>
+                              		<td class="col-2"><%=endDate %></td>
+								</tr>
+								<%	 }
+                             		}
+                                }else{ %>
+										<tr class="d-flex justify-content-start">
                                   			<th class="col-12">게시글이 없습니다.</th>
                                   		</tr> 
                                  <% } %>
 							</tbody>
 						</table>
 					</div>
-
+					<%
+					if("식당회원".equals(session.getAttribute("USERTYPE"))){
+						%>
+					<div>
+							<a type="button" class="btn btn-lg btn-secondary" href="insert.do">게시글 작성하기</a>
+					</div>
+						<%
+					}
+					%>
 				</div>
-				<!-- Pagination -->
-				<ul class="pagination justify-content-center mb-4">
-					<li class="page-item"><a class="page-link" href="#">&larr;
-							Older</a></li>
-					<li class="page-item disabled"><a class="page-link" href="#">Newer
-							&rarr;</a></li>
-				</ul>
-
 			</div>
+			</div>
+			      <!-- Sidebar Widgets Column -->
+	      <div class="col-md-4">
+	        <!-- Categories Widget -->
 
-
+	        <div class="card my-4">
+	          <h5 class="card-header">세호불백<small>울트라콜</small></h5>
+	          <img class="col-12" src="<%=request.getContextPath() %>/assets/img/restau/seho.jpg">
+	          <div class="card-body">
+	            <div class="row">
+	              <div class="col-lg-12 d-flex align-content-start">
+	              	<table class="table" >
+						<tr class="d-flex align-content-start">
+			              	<td class=" col-lg-4">가격&nbsp;</td>
+			              	<td class=" col-lg-5"><a class="btn btn-md btn-success">8000원</a></td>
+			              	<td class=" col-lg-3"></td>
+	              		</tr>
+						<tr class="d-flex">
+			              	<td class="col-lg-4">거리&nbsp;</td>
+			              	<td class="col-lg-5"><a class="btn btn-md btn-info">10분(600m)</a></td>
+			              	<td class="col-lg-3"></td>
+	              		</tr>
+						<tr class="d-flex">
+			              	<td class="col-lg-4">분류&nbsp;</td>
+			              	<td class="col-lg-5"><a class="btn btn-md btn-danger">한식</a></td>
+			              	<td class="col-lg-3"></td>
+			              	
+	              		</tr>
+			              	<hr>
+						<tr class="d-flex">
+			              	<td class="col-lg-4">평점&nbsp;</td>
+			              	<td class="col-lg-8">
+						<span class='star-rating'>
+						<span style ="width:80%"></span>
+						</span>
+			              	</td>
+	              		</tr>
+						<tr class="d-flex">
+			              	<td class="col-lg-4">주력메뉴&nbsp;</td>
+			              	<td class="col-lg-5"><a class="btn btn-md btn-warning">불고기</a></td>
+			              	<td class="col-lg-3"></td>
+	              		</tr>
+	              	</table>
+	              </div>
+	              <div class="col-lg-6">
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+			</div>
 		</div>
-	</div>
 	<!-- /.container -->
-
-	<!-- Footer -->
-	<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright © 그런거 없어요. 대덕인재개발원  ddit 202101</p>
-		</div>
-		<!-- /.container -->
-	</footer>
-
-	<!-- Bootstrap core JavaScript -->
-		<script src="vendor/jquery/jquery.min.js"></script>
-		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<!-- Bootstrap core JS-->
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Third party plugin JS-->
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-	<!-- Core theme JS-->
-		<script src="<%=request.getContextPath() %>/js/scripts.js"></script>
-</body>
-</html>
+	<script type="text/javascript">
+	function divDis(){
+		 if($('#option1').prop("checked")){
+       		 $('#divEve').show();
+       		 $('#divPromo').hide();
+       	 }else if($('#option0').prop("checked")){
+       		 $('#divEve').hide();
+       		 $('#divPromo').show();
+       	 }
+	}
+	</script>
+	<%@include file="/WEB-INF/view/common/mainFooter.jsp"%>

@@ -64,8 +64,17 @@ public class CommentDaoImpl implements ICommentDao {
 	}
 
 	@Override
-	public List<CommentVO> getCommentCount(SqlMapClient smc, CommentVO cv) throws SQLException {
-		return smc.queryForList("comment.getCommentCount", cv);
+	public int getCommentCount(SqlMapClient smc, CommentVO cv) throws SQLException {
+		return (int) smc.queryForObject("comment.getCommentCount", cv);
+	}
+	
+	
+	
+	// 관리자 영역
+	
+	@Override
+	public List<CommentVO> getAllCommentList(SqlMapClient smc) throws SQLException {
+		return smc.queryForList("comment.getAllCommentList");
 	}
 
 }

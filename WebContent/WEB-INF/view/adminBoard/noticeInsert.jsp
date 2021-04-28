@@ -159,7 +159,7 @@
 						<div class="col-12">
 						   	<button type="submit" class="btn btn-outline-primary btn-sm">등록</button>
 						   	<button type="reset" class="btn btn-outline-secondary btn-sm">초기화</button>
-						   	<a type="button" class="btn btn-outline-info btn-sm" href="<%=request.getContextPath() %>/adminBoard/getAll.do">목록으로</a>
+						   	<a type="button" class="btn btn-outline-info btn-sm" href="<%=request.getContextPath() %>/adminBoard/noticeGetAll.do">목록으로</a>
 					    </div>
 			        	<input type="hidden" id="boardList" name="boardSeq">
 					    </form>

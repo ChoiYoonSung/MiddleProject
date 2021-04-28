@@ -61,6 +61,14 @@ public interface ICommentDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<CommentVO> getCommentCount(SqlMapClient smc, CommentVO cv) throws SQLException;
+	public int getCommentCount(SqlMapClient smc, CommentVO cv) throws SQLException;
+	
+	/**
+	 * 관리자가 조회하는 홈페이지 전체 댓글
+	 * @param smc
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<CommentVO> getAllCommentList(SqlMapClient smc) throws SQLException;
 	
 }

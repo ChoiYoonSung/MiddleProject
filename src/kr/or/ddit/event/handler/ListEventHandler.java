@@ -9,6 +9,7 @@ import kr.or.ddit.common.handler.CommandHandler;
 import kr.or.ddit.event.service.EventServiceImpl;
 import kr.or.ddit.event.service.IEventService;
 import kr.or.ddit.event.vo.EventVO;
+import kr.or.ddit.restInfo.vo.RestInfoVO;
 
 public class ListEventHandler implements CommandHandler{
 	private static final String VIEW_PAGE = "/WEB-INF/view/eventBoard/listEvent.jsp";
@@ -23,8 +24,10 @@ public class ListEventHandler implements CommandHandler{
 		IEventService eventService = EventServiceImpl.getInstance();
 		
 		List<EventVO> eventList = eventService.getAllEvent();
+		List<RestInfoVO> restList = eventService.getRestInfo();
 		
 		req.setAttribute("eventList", eventList);
+		req.setAttribute("restList", restList);
 		
 		return VIEW_PAGE;
 	}

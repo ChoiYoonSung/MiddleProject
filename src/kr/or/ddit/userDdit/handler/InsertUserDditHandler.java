@@ -61,6 +61,16 @@ public class InsertUserDditHandler implements CommandHandler {
 		userPw = HashSha256Test.hashSha256(userPw);
 		RESULT_LOGGER.info("■■■ 암호화 비밀번호 값 : " + userPw);
 		
+		// 이메일 수신 여부 동의 데이터 가공 : on -> Y
+//		int b = (5 < 4) ? 50 : 40; 
+		if(recvMail == null) {
+			recvMail = "N";
+		}else if(recvMail.equals("on")){
+			recvMail = "Y";
+		}
+//		recvMail = (recvMail.equals("on")) ? "Y" : (recvMail.equals(anObject)"N";
+		RESULT_LOGGER.info("■■■ 메일 가공된 값 : " + recvMail);
+		
 		userAllVo.setUserId(userId);
 		userAllVo.setUserPw(userPw);
 		userAllVo.setUserType("일반회원");
@@ -82,6 +92,8 @@ public class InsertUserDditHandler implements CommandHandler {
 		
 		int cntUserAll = userAllService.insertUserAll(userAllVo);
 		int cntUserDdit = userDditService.insertUserDdit(userDditVo);
+		
+		RESULT_LOGGER.info("■■■ UserAll, UserDdit DB 결과 : " + cntUserAll + ", " + cntUserDdit);
 		
 		String msg = "";
 		

@@ -1,7 +1,7 @@
 package kr.or.ddit.event.vo;
 
 public class EventVO {
-	private String CODE;
+	private String code;
 	private long boardSeq;
 	private String userId;
 	private String boardType;
@@ -14,11 +14,11 @@ public class EventVO {
 	private long boardHits;
 	private String boardDelete;
 	
-	public String getCODE() {
-		return CODE;
+	public String getCode() {
+		return code;
 	}
-	public void setCODE(String cODE) {
-		CODE = cODE;
+	public void setCode(String code) {
+		this.code = code;
 	}
 	public long getBoardSeq() {
 		return boardSeq;

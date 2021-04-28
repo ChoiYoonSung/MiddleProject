@@ -1,5 +1,16 @@
+<%@page import="kr.or.ddit.common.vo.AtchFileVO"%>
+<%@page import="kr.or.ddit.commBoard.vo.CommBoardVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	CommBoardVO cv = (CommBoardVO)request.getAttribute("boardVO");
+	List<AtchFileVO> atchFileList = (List<AtchFileVO>) request.getAttribute("atchFileList");
+	
+	String msg = request.getParameter("msg") == null ? "" : request.getParameter("msg");
+
+%>    
+    
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -90,30 +101,36 @@
 							<tbody>
 								<tr class="d-flex text-left">
 									<th class="col-1 ">제목</th>
-									<th class="col-3 " name="boardTitle">롤린롤린</th>
+									<th class="col-3 " name="boardTitle"><%=cv.getBoardTitle() %></th>
 									<th class="col-6 "></th>
 									<th class="col-1 "><small>조회수</small></th>
-									<th class="col-1 "name="boardHitsNumber"><small>1</small></th>
+									<th class="col-1 "name="boardHitsNumber"><small><%=cv.getBoardHitsNumber() %></small></th>
 								</tr>
 								<tr class="d-flex text-left">
 									<td class="col-1 ">작성자</td>
-									<td class="col-3 "name="userId">브브걸</td>
+									<td class="col-3 "name="userId"><%=cv.getUserId()%></td>
 									<th class="col-6 "></th>
 									<td class="col-1 "><small>작성일</small></td>
-									<td class="col-1 "name="boardDate"><small>오늘</small></td>
+									<td class="col-1 "name="boardDate"><small><%=cv.getBoardDate() %></small></td>
 								</tr>
 								<tr class="d-flex text-left">
-									<td class="col-12"><img class="col-12" src="<%=request.getContextPath() %>/assets/img/budae.jpg">
+									<td class="col-12"><img class="col-12" src="../filedownload.do?fileId=<%=cv.getAtchFileId() %>">
 									</td>
 								</tr>
 								<tr class="d-flex text-left">
-									<td class="col-12">롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~롤린롤린롤린 hey~
+									<td class="col-12">
+								<%=cv.getBoardContent() %>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="card-footer d-flex justify-content-center">
 							<a class="btn btn-lg btn-secondary" type="button" href="list.do">목록으로 돌아가기</a>
+								&nbsp;&nbsp;
+							<a class="btn btn-lg btn-secondary" type="submit" href="update.do">수정하기</a>
+								&nbsp;&nbsp;
+							<a class="btn btn-lg btn-secondary" type="reset" href="delete.do">삭제하기</a>
+					</div>
 						</div>
 					</div>
  					<div class="card-footer">

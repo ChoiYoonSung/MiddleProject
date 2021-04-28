@@ -1,211 +1,180 @@
 <%@page import="kr.or.ddit.common.vo.AtchFileVO"%>
-<%@page import="kr.or.ddit.qna.vo.QnABoardVO"%>
+<%@page import="kr.or.ddit.comment.vo.CommentVO"%>
 <%@page import="java.util.List"%>
-<%@ page import="kr.or.ddit.comment.vo.CommentVO" %>
+<%@page import="kr.or.ddit.qna.vo.QnABoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	QnABoardVO qnaVO = (QnABoardVO) request.getAttribute("qnaVO");
+	
+	int a = (Integer) request.getAttribute("cnt");
 	List<CommentVO> commentList = (List<CommentVO>) request.getAttribute("commentList");
 	List<AtchFileVO> atchFileList = (List<AtchFileVO>) request.getAttribute("atchFileList");
-%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>게시글 쓰기</title>
-        <link href="<%=request.getContextPath() %>/adminView/css/styles.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-    </head>
-    <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">Welcome, Admin!</a>
-            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
-                    </div>
-                </div>
-            </form>
-            <!-- Navbar-->
-            <ul class="navbar-nav ml-auto ml-md-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Activity Log</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">로그아웃</a>
-                    </div>
-                </li>
-            </ul>
-        </nav>
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">MAIN</div>
-                            <a class="nav-link" href="index.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Admin Main Page
-                            </a>
-                            <div class="sb-sidenav-menu-heading">ADMIN DATA</div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Layouts
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Pages
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Authentication
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.html">Login</a>
-                                            <a class="nav-link" href="register.html">Register</a>
-                                            <a class="nav-link" href="password.html">Forgot Password</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Error
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="401.html">401 Page</a>
-                                            <a class="nav-link" href="404.html">404 Page</a>
-                                            <a class="nav-link" href="500.html">500 Page</a>
-                                        </nav>
-                                    </div>
-                                </nav>
-                            </div>
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a>
-                        </div>
-                    </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        굿끼제먹 관리자
-                    </div>
-                </nav>
-            </div>
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid">
+%>    
 
+<%@include file="/WEB-INF/view/common/mainNav.jsp"%>
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
 
-                        <h1 class="mt-4 mb-4">글 보기 테스트</h1>
+			<!-- Blog Entries Column -->
+			<div class="col-md-12">
+				<h1 class="my-4">
+					Q&A
+				</h1>
 
-						<div class="card mb-4">
-                            <div class="card-body">
-                               중프 게시판 테스트용 임시 페이지 입니다.
-                            </div>
-                        </div>
-                        <form id="fm" method="post" enctype="multipart/form-data">
-	                        <input type="hidden" value="<%=qnaVO.getUserId() %>">
-	                        <input type="hidden" value="<%=qnaVO.getBoardSeq() %>">
-							<div class="input-group mb-3 col-md-10">
-							  <span class="input-group-text" id="basic-addon3">제목</span>
-							  <input type="text" class="form-control" id="boardTitle" aria-describedby="basic-addon3" readonly="readonly" value="<%=qnaVO.getBoardTitle() %>">
-							</div>
-
-							<div class="input-group mb-3 col-md-10">
-							  <span class="input-group-text">내용</span>
-							  <textarea class="form-control" id="boardContent" aria-label="With textarea" rows="10" readonly="readonly"><%=qnaVO.getBoardContent() %></textarea>
-							</div>
-
-							<div class="input-group mb-3 col-md-10">
-							  <span class="input-group-text" name="atchFile">첨부파일</span>
+				<!-- Blog Post -->
+				<div class="card mb-4">
+					<div class="card-body">
+						<table class="table" >
+							<tbody>
+								<tr class="d-flex text-left">
+									<th class="col-1 ">제목</th>
+									<th class="col-3 " name="boardTitle"><%=qnaVO.getBoardTitle() %></th>
+									<th class="col-6 "></th>
+									<th class="col-1 "><small>조회수</small></th>
+									<th class="col-1 "name="boardHitsNumber"><small><%=qnaVO.getBoardHits() %></small></th>
+								</tr>
+								<tr class="d-flex text-left">
+									<td class="col-1 ">작성자</td>
+									<td class="col-3 "name="userId"><%=qnaVO.getUserId() %></td>
+									<th class="col-6 "></th>
+									<td class="col-1 "><small>작성일</small></td>
+									<td class="col-1 "name="boardDate"><small><%=qnaVO.getBoardDate() %></small></td>
+								</tr>
 								<%
-						         if(atchFileList != null) {
-						            for(AtchFileVO atchFileVO : atchFileList){
-						         %>
-						            <div><a href="<%=request.getContextPath() %>/filedownload.do?fileId=<%=atchFileVO.getAtchFileId() %>
-						            &fileSn=<%=atchFileVO.getFileSn() %>">
-						            <%=atchFileVO.getOrignlFileNm() %></a></div>
-						         <%
-						            }
-						         }else{
-						        	 %>
-						        	 <input type="text" readonly="readonly" value="첨부파일이 없습니다.">
-						        	 <%
-						         }
-						         %>
+								if(qnaVO.getAtchFileId() != -1){
+									%>
+								<tr class="d-flex text-left">
+									<td class="col-12"><img class="col-12" src="../filedownload.do?fileId=<%=qnaVO.getAtchFileId() %>">
+									</td>
+								</tr>
+									<%
+								}
+								%>
+								<tr class="d-flex text-left">
+									<td class="col-12">
+								<%=qnaVO.getBoardContent() %>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="card-footer d-flex justify-content-center">
+							<a class="btn btn-lg btn-secondary" type="button" href="list.do">목록으로 돌아가기</a>
+							<%
+							if(userId != null && userId.equals( qnaVO.getUserId())){
+								%>
+								&nbsp;&nbsp;
+							<a class="btn btn-lg btn-secondary" type="submit" href="update.do?boardSeq=<%=qnaVO.getBoardSeq() %>">수정하기</a>
+								&nbsp;&nbsp;
+							<a class="btn btn-lg btn-secondary" type="reset" href="delete.do?boardSeq=<%=qnaVO.getBoardSeq() %>">삭제하기</a>
+								<%
+							}
+							%>
+					</div>
+						</div>
+					</div>
+				</div>
+					<div class="col-11 ml-3 mt-3 text-monospace">
+					<h5 class="text-weight-bold">Comments </h5>
+					<span><%=a %></span>
+					<%
+					    for (CommentVO commentVO : commentList) {
+					%>
+						<div class="card border-secondary" style="max-width: 40rem;">
+			              <div id="reply-top<%=commentVO.getReplySeq()%>" class="row card-header pb-0">
+			                <p class="col px-md-3 font-weight-bold mb-1"><%=commentVO.getUserId() %></p>
+			                <a class="mr-3 text-primary" onclick="fn_update_click('<%=commentVO.getReplySeq()%>');">수정</a>
+			                <a class="text-danger" onclick="fn_delete('<%=commentVO.getReplySeq()%>');">삭제</a>
+			              </div>
+			              <div id="reply-bottom<%=commentVO.getReplySeq()%>" class="row card-header pb-0" style="display: none;">
+			                <p class="col px-md-3 font-weight-bold mb-1"><%=commentVO.getUserId() %></p>
+			                <a class="mr-3 text-primary" onclick="fn_update_cancel('<%=commentVO.getReplySeq()%>');">취소</a>
+			                <a class="text-danger" onclick="fn_update('<%=commentVO.getReplySeq()%>');">등록</a>
+			              </div>
+			              <div class="card-body">
+			                <p class="card-subtitle mb-2 text-muted text-right"><%=commentVO.getReplyDate() %></p>
+			                <p class="card-text" id="reply<%=commentVO.getReplySeq()%>"><%=commentVO.getReplyContent() %></p>
+			              </div>
+			            </div>
+					<%
+					    }
+					%>
+					<form id="reply" class="row col-11" method="post">
+						<div class="input-group mt-4 mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">내용</span>
 							</div>
+							<textarea class="form-control" id="replyContent" aria-label="With textarea" name="replyContent"></textarea>
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" id="commentBtn" onclick="fn_insert()">댓글<br>등록</button>
+							</div>
+						</div>
+						<!-- 들고나갈 값 -->
+						<input type="hidden" name="code" value="QNA">
+						<input type="hidden" name="userId" value="admin">
+						<input type="hidden" name="boardSeq" value="<%=qnaVO.getBoardSeq()%>">
+						<input type="hidden" name="replySeq" id="replySeq">
+						<input type="hidden" id="tmpContent">
+					</form>
+				</div>
+			</div>
+			<!-- <form id="delete" method="post"> -->
+			<!-- 	<input type="hidden" name="replySeq" id="replySeq"> -->
+			<!-- </form>  -->
+			</main>
+			<script type="text/javascript">
+			function fn_update(seq) {
+			    if(confirm("댓글을 수정하시겠습니까?")) {
+			        $('#reply').attr("action", "<%=request.getContextPath()%>/comment/update.do");
+			        $('#replySeq').val(seq);
+			        var text = $('#reply' + seq).find('textarea').val();
+			        $('#replyContent').val(text);
+			        $('#reply').submit();
+			    }
+			}
+			
+			function fn_update_click(seq) {
+			    $('#reply-top' + seq).hide();
+			    $('#reply-bottom' + seq).show();
+			    var text = $('#reply' + seq).text();
+			    $('#reply' + seq).html('<textarea class="form-control">' + text + '</textarea>');
+			    $('#tmpContent').val(text);
+			}
+			
+			function fn_update_cancel(seq) {
+			    $('#reply-bottom' + seq).hide();
+			    $('#reply-top' + seq).show();
+			    $('#reply' + seq).html($('#tmpContent').val());
+			}
+			
+			function fn_insert() {
+			    $("#reply").attr("action", "<%=request.getContextPath()%>/comment/insert.do");
+			    $("#reply").submit();
+			}
+			
+			function fn_delete(seq) {
+			    if(confirm("댓글을 삭제하시겠습니까?")) {
+			        $('#reply').attr("action", "<%=request.getContextPath()%>/comment/delete.do");
+			        $('#replySeq').val(seq);
+			        $('#reply').submit();
+			    }
+			}
+			</script>
 
-							<div class="col-12">
-							   <button type="reset" class="btn btn-outline-secondary btn-sm">초기화</button>
-							   <a type="button" class="btn btn-outline-primary btn-sm" href='update.do?userId=<%=request.getParameter("userId") %>&boardSeq=<%=request.getParameter("boardSeq") %>'>수정</a>
-							   <a type="button" class="btn btn-outline-info btn-sm" href="list.do">목록으로</a>
-						    </div>
-                        </form>
-                   	</div>
-                    <div>
-                        댓글 목록!
-                        <%
-                            for (CommentVO commentVO : commentList) {
-                        %>
-                        <div>
-                            <span><%=commentVO.getReplyContent() %></span>
-                        </div>
-                        <%
-                            }
-                        %>
-                    </div>
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Enjoy Your Meal Right On Time 2021</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="<%=request.getContextPath() %>/adminView/js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="<%=request.getContextPath() %>/adminView/assets/demo/chart-area-demo.js"></script>
-        <script src="<%=request.getContextPath() %>/adminView/assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-        <script src="<%=request.getContextPath() %>/adminView/assets/demo/datatables-demo.js"></script>
-         <script type="text/javascript">
-        </script>
-    </body>
-</html>
+			</div>
+				<!-- Pagination -->
+				<ul class="pagination justify-content-center mb-4">
+					<li class="page-item"><a class="page-link" href="#">&larr;
+							Older</a></li>
+					<li class="page-item disabled"><a class="page-link" href="#">Newer
+							&rarr;</a></li>
+				</ul>
+
+
+		</div>
+	</div>
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<%@include file="/WEB-INF/view/common/mainFooter.jsp" %>

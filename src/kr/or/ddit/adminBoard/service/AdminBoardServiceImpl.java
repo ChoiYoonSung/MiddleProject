@@ -55,10 +55,10 @@ public class AdminBoardServiceImpl implements IAdminBoardService{
 	}
 
 	@Override
-	public List<AdminBoardVO> getAllAdminBoardList(String code) {
+	public List<AdminBoardVO> getAllAdminBoardList(AdminBoardVO abv) {
 		List<AdminBoardVO> boardList = new ArrayList<AdminBoardVO>();
 		try {
-			boardList = adminBoardDao.getAllAdminBoardList(smc, code);
+			boardList = adminBoardDao.getAllAdminBoardList(smc, abv);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

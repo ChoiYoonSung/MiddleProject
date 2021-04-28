@@ -39,9 +39,9 @@ public class LoginHandler implements CommandHandler {
 			BeanUtils.populate(userAllVo, req.getParameterMap());
 			
 			//비밀번호 암호화 메서드 호출
-//				String userPw = HashSha256Test.hashSha256(userAllVo.getUserPw());
-//				userAllVo.setUserPw(userPw);
-			
+			String userPw = HashSha256Test.hashSha256(userAllVo.getUserPw());
+			userAllVo.setUserPw(userPw);
+		
 			IUserAllService userAllService = UserAllServiceImpl.getInstance();
 			userAllVo = userAllService.checkLoginUserAll(userAllVo);
 			
@@ -50,11 +50,14 @@ public class LoginHandler implements CommandHandler {
 				
 				String userId = userAllVo.getUserId();
 				String userType = userAllVo.getUserType();
+				String userPhoto = userAllVo.getUserPhoto();
 				System.out.println("■" + userId);
 				System.out.println("■" + userType);
+				System.out.println("■" + userPhoto);
 				
 				session.setAttribute("USERID", userId);
 				session.setAttribute("USERTYPE", userType);
+				session.setAttribute("USERPHOTO", userPhoto);
 				
 				String visitFlag = "FALSE"; // true : 기존 방문 이력이 있음, false : 방문 이력이 없음
 				
@@ -68,11 +71,16 @@ public class LoginHandler implements CommandHandler {
 //				
 				session.setAttribute("VISITFLAG", visitFlag);
 				
+				String redirectUrl = "";
+				if("관리자".equals(userType)) {
+					redirectUrl = req.getContextPath() + 
+							"/admin/main.do?login=true";
+				} else {
+					// 게시글 목록으로 이동 (유저 정보를 가지고 있으므로 redirect)
+					redirectUrl = req.getContextPath() + 
+							"/main/main.do?login=true";
+				}
 				
-				
-				// 게시글 목록으로 이동 (유저 정보를 가지고 있으므로 redirect)
-				String redirectUrl = req.getContextPath() + 
-						"/main/main.do?login=true";
 				return redirectUrl;
 			} else {
 				String redirectUrl = req.getContextPath() + "/logInOut/login.do?login=false";

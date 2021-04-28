@@ -32,6 +32,13 @@ public interface IUserDditService {
 	public List<UserDditVO> getAllUserDditList();
 	
 	/**
+	 * 주어진 회원 ID에 해당하는 회원 정보를 조회하는 메서드
+	 * @param userId 검색할 회원 ID
+	 * @return 해당 회원 ID에 해당하는 회원 정보
+	 */
+	public UserDditVO getUserDdit(String userId);
+	
+	/**
 	 * 하나의 회원 정보를 이용하여 DB를 update 하는 메서드
 	 * @param userDditVo UserDditVO 객체
 	 * @return 작업성공 : 1 , 작업 실패 : 0

@@ -36,10 +36,10 @@ public class CodeDaoImpl implements ICodeDao {
 	}
 
 	@Override
-	public int updateCode(SqlMapClient smc, CodeVO cv) throws SQLException {
+	public int updateCode(SqlMapClient smc,  CodeVO cv) throws SQLException {
 		int cnt = 0;
 
-		cnt = smc.delete("code.insertCode", cv);
+		cnt = smc.update("code.updateCode", cv);
 
 		return cnt;
 	}
@@ -60,7 +60,7 @@ public class CodeDaoImpl implements ICodeDao {
 
 	@Override
 	public CodeVO getCode(SqlMapClient smc, String code) throws SQLException {
-		return (CodeVO) smc.queryForList("code.getCode", code);
+		return (CodeVO) smc.queryForObject("code.getCode", code);
 	}
 
 	@Override

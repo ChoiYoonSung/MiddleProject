@@ -9,7 +9,7 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 import kr.or.ddit.event.dao.EventDaoImpl;
 import kr.or.ddit.event.dao.IEventDao;
 import kr.or.ddit.event.vo.EventVO;
-import kr.or.ddit.qna.vo.QnABoardVO;
+import kr.or.ddit.restInfo.vo.RestInfoVO;
 import kr.or.ddit.util.SqlMapClientUtil;
 
 public class EventServiceImpl implements IEventService{
@@ -54,7 +54,7 @@ public class EventServiceImpl implements IEventService{
 	}
 	
 	@Override
-	public int deleteEvent(String boardSeq) {
+	public int deleteEvent(long boardSeq) {
 		int cnt = 0;
 		try {
 			cnt = evnDao.deleteEvnet(smc, boardSeq);
@@ -76,7 +76,18 @@ public class EventServiceImpl implements IEventService{
 	}
 	
 	@Override
-	public EventVO selectEvent(String boardSeq) {
+	public List<RestInfoVO> getRestInfo() {
+		List<RestInfoVO> list = new ArrayList<>();
+		try {
+			list = evnDao.getRestInfo(smc);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@Override
+	public EventVO selectEvent(long boardSeq) {
 		EventVO event = null;
 		try {
 			event = evnDao.selectEvent(smc, boardSeq);
@@ -87,7 +98,18 @@ public class EventServiceImpl implements IEventService{
 	}
 
 	@Override
-	public EventVO getEvent(String boardSeq) {
+	public RestInfoVO selectRest(String userId) {
+		RestInfoVO rest = null;
+		try {
+			rest = evnDao.selectRest(smc, userId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rest;
+	}
+	
+	@Override
+	public EventVO getEvent(long boardSeq) {
 		EventVO event = null;
 		try {
 			event = evnDao.getEvent(smc, boardSeq);

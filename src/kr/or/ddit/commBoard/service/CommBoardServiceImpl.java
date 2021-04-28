@@ -60,6 +60,126 @@ public class CommBoardServiceImpl implements ICommBoardService{
 		
 		return boardList;
 	}
+	@Override
+	public List<CommBoardVO> getAllDevBoardList(PagingVO pagingVO) {
+		List<CommBoardVO> boardList = new ArrayList<>();
+		try {
+			boardList = boardDao.getAllDevBoardList(smc, pagingVO);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return boardList;
+	}
+	@Override
+	public List<CommBoardVO> getAllJobBoardList(PagingVO pagingVO) {
+		List<CommBoardVO> boardList = new ArrayList<>();
+		try {
+			boardList = boardDao.getAllJobBoardList(smc, pagingVO);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return boardList;
+	}
+	@Override
+	public List<CommBoardVO> getAllSocialBoardList(PagingVO pagingVO) {
+		List<CommBoardVO> boardList = new ArrayList<>();
+		try {
+			boardList = boardDao.getAllSocialBoardList(smc, pagingVO);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return boardList;
+	}
+	@Override
+	public List<CommBoardVO> getAllClassBoardList(PagingVO pagingVO) {
+		List<CommBoardVO> boardList = new ArrayList<>();
+		try {
+			boardList = boardDao.getAllClassBoardList(smc, pagingVO);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return boardList;
+	}
+	@Override
+	public List<CommBoardVO> getAll401BoardList(PagingVO pagingVO) {
+		List<CommBoardVO> boardList = new ArrayList<>();
+		try {
+			boardList = boardDao.getAll401BoardList(smc, pagingVO);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return boardList;
+	}
+	@Override
+	public List<CommBoardVO> getAll403BoardList(PagingVO pagingVO) {
+		List<CommBoardVO> boardList = new ArrayList<>();
+		try {
+			boardList = boardDao.getAll403BoardList(smc, pagingVO);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return boardList;
+	}
+	@Override
+	public List<CommBoardVO> getAll404BoardList(PagingVO pagingVO) {
+		List<CommBoardVO> boardList = new ArrayList<>();
+		try {
+			boardList = boardDao.getAll404BoardList(smc, pagingVO);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return boardList;
+	}
+	@Override
+	public List<CommBoardVO> getAll405BoardList(PagingVO pagingVO) {
+		List<CommBoardVO> boardList = new ArrayList<>();
+		try {
+			boardList = boardDao.getAll405BoardList(smc, pagingVO);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return boardList;
+	}
+	@Override
+	public List<CommBoardVO> getAll406BoardList(PagingVO pagingVO) {
+		List<CommBoardVO> boardList = new ArrayList<>();
+		try {
+			boardList = boardDao.getAll406BoardList(smc, pagingVO);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return boardList;
+	}
+	@Override
+	public List<CommBoardVO> getAll407BoardList(PagingVO pagingVO) {
+		List<CommBoardVO> boardList = new ArrayList<>();
+		try {
+			boardList = boardDao.getAll407BoardList(smc, pagingVO);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return boardList;
+	}
+	@Override
+	public List<CommBoardVO> getAll408BoardList(PagingVO pagingVO) {
+		List<CommBoardVO> boardList = new ArrayList<>();
+		try {
+			boardList = boardDao.getAll408BoardList(smc, pagingVO);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return boardList;
+	}
+	@Override
+	public List<CommBoardVO> getAll402BoardList(PagingVO pagingVO) {
+		List<CommBoardVO> boardList = new ArrayList<>();
+		try {
+			boardList = boardDao.getAll402BoardList(smc, pagingVO);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return boardList;
+	}
 	
 	@Override
 	public int getAllBoardListCount() {
@@ -84,11 +204,11 @@ public class CommBoardServiceImpl implements ICommBoardService{
 	}
 
 	@Override
-	public int deleteBoard(CommBoardVO cv) {
+	public int deleteBoard(long boardSeq) {
 		int cnt = 0;
 		
 		try {
-			cnt = boardDao.deleteBoard(smc, cv);
+			cnt = boardDao.deleteBoard(smc, boardSeq);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

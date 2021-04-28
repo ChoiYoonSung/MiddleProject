@@ -1,5 +1,13 @@
+<%@page import="kr.or.ddit.commBoard.vo.CommBoardVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	List<CommBoardVO> boardList = (List<CommBoardVO>)request.getAttribute("boardList");
+
+	String msg = request.getParameter("msg") == null ? "" : request.getParameter("msg");
+
+%>    
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -22,15 +30,14 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 	<link href="<%=request.getContextPath() %>/css/styles.css" rel="stylesheet" />
 	<style type="text/css">
-		h1, h2, li, a {
-			font-family: 'Jua', sans-serif;
-		}
-		
-		h3, h4, h5, h6, p {
+       	h1, h2, li, a, th, td{
+       		font-family: 'Jua', sans-serif;
+			font-size: 1.2em;
+       	}
+       	h3,h4,h5,h6, p{
 			font-family: 'Sunflower', sans-serif;
 			font-size: 1.2em;
-		}
-		
+       	}
 		body {
 			padding-top: 56px;
 		}
@@ -39,7 +46,7 @@
 
 <body>
 <form action="insert.do" method="post" enctype="multipart/form-data">
-<input type="hidden" name="code" value="개발통합커뮤니티">
+<input type="hidden" name="code" value="개발">
 <input type="hidden" name="userId" value="세션전까지 아이디">
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -92,65 +99,49 @@
 						<table class="table" >
 							<tbody>
 								<tr class="d-flex text-center">
-									<th class="col-2">게시글번호</th>
+									<th class="col-1">번호</th>
+									<th class="col-1">분류</th>
 									<th class="col-5">제목</th>
 									<th class="col-2">작성자</th>
 									<th class="col-2">작성일</th>
 									<th class="col-1">추천수</th>
 								</tr>
-								<tr class="d-flex text-center">
-									<th class="col-2" name="boardSeq">1</th>
-									<th class="col-5" name="boardTitle">롤린</th>
-									<th class="col-2" name="userId">브브걸</th>
-									<th class="col-2" name="boardDate">오늘</th>
-									<th class="col-1" name="boardHitsNumber">999</th>
+																<%
+				int boardSize = boardList.size();
+				String atchFile = "N";
+				if(boardSize > 0){
+					for(int i = 0; i < boardSize; i++){
+						if(boardList.get(i).getAtchFileId() > 0){
+							atchFile="Y";
+						}
+		%>
+
+								<tr>
+									<td><a href="select.do?boardSeq=<%=boardList.get(i).getBoardSeq()%>"><%=boardList.get(i).getBoardSeq()%></a></td>
+									<td><%=boardList.get(i).getCode() %></td>
+									<td><%=boardList.get(i).getBoardTitle() %></td>
+									<td><%=boardList.get(i).getUserId() %></td>
+									<td><%=boardList.get(i).getBoardDate() %></td>
+									<td><%=boardList.get(i).getBoardHitsNumber() %></td>
 								</tr>
-								<tr class="d-flex text-center">
-									<th class="col-2">1</th>
-									<th class="col-5">롤린</th>
-									<th class="col-2">브브걸</th>
-									<th class="col-2">오늘</th>
-									<th class="col-1">999</th>
+								<%
+					}
+				}else{
+			
+		%>
+								<tr>
+									<td colspan="8">게시판 정보가 없습니다.</td>
 								</tr>
-								<tr class="d-flex text-center">
-									<th class="col-2">1</th>
-									<th class="col-5">롤린</th>
-									<th class="col-2">브브걸</th>
-									<th class="col-2">오늘</th>
-									<th class="col-1">999</th>
-								</tr>
-								<tr class="d-flex text-center">
-									<th class="col-2">1</th>
-									<th class="col-5">롤린</th>
-									<th class="col-2">브브걸</th>
-									<th class="col-2">오늘</th>
-									<th class="col-1">999</th>
-								</tr>
-								<tr class="d-flex text-center">
-									<th class="col-2">1</th>
-									<th class="col-5">롤린</th>
-									<th class="col-2">브브걸</th>
-									<th class="col-2">오늘</th>
-									<th class="col-1">999</th>
-								</tr>
-								<tr class="d-flex text-center">
-									<th class="col-2">1</th>
-									<th class="col-5">롤린</th>
-									<th class="col-2">브브걸</th>
-									<th class="col-2">오늘</th>
-									<th class="col-1">999</th>
-								</tr>
-								<tr class="d-flex text-center">
-									<th class="col-2">1</th>
-									<th class="col-5">롤린</th>
-									<th class="col-2">브브걸</th>
-									<th class="col-2">오늘</th>
-									<th class="col-1">999</th>
-								</tr>
+								<%
+				}
+		%>
 							</tbody>
 						</table>
 					</div>
-
+					<div class="card-footer d-flex justify-content-end">
+						<a class="btn btn-lg btn-secondary" type="submit" href="insert.do">게시글 작성하기</a>
+						&nbsp;&nbsp;
+					</div>
 				</div>
 				<!-- Pagination -->
 				<ul class="pagination justify-content-center mb-4">

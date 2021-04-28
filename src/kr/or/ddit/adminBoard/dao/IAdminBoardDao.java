@@ -15,7 +15,7 @@ public interface IAdminBoardDao {
 	 * @return 회원정보를 담고있는 List객체
 	 * @throws SQLException SQL예외객체
 	 */
-	public List<AdminBoardVO> getAllAdminBoardList(SqlMapClient smc, String code)
+	public List<AdminBoardVO> getAllAdminBoardList(SqlMapClient smc, AdminBoardVO abv)
 			throws SQLException;
 	
 	/**

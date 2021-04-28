@@ -151,8 +151,7 @@
                         <div class="get-board">
                         	<button type="button" onclick="fnUpdate(<%=abv.getBoardSeq() %>)">수정</button>
                             <button type="button" onclick="fnDelete(<%=abv.getBoardSeq() %>)">삭제</button>
-                        	<button type="button">수정</button>
-                        	<button type="button">삭제</button>
+                            <button type="button" onclick="fnGetAll()">목록</button>
                         	<table class="board-table table-spacing right">
                        			<tr class="border-bottom">
                        				<th class="tr-th text-center border-right">제목</th>
@@ -170,7 +169,9 @@
                        			</tr>
                        			<tr class="border-bottom">
                        				<th class="tr-th text-center border-right">첨부파일</th>
-                       				<td colspan="3">(첨부파일)</td>
+                       				<td>(첨부파일)</td>
+                       				<th class="tr-th border-left text-center border-right">삭제여부</th>
+                       				<td><%=abv.getBoardDelete() %></td>
                        			</tr>
                         	</table>
                         </div>
@@ -191,24 +192,28 @@
             </div>
         </div>
         <form id="fm" method="post">
-        	<input type="hidden" id="boardList" name="boardSeq">
+        	<input type="hidden" id="boardSeq" name="boardSeq">
         </form>
         <script type="text/javascript">
         function fnDelete(data){
-    		if(confirm("삭제하시겠습니까?")){
+    		if(confirm("삭제하시겠습니까?")){//삭제하기
     			$("#fm").attr("action", "<%=request.getContextPath()%>/adminBoard/faqDelete.do");
-    			$("#boardList").val(data);
+    			$("#boardSeq").val(data);
     			$("#fm").submit();
     		}
     	}
-        function fnUpdate(data) {
+        function fnUpdate(data) {//수정하기
 //				if(confirm("수정ㄱ?")){
 				$("#fm").attr("method", "get");
 				$("#fm").attr("action", "<%=request.getContextPath()%>/adminBoard/faqUpdate.do");
-				$("#boardList").val(data);
+				$("#boardSeq").val(data);
 				$("#fm").submit();
 //				}
 		}
+        function fnGetAll() {//목록으로 돌아가기
+			$("#fm").attr("action", "<%=request.getContextPath()%>/adminBoard/faqGetAll.do");
+			$("#fm").submit();
+	}
         </script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

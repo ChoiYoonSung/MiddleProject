@@ -7,6 +7,7 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.or.ddit.event.service.IEventService;
 import kr.or.ddit.event.vo.EventVO;
+import kr.or.ddit.restInfo.vo.RestInfoVO;
 import kr.or.ddit.util.SqlMapClientUtil;
 
 public class EventDaoImpl implements IEventDao{
@@ -42,7 +43,7 @@ public class EventDaoImpl implements IEventDao{
 	}
 
 	@Override
-	public int deleteEvnet(SqlMapClient smc, String boardSeq) throws SQLException {
+	public int deleteEvnet(SqlMapClient smc, long boardSeq) throws SQLException {
 		int cnt = (int)smc.delete("event.deleteEvent", boardSeq);
 		return cnt;
 	}
@@ -54,19 +55,31 @@ public class EventDaoImpl implements IEventDao{
 	}
 
 	@Override
-	public EventVO selectEvent(SqlMapClient smc, String boardSeq) throws SQLException {
+	public List<RestInfoVO> getRestInfo(SqlMapClient smc) throws SQLException {
+		List<RestInfoVO> list = smc.queryForList("event.getRestInfo");
+		return list;
+	}
+	
+	@Override
+	public EventVO selectEvent(SqlMapClient smc, long boardSeq) throws SQLException {
 		int cnt = smc.update("event.countHitsEvent", boardSeq);
 		
-		EventVO event = (EventVO) smc.queryForObject("event.selectEvent", boardSeq);
-		System.out.println(event);
+		EventVO event = (EventVO) smc.queryForObject("event.getEvent", boardSeq);
 		return event;
 	}
 	
 	@Override
-	public EventVO getEvent(SqlMapClient smc, String boardSeq) throws SQLException {
+	public RestInfoVO selectRest(SqlMapClient smc, String userId) throws SQLException {
+		RestInfoVO rest = (RestInfoVO) smc.queryForObject("event.getRest", userId);
+		return rest;
+	}
+	
+	@Override
+	public EventVO getEvent(SqlMapClient smc, long boardSeq) throws SQLException {
 		EventVO event = (EventVO) smc.queryForObject("event.getEvent", boardSeq);
 		return event;
 	}
+
 
 //	@Override
 //	public int countHitsQnABoard(SqlMapClient smc, String boardSeq) throws SQLException {

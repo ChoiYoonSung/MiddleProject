@@ -41,6 +41,15 @@ public interface IUserDditDao {
 	public List<UserDditVO> getAllUserDditList(SqlMapClient smc) throws SQLException;
 	
 	/**
+	 * 주어진 회원 ID에 해당하는 회원 정보를 조회하는 메서드
+	 * @param smc SqlMapClient 객체
+	 * @param userId 삭제할 회원ID
+	 * @return 회원 정보를 담고있는 UserDditVO 객체
+	 * @throws SQLException JDBC관련 예외객체 발생
+	 */
+	public UserDditVO getUserDdit(SqlMapClient smc, String userId) throws SQLException;
+	
+	/**
 	 * 하나의 회원정보를 이용하여 DB를 update하는 메서드
 	 * @param smc SqlMapClient 객체
 	 * @param userDDITVo UserDDITVO 객체 

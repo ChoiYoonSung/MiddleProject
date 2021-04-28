@@ -36,15 +36,22 @@
 	xml 분리 예) 마이페이지, Qna, 공지사항 등 (게시판 CRUD 별로 쿼리 분리)-->
 		<sqlMap resource="kr/or/ddit/sqlmap/atchFile.xml" />
 		<sqlMap resource="kr/or/ddit/sqlmap/commBoard.xml" />
-		<sqlMap resource="kr/or/ddit/userAll/userAll.xml" />
-		<sqlMap resource="kr/or/ddit/userDdit/userDdit.xml" />
+		<sqlMap resource="kr/or/ddit/userAll/userAll.xml" /> <!-- 회원 전체 목록 -->
+		<sqlMap resource="kr/or/ddit/userDdit/userDdit.xml" /> <!-- 학원 회원 목록 -->
 		<sqlMap resource="kr/or/ddit/sqlmap/adminBoard.xml" />
 		<sqlMap resource="kr/or/ddit/sqlmap/qnaBoard.xml" />
       	<sqlMap resource="kr/or/ddit/sqlmap/eventBoard.xml" />
+      	<sqlMap resource="kr/or/ddit/sqlmap/partyBoard.xml" /><!-- 밀파티 -->
+      	<sqlMap resource="kr/or/ddit/sqlmap/partyJoin.xml" /> <!-- 밀파티2 -->
+      	<sqlMap resource="kr/or/ddit/sqlmap/comment.xml" /> <!-- 댓글 -->
+      	<sqlMap resource="kr/or/ddit/sqlmap/groupCode.xml" /> <!-- 그룹코드 -->
+      	<sqlMap resource="kr/or/ddit/sqlmap/code.xml" /> <!-- 코드 -->
+      	<sqlMap resource="kr/or/ddit/blackList/blackList.xml" /> <!-- 블랙리스트 목록 -->
+      	<sqlMap resource="kr/or/ddit/restInfo/restInfo.xml" /> 
+       	<sqlMap resource="kr/or/ddit/restInfo/menu.xml" /> <!-- 메뉴 -->
+        <sqlMap resource="kr/or/ddit/restInfo/restFav.xml" />
+        	<sqlMap resource="kr/or/ddit/restInfo/reviewBoard.xml" /> 
+      	
+      	<sqlMap resource="kr/or/ddit/mypage/myPage.xml" /> <!-- 마이페이지-->
+      	
 </sqlMapConfig>
-
-
-
-
-
-

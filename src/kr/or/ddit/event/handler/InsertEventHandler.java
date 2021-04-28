@@ -2,6 +2,7 @@ package kr.or.ddit.event.handler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.Session;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
@@ -33,8 +34,8 @@ public class InsertEventHandler implements CommandHandler{
 		if(req.getMethod().equals("GET")) {
 			return VIEW_PAGE;
 		}else {
-			FileItem item = ((FileUploadRequestWrapper)req).getFileItem("atchFile") == null ? null
-					:((FileUploadRequestWrapper)req).getFileItem("atchFile");
+			FileItem item = ((FileUploadRequestWrapper)req).getFileItem("atchFileId") == null ? null
+					:((FileUploadRequestWrapper)req).getFileItem("atchFileId");
 			
 			AtchFileVO atchFileVO = new AtchFileVO();
 			if(item != null) {
@@ -46,6 +47,7 @@ public class InsertEventHandler implements CommandHandler{
 			
 			EventVO event = new EventVO();
 			BeanUtils.populate(event, req.getParameterMap());
+			event.setAtchFileId(atchFileVO.getAtchFileId());
 			
 			eventService.insertEvent(event);
 			

@@ -24,7 +24,7 @@ public interface IAdminBoardService {
 	 * 전체 게시글 정보 조회 메서드
 	 * @return 작업 완료된 게시글 정보를 담고있는 List객체
 	 */
-	public List<AdminBoardVO> getAllAdminBoardList(String code);
+	public List<AdminBoardVO> getAllAdminBoardList(AdminBoardVO abv);
 	
 	/**
 	 * 하나의 게시글 정보를 수정하는 메서드

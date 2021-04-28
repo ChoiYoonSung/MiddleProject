@@ -159,12 +159,18 @@
 							</div>
 	                        <div class="input-group mb-3 col-md-10">
 							  	<span class="input-group-text">내용</span>
-							  	<textarea class="form-control" rows="10" id="boardContent" name="boardContent">
-							  		"<%=abv.getBoardContent() %>"
-							  	</textarea>
+							  	<textarea class="form-control" rows="10" id="boardContent" name="boardContent"><%=abv.getBoardContent() %></textarea>
 							</div>
+<!-- 							<div class="input-group"> -->
+<!-- 								<div class="input-group-text"> -->
+<!-- 									<label><input type="checkbox" name="boardDelete" id="boardDelete" onclick="fnDelete()">삭제여부</label> -->
+<!-- 									<label for="BY">삭제Y</label> -->
+<!-- 									<input type="radio" name="boardDelete" id="boardDelete" value="N"> -->
+<!-- 									<label for="BN">삭제N</label> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 							<div class="col-12">
-							   	<button type="submit" class="btn btn-outline-primary btn-sm">수정완료</button>
+							   	<button type="submit" class="btn btn-outline-primary btn-sm" onclick="fnGet(<%=abv.getBoardSeq() %>)">수정완료</button>
 							   	<a type="button" class="btn btn-outline-info btn-sm" href="<%=request.getContextPath() %>/adminBoard/getAll.do">목록으로</a>
 						    </div>
 				        	<input type="hidden" id="boardList" name="boardSeq" value="<%=abv.getBoardSeq()%>">
@@ -185,6 +191,24 @@
                 </footer>
             </div>
         </div>
+        <script type="text/javascript">
+//         function fnDelete() {
+//         	if($("#boardDelete").attr("checked") == true){
+//         		$("#boardDelete").val("Y");
+//         	} else if($("#boardDelete").attr("checked") == false){
+//         		$("#boardDelete").val("N");
+//         	}
+			
+// 		}
+		function fnTitle() {
+			$("#")
+		}
+        function fnGet(data) {
+			$("#fm").attr("action", "<%=request.getContextPath()%>/adminBoard/noticeGet.do");
+			$("#boardSeq").val(data);
+			$("#fm").submit();
+		}
+        </script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="<%=request.getContextPath() %>/adminView/js/scripts.js"></script>

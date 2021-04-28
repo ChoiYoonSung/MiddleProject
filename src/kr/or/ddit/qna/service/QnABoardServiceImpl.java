@@ -52,10 +52,10 @@ public class QnABoardServiceImpl implements IQnABoardService{
 	}
 	
 	@Override
-	public int deleteQnABoard(QnABoardVO qna) {
+	public int deleteQnABoard(long boardSeq) {
 		int cnt = 0;
 		try {
-			cnt = qnaDao.deleteQnABoard(smc, qna);
+			cnt = qnaDao.deleteQnABoard(smc, boardSeq);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -74,37 +74,25 @@ public class QnABoardServiceImpl implements IQnABoardService{
 	}
 	
 	@Override
-	public List<QnABoardVO> getQnABoard(QnABoardVO qna) {
-		List<QnABoardVO> list = new ArrayList<>();
+	public QnABoardVO selectQnABoard(long boardSeq) {
+		QnABoardVO qna = null;
 		try {
-			list = qnaDao.getQnABoard(smc, qna);
+			qna = qnaDao.selectQnABoard(smc, boardSeq);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return qna;
 	}
-
+	
 	@Override
-	public QnABoardVO getQnA(String boardSeq) {
+	public QnABoardVO getQnABoard(long boardSeq) {
 		QnABoardVO qna = null;
 		try {
-			qna = qnaDao.getQnA(smc, boardSeq);
+			qna = qnaDao.getQnABoard(smc, boardSeq);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return qna;
 	}
 
-	@Override
-	public int countHitsQnABoard(String boardSeq) {
-		int cnt = 0;
-		try {
-			cnt = qnaDao.countHitsQnABoard(smc, boardSeq);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return cnt;
-	}
-	
-	
 }

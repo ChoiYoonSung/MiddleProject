@@ -10,6 +10,21 @@
 				AND DDIT_MAIL = #dditMail#
 	</select>
 	
+	
+	<select id="getUserDdit" parameterClass="String" resultClass="userDditVO">
+		SELECT 	USER_ID	userId
+				,DDIT_NAME dditName
+				,DDIT_CLASS dditClass
+				,DDIT_HP dditHp
+				,DDIT_MAIL dditMail
+				,DDIT_BIR dditBir
+				,RECV_MAIL recvMail
+				,POLICY_YN policyYn
+		FROM TB_USER_DDIT
+		WHERE 	1=1
+				AND USER_ID = #userId#
+	</select>
+	
 	<insert id="insertUserDdit" parameterClass="userDditVO">
 		INSERT INTO TB_USER_DDIT(
 		    USER_ID
@@ -31,4 +46,13 @@
 		    ,#policyYn#
 		)
 	</insert>
+	
+	<update id="updateUserDdit" parameterClass="kr.or.ddit.userDdit.vo.UserDditVO">
+		Update TB_USER_DDIT
+		Set   DDIT_BIR = #dditBir#
+			, DDIT_HP = #dditHp#
+			, DDIT_MAIL = #dditMail#
+			, RECV_MAIL = #recvMail#
+		WHERE USER_ID = #userId#
+	</update>
 </sqlMap>

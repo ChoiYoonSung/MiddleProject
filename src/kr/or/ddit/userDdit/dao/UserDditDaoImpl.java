@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
+import kr.or.ddit.userAll.vo.UserAllVO;
 import kr.or.ddit.userDdit.vo.UserDditVO;
 
 public class UserDditDaoImpl implements IUserDditDao {
@@ -69,7 +70,11 @@ public class UserDditDaoImpl implements IUserDditDao {
 		return userDDITList;
 	}
 
-	
-	
 
+	@Override
+	public UserDditVO getUserDdit(SqlMapClient smc, String userId) throws SQLException {
+		UserDditVO userDdit = (UserDditVO) smc.queryForObject("userddit.getUserDdit", userId);
+		
+		return userDdit;
+	}
 }

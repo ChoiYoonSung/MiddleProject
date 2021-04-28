@@ -32,7 +32,7 @@ public class UpdateEventHandler implements CommandHandler{
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		if(req.getMethod().equals("GET")) {
-			String boardSeq = req.getParameter("boardSeq");
+			long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
 			
 			IEventService eventService = EventServiceImpl.getInstance();
 			EventVO event= eventService.getEvent(boardSeq);
@@ -65,7 +65,7 @@ public class UpdateEventHandler implements CommandHandler{
 				atchFileVO = fileService.saveAtchFile(item);	// 첨부파일 저장
 			}
 						
-			String boardSeq = req.getParameter("boardSeq");
+			Long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
 			
 			IEventService eventService = EventServiceImpl.getInstance();
 			

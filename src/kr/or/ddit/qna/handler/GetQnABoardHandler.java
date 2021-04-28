@@ -34,33 +34,19 @@ public class GetQnABoardHandler implements CommandHandler{
 		ICommentService commentService = CommentServiceImpl.getInstance();
 
 		// 특정 게시글
-		String boardSeq = req.getParameter("boardSeq");
-		QnABoardVO qna = qnaService.getQnA(boardSeq);
-		long count = qna.getBoardHits();
-		count++;
-		qna.setBoardHits(count);
+		Long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
+		QnABoardVO qna = qnaService.selectQnABoard(boardSeq);
 		req.setAttribute("qnaVO", qna);
-
-		BeanUtils.populate(qna, req.getParameterMap());
-
-		if(qna.getAtchFileId()>0) {
-			AtchFileVO fileVO = new AtchFileVO();
-			fileVO.setAtchFileId(qna.getAtchFileId());
-
-			IAtchFileService atchFileService = AtchFileServiceImpl.getInstance();
-			List<AtchFileVO> atchFileList = atchFileService.getAtchFileList(fileVO);
-
-			req.setAttribute("atchFileList", atchFileList);
-		}
-
-		// ?
-//		qnaService.countHitsQnABoard(boardSeq);
-//		qnaService.getQnABoard(qna);
 
 		// 댓글 목록
 		CommentVO commentVO = new CommentVO();
 		commentVO.setCode("QNA");
-		commentVO.setBoardSeq(Long.parseLong(boardSeq));
+		commentVO.setBoardSeq(boardSeq);
+		
+		// 댓글 수?
+		req.setAttribute("cnt", commentService.getCommentCount(commentVO));
+		
+		// 댓글 목록 세팅
 		req.setAttribute("commentList", commentService.getCommentList(commentVO));
 
 		return VIEW_PAGE;

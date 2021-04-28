@@ -34,7 +34,8 @@ public class InsertQnABoardHandler implements CommandHandler{
 		if(req.getMethod().equals("GET")) {
 			return VIEW_PAGE;
 		}else {
-			FileItem item = ((FileUploadRequestWrapper)req).getFileItem("atchFile")==null?null:((FileUploadRequestWrapper)req).getFileItem("atchFile");
+			FileItem item = ((FileUploadRequestWrapper)req).getFileItem("atchFileId")
+					==null?null:((FileUploadRequestWrapper)req).getFileItem("atchFileId");
 			
 			AtchFileVO atchFileVO = new AtchFileVO();
 			if(item != null) {

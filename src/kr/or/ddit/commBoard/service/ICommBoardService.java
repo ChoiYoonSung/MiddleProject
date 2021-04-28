@@ -24,6 +24,18 @@ public interface ICommBoardService {
 	 * @return
 	 */
 	public List<CommBoardVO> getAllBoardList(PagingVO pagingVO);
+	public List<CommBoardVO> getAllDevBoardList(PagingVO pagingVO);
+	public List<CommBoardVO> getAllJobBoardList(PagingVO pagingVO);
+	public List<CommBoardVO> getAllSocialBoardList(PagingVO pagingVO);
+	public List<CommBoardVO> getAllClassBoardList(PagingVO pagingVO);
+	public List<CommBoardVO> getAll401BoardList(PagingVO pagingVO);
+	public List<CommBoardVO> getAll402BoardList(PagingVO pagingVO);
+	public List<CommBoardVO> getAll403BoardList(PagingVO pagingVO);
+	public List<CommBoardVO> getAll404BoardList(PagingVO pagingVO);
+	public List<CommBoardVO> getAll405BoardList(PagingVO pagingVO);
+	public List<CommBoardVO> getAll406BoardList(PagingVO pagingVO);
+	public List<CommBoardVO> getAll407BoardList(PagingVO pagingVO);
+	public List<CommBoardVO> getAll408BoardList(PagingVO pagingVO);
 	
 	/**
 	 * 전체 회원수를 반환하는 메서드
@@ -42,7 +54,7 @@ public interface ICommBoardService {
 	 * @param uerId
 	 * @return
 	 */
-	public int deleteBoard(CommBoardVO cv);
+	public int deleteBoard(long boardSeq);
 	
 	/**
 	 * CommBoardVO 자료를 이용하여 회원을 검색하는 메서드

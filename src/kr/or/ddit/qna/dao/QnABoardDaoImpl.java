@@ -39,11 +39,10 @@ public class QnABoardDaoImpl implements IQnABoardDao{
 	}
 
 	@Override
-	public int deleteQnABoard(SqlMapClient smc, QnABoardVO qna) throws SQLException {
-		int cnt = (int)smc.delete("qna.deleteQnABoard", qna);
+	public int deleteQnABoard(SqlMapClient smc, long boardSeq) throws SQLException {
+		int cnt = (int)smc.delete("qna.deleteQnABoard", boardSeq);
 		return cnt;
 	}
-	
 
 	@Override
 	public List<QnABoardVO> getAllQnABoard(SqlMapClient smc) throws SQLException {
@@ -52,21 +51,15 @@ public class QnABoardDaoImpl implements IQnABoardDao{
 	}
 	
 	@Override
-	public List<QnABoardVO> getQnABoard(SqlMapClient smc, QnABoardVO qna) throws SQLException {
-		List<QnABoardVO> list = smc.queryForList("qna.getQnABoard", qna);
-		return list;
-	}
-
-	@Override
-	public QnABoardVO getQnA(SqlMapClient smc, String boardSeq) throws SQLException {
-		QnABoardVO qna = (QnABoardVO) smc.queryForObject("qna.getQnA", boardSeq);
+	public QnABoardVO selectQnABoard(SqlMapClient smc, long boardSeq) throws SQLException {
+		smc.update("qna.countHitsQnABoard",boardSeq);
+		QnABoardVO qna = (QnABoardVO) smc.queryForObject("qna.getQnABoard", boardSeq);
 		return qna;
 	}
-
-	@Override
-	public int countHitsQnABoard(SqlMapClient smc, String boardSeq) throws SQLException {
-		int cnt = (int)smc.update("qna.countHitsQnABoard", boardSeq);
-		return cnt;
-	}
 	
+	@Override
+	public QnABoardVO getQnABoard(SqlMapClient smc, long boardSeq) throws SQLException {
+		QnABoardVO qna = (QnABoardVO) smc.queryForObject("qna.getQnABoard", boardSeq);
+		return qna;
+	}
 }

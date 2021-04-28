@@ -29,7 +29,7 @@ public class LogoutHandler implements CommandHandler{
 		session.invalidate();
 		// 게시글 목록으로 이동 (유저 정보를 가지고 있으므로 redirect)
 		String redirectUrl = req.getContextPath() + 
-				"/intro.html";
+				"/main/main.do";
 		System.out.println("■redirect : " + redirectUrl);
 		return redirectUrl;
 	}

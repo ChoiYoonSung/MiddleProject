@@ -15,7 +15,8 @@ import kr.or.ddit.util.FileUploadRequestWrapper;
 
 public class InsertAdminBoardHandler implements CommandHandler{
 	
-	private static String VIEW_PAGE = "";
+	private static String VIEW_PAGE_in = "";
+	private static String VIEW_PAGE_ga = "";
 	
 	@Override
 	public boolean isRedirect(HttpServletRequest req) {
@@ -28,13 +29,25 @@ public class InsertAdminBoardHandler implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-	if("notice".equals(req.getParameter("code"))) {
-		VIEW_PAGE = "/WEB-INF/view/adminBoard/noticeInsert.jsp";
-	} else {
-		VIEW_PAGE = "/WEB-INF/view/adminBoard/faqInsert.jsp";
-	}
+	
+		String firstURI = req.getRequestURI();
+		String secondURI[] = firstURI.split("/", 4);
+		String thirdURI[] = secondURI[3].split("\\.");
+		String finalURI = thirdURI[0].substring(0, 3);
+		
+		String code = "";
+		if("not".equals(finalURI)) {
+			VIEW_PAGE_in = "/WEB-INF/view/adminBoard/noticeInsert.jsp";
+			VIEW_PAGE_ga = req.getContextPath() + "/adminBoard/noticeGetAll.do";
+			code = "NOTICE";
+		}else if("faq".equals(finalURI)){
+			VIEW_PAGE_in = "/WEB-INF/view/adminBoard/faqInsert.jsp";
+			VIEW_PAGE_ga = req.getContextPath() + "/adminBoard/faqGetAll.do";
+			code = "FAQ";
+		}
+		
 		if(req.getMethod().equals("GET")) { //get방식인 경우 isRedirect X
-			return VIEW_PAGE;
+			return VIEW_PAGE_in;
 		}else {//post방식인 경우 isRedirect O
 //			FileItem item = ((FileUploadRequestWrapper)req).getFileItem("");
 			
@@ -49,7 +62,7 @@ public class InsertAdminBoardHandler implements CommandHandler{
 			
 			//게시글 등록하기
 			AdminBoardVO abv = new AdminBoardVO();
-//			abv.setCode(code);
+			abv.setCode(code);
 			abv.setUserId(userId);
 			abv.setBoardTitle(boardTitle);
 			abv.setBoardContent(boardContent);
@@ -65,8 +78,8 @@ public class InsertAdminBoardHandler implements CommandHandler{
 			}
 			
 			//목록조회 화면으로 이동
-			String redirectUrl = req.getContextPath() + "/adminBoard/getAll.do?msg=" + URLEncoder.encode(msg,"UTF-8");
-			return redirectUrl;
+//			VIEW_PAGE_ga += "?boardSeq=" + req.getParameter("boardSeq");
+			return VIEW_PAGE_ga;
 		}
 	}
 }

@@ -48,15 +48,17 @@ public class GetAllAdminBoardListHandler implements CommandHandler{
 			VIEW_PAGE = "/WEB-INF/view/adminBoard/faqGetAll.jsp";
 			code = "FAQ";
 		}
+		System.out.println(code);
+		
+		AdminBoardVO abv = new AdminBoardVO();
+		abv.setCode(code);
 		//1. 서비스 객체 생성
 		IAdminBoardService boardService = AdminBoardServiceImpl.getInstance();
 		
 		//2. 게시글 정보 조회
-		List<AdminBoardVO> boardList = boardService.getAllAdminBoardList(code);
+		List<AdminBoardVO> boardList = boardService.getAllAdminBoardList(abv);
 		
-//		VIEW_PAGE = "/WEB-INF/view/adminBoard/"+ pageVal +"GetAll.jsp";
 		req.setAttribute("boardList", boardList);
-		req.setAttribute("code", code);
 		return VIEW_PAGE;
 	}
 }

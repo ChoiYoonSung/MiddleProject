@@ -81,15 +81,15 @@
 
 					// Images (in the format of 'url': 'alignment').
 						images: {
-							'/DPJ/assets/images/gimbok.jpg': 'center',
-							'/DPJ/assets/images/gimpi.jpg': 'center',
-							'/DPJ/assets/images/sam.jpg': 'center',
-							'/DPJ/assets/images/budae.jpg': 'center',
-							'/DPJ/assets/images/care.jpg': 'center'
+							'/DPJ/assets/img/mainImg/gimbok.jpg': 'center',
+							'/DPJ/assets/img/mainImg/gimpi.jpg': 'center',
+							'/DPJ/assets/img/mainImg/sam.jpg': 'center',
+							'/DPJ/assets/img/mainImg/budae.jpg': 'center',
+							'/DPJ/assets/img/mainImg/care.jpg': 'center'
 						},
 
 					// Delay.
-						delay: 6000
+						delay: 5000
 
 				};
 
