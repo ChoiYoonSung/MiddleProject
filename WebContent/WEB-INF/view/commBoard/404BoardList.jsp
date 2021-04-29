@@ -46,7 +46,7 @@
 		%>
 
 								<tr class="d-flex col-12">
-									<td class="col-2"><a href="<%=request.getContextPath() %>/commBoard/select.do?boardSeq=<%=boardList.get(i).getBoardSeq()%>"><%=boardList.get(i).getBoardSeq()%></a></td>
+									<td class="col-2"><a href="<%=request.getContextPath() %>/<%=boardList.get(i).getCode() %>/select.do?boardSeq=<%=boardList.get(i).getBoardSeq()%>"><%=boardList.get(i).getBoardSeq()%></a></td>
 									<td class="col-5"><%=boardList.get(i).getBoardTitle() %></td>
 									<td class="col-2"><%=boardList.get(i).getUserId() %></td>
 									<td class="col-2"><%=boardList.get(i).getBoardDate() %></td>

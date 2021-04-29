@@ -17,7 +17,7 @@
 				,DDIT_CLASS dditClass
 				,DDIT_HP dditHp
 				,DDIT_MAIL dditMail
-				,DDIT_BIR dditBir
+				,TO_CHAR(DDIT_BIR,'YY-MM-DD') dditBir
 				,RECV_MAIL recvMail
 				,POLICY_YN policyYn
 		FROM TB_USER_DDIT
@@ -48,11 +48,6 @@
 	</insert>
 	
 	<update id="updateUserDdit" parameterClass="kr.or.ddit.userDdit.vo.UserDditVO">
-		Update TB_USER_DDIT
-		Set   DDIT_BIR = #dditBir#
-			, DDIT_HP = #dditHp#
-			, DDIT_MAIL = #dditMail#
-			, RECV_MAIL = #recvMail#
-		WHERE USER_ID = #userId#
+		{CALL PROC_UP_USER_DDIT_ALL(#userId#,#dditBir#,#dditHp#,#dditMail#,#recvMail#,#userPhoto#)}
 	</update>
 </sqlMap>

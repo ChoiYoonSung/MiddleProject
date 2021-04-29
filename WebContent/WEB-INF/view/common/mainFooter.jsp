@@ -3,7 +3,7 @@
 
 <footer class="py-5 bg-dark">
 	<div class="container">
-		<p class="m-0 text-center text-white">Copyright &copy그런거 엄슴; DDIT 202101 #403 같이밥먹어조</p>
+		<span class="text-center text-white">Copyright &copy 2021. Eat Your Meal Right On Time</span>
 	</div>
 </footer>
 

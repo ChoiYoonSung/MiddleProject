@@ -14,7 +14,7 @@ import kr.or.ddit.userDdit.service.UserDditServiceImpl;
 import kr.or.ddit.userDdit.vo.UserDditVO;
 
 public class MyPageEditHandler implements CommandHandler {
-	private static final String VIEW_PAGE = "/WEB-INF/view/mypage/mypageForm.jsp";
+	private static final String VIEW_PAGE = "/WEB-INF/view/myPage/myPageForm.jsp";
 
 	@Override
 	public boolean isRedirect(HttpServletRequest req) {
@@ -51,6 +51,7 @@ public class MyPageEditHandler implements CommandHandler {
 			String dditHp = req.getParameter("dditHp");
 			String dditMail = req.getParameter("dditMail");
 			String recvMail = req.getParameter("recvMail");
+			String userPhoto = req.getParameter("userPhoto");
 			
 			
 			
@@ -78,6 +79,8 @@ public class MyPageEditHandler implements CommandHandler {
 			} else {
 				msg = "failure";
 			}
+			
+			session.setAttribute("USERPHOTO", userPhoto); // 세션에 사진 세팅
 			
 			// 화면 이동
 			String redirectUrl = "";

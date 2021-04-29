@@ -19,8 +19,8 @@
 					<div class="card-body">
 						<h2 class="card-title">
 								<select name="code">
-									<option name="code" value="PROMO" checked>홍보글</option>
-									<option name="code" value="EVE">이벤트글</option>
+									<option name="code" value="EVE" checked>이벤트글</option>
+									<option name="code" value="PROMO">홍보글</option>
 								</select>
 							게시판</h2>
 						<table class="table" >

@@ -15,7 +15,7 @@
 	}
 	
 	if(userPhoto == null) {
-		userType = "null";
+		userPhoto = "null";
 	}
 	
 	if(visitFlag == null) {
@@ -80,17 +80,18 @@
 		tg{
 			text-align: center;
 		}
-		tr, td{
-			text-align: left;
-		}
+/* 		tr, td{ */
+/* 			text-align: left; */
+/* 		} */
 	</style>
 </head>
 
 <body>
+	
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand col-lg-2-h1" href="<%=request.getContextPath() %>/main/main.do"><h1>굿끼제먹</h1></a>
+			<a class="navbar-brand col-lg-2-h1" href="<%=request.getContextPath() %>/main/main.do"><h1><i class="fas fa-cookie-bite mr-3"></i>굿끼제먹</h1></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" 
 				aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -98,10 +99,10 @@
 
 			<div class="collapse navbar-collapse " id="navbarResponsive">
 				<ul class="navbar-nav ml-auto col-lg-7-h1">
-					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath() %>/eventBoard/list.do"">이벤트</a></li>
 					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath() %>/searchRest/list.do">식당검색</a></li>
 					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath() %>/PARTY/main.do">Meal파티</a></li>
 					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath() %>/commBoard/main.do">커뮤니티</a></li>
+					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath() %>/eventBoard/list.do"">이벤트</a></li>
 					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath() %>/adminBoardMain/noticeGetAll.do">고객센터</a></li>
 					<%
 						if("일반회원".equals(userType) || "식당회원".equals(userType)){

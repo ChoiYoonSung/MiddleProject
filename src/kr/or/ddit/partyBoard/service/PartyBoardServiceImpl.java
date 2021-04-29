@@ -53,10 +53,10 @@ public class PartyBoardServiceImpl implements IPartyBoardService {
 	}
 
 	@Override
-	public int deletePartyBoard(PartyBoardVO pv) {
+	public int deletePartyBoard(long boardSeq) {
 		int cnt = 0;
 		try {
-			cnt = partyBoardDao.deletePartyBoard(smc, pv);
+			cnt = partyBoardDao.deletePartyBoard(smc, boardSeq);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

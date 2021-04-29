@@ -10,7 +10,7 @@ public interface IPartyBoardService {
 	
 	public int updatePartyBoard(PartyBoardVO pv);
 	
-	public int deletePartyBoard(PartyBoardVO pv);
+	public int deletePartyBoard(long boardSeq);
 	
 	public PartyBoardVO getPartyBoard(long boardSeq);
 	

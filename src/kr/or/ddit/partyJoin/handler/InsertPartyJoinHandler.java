@@ -31,7 +31,6 @@ public class InsertPartyJoinHandler implements CommandHandler {
 			long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
 			String userId = req.getParameter("userId");
 			String userPhoto = req.getParameter("userProfile");
-			System.out.println("★ 보드시퀀스 : " + boardSeq + " / 아이디 : " + userId + " / 사진 : " + userPhoto);
 			
 			pv.setBoardSeq(boardSeq);
 			pv.setUserId(userId);

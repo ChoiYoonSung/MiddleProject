@@ -121,4 +121,15 @@ public class RestInfoServiceImpl implements IRestInfoService {
 		return res;
 	}
 
+	@Override
+	public List<RestInfoVO> getRestInfoAboutUser(String userId) {
+		List<RestInfoVO> favInfoList = null;
+		try {
+			favInfoList = restInfoDao.getRestInfoAboutUser(smc, userId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return favInfoList;
+	}
+
 }

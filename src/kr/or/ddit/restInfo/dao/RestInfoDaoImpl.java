@@ -84,4 +84,10 @@ public class RestInfoDaoImpl implements IRestInfoDao{
 		int cnt = (int)smc.delete("restFav.deleteDips", rfv);
 		return cnt;
 	}
+
+	@Override
+	public List<RestInfoVO> getRestInfoAboutUser(SqlMapClient smc, String userId) throws SQLException {
+		List<RestInfoVO> favInfoList = smc.queryForList("restFav.getRestInfoAboutUser", userId);
+		return favInfoList;
+	}
 }

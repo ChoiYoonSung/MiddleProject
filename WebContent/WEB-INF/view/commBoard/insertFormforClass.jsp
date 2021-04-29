@@ -28,14 +28,14 @@ String msg = request.getParameter("msg") == null ? "" : request.getParameter("ms
 					<div class="card-body">
 						<h2 class="card-title">
 								<select name="code">
-									<option name="code" value="401">401호</option>
-									<option name="code" value="402">402호</option>
-									<option name="code" value="403">403호</option>
-									<option name="code" value="404">404호</option>
-									<option name="code" value="405">405호</option>
-									<option name="code" value="406">406호</option>
-									<option name="code" value="407">407호</option>
-									<option name="code" value="408">408호</option>
+									<option value="CLASS401">401호</option>
+									<option value="CLASS402">402호</option>
+									<option value="CLASS403">403호</option>
+									<option value="CLASS404">404호</option>
+									<option value="CLASS405">405호</option>
+									<option value="CLASS406">406호</option>
+									<option value="CLASS407">407호</option>
+									<option value="CLASS408">408호</option>
 								</select>
 							게시판</h2>
 						<table class="table" >

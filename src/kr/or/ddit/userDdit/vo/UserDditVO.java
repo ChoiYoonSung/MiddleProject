@@ -10,6 +10,14 @@ public class UserDditVO {
 	private String recvMail;
 	private String policyYn;
 	
+	private String userPhoto; // 마이페이지 유저 포토 출력용
+	
+	public String getUserPhoto() {
+		return userPhoto;
+	}
+	public void setUserPhoto(String userPhoto) {
+		this.userPhoto = userPhoto;
+	}
 	public String getUserId() {
 		return userId;
 	}

@@ -9,34 +9,8 @@
 %>
 
 <%@ include file="/WEB-INF/view/common/top.jsp" %>
-<main>
-    <div class="container-fluid">
-        <h1 class="mt-4 mb-4">Board Administration</h1>
+<%@include file="/WEB-INF/view/common/boardSubNav.jsp"%>
 
-       <ul class="nav nav-pills mb-4">
-		  <li class="nav-item">
-		    <a class="nav-link" href="boardAdmin.html">전체</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="noticeGetAll.do">공지</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="faqGetAll.do">FAQ</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link active" href="qnaGetAll.do">문의</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="eventAdmin.html">홍보/이벤트</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="commuAdmin.html">커뮤니티</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="partyAdmin.html">파티</a>
-		  </li>
-		</ul>>
-        </ul>
         <div class="card mb-4">
             <div class="card-body">
                문의 게시판 테스트용 임시 페이지 입니다.

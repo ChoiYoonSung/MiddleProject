@@ -23,7 +23,19 @@
 							</tr>
 							<tr class="d-flex text-left">
 								<th class="col-1 ">작성자</th>
-								<td class="col-3 "><%=userId %></td>
+								<td class="col-3 ">
+							<%
+									if(userId.equals("null")) {
+							%>
+									비회원
+							<%			
+									} else {
+							%>
+									<%=userId %>
+							<%			
+									}
+							%>
+								</td>
 								<th class="col-8 "></th>
 							</tr>
 							<tr class="d-flex text-left">
@@ -43,7 +55,7 @@
 					<button class="btn btn-lg btn-secondary" type="submit">글 등록</button>
 					&nbsp;&nbsp;
 					&nbsp;&nbsp;
-					<a class="btn btn-lg btn-secondary" type="reset" href="<%=request.getContextPath() %>/qnaBoard/list.do">목록으로 돌아가기</a>
+					<a class="btn btn-lg btn-secondary" type="reset" href="list.do">목록으로 돌아가기</a>
 				</div>
 			</div>
 			</form>

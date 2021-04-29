@@ -86,4 +86,16 @@ public class ReviewVO {
 	}
 	private long boardHits;
 	private String boardDelete;
+
+	
+	private String restName; // 마이페이지에서 사용할 식당이름
+	
+	public String getRestName() {
+		return restName;
+	}
+	public void setRestName(String restName) {
+		this.restName = restName;
+	}
+	
+	
 }

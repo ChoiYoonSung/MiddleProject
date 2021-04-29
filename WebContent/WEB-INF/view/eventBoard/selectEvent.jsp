@@ -57,7 +57,7 @@
 									</td>
 								</tr>
 								<tr class="d-flex text-left">
-									<td class="col-12"><%=eventVO.getBoardContent() %></td>
+									<td class="col-12"><pre><%=eventVO.getBoardContent() %></pre></td>
 								</tr>
 								
 							</tbody>

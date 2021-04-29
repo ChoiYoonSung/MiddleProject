@@ -79,7 +79,6 @@ public class UpdateCommBoardHandler implements CommandHandler{
 			String boardTitle = req.getParameter("boardTitle");
 			String boardContent = req.getParameter("boardContent");
 			String code = req.getParameter("code");
-
 			// 2. 서비스 객체 생성하기
 			ICommBoardService boardService = CommBoardServiceImpl.getInstance();
 			
@@ -104,7 +103,7 @@ public class UpdateCommBoardHandler implements CommandHandler{
 			
 			// 4. 목록 조회화면으로 이동
 			String redirectUrl = req.getContextPath() +
-					"/commBoard/select.do?boardSeq="+ boardSeq;
+					"/" + code +"/select.do?boardSeq="+ boardSeq;
 			
 			return redirectUrl;
 		}

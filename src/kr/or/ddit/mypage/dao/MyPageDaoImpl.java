@@ -7,7 +7,10 @@ import org.apache.log4j.Logger;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
+import kr.or.ddit.comment.vo.CommentVO;
+import kr.or.ddit.partyBoard.vo.PartyBoardVO;
 import kr.or.ddit.qna.vo.QnABoardVO;
+import kr.or.ddit.review.vo.ReviewVO;
 import kr.or.ddit.userAll.vo.UserAllVO;
 
 public class MyPageDaoImpl implements IMyPageDao {
@@ -32,4 +35,27 @@ public class MyPageDaoImpl implements IMyPageDao {
 		return qnaBoardList;
 	}
 
+	@Override
+	public List<CommentVO> getAllMyPageComment(SqlMapClient smc, CommentVO commentVo) throws SQLException {
+		List<CommentVO> commentList = smc.queryForList("mypage.listMyPageComment", commentVo);
+		
+		RESULT_LOGGER.info("■■■ DAO [목록 수] : " + commentList.size());
+		return commentList;
+	}
+
+	@Override
+	public List<ReviewVO> getAllMyPageReview(SqlMapClient smc, ReviewVO reviewVo) throws SQLException {
+		List<ReviewVO> reviewList = smc.queryForList("mypage.listMyPageReview", reviewVo);
+		
+		RESULT_LOGGER.info("■■■ DAO [목록 수] : " + reviewList.size());
+		return reviewList;
+	}
+
+	@Override
+	public List<PartyBoardVO> getAllMyPagePartyBoard(SqlMapClient smc, PartyBoardVO partyBoardVo) throws SQLException {
+		List<PartyBoardVO> partyBoardList = smc.queryForList("mypage.listMyPagePartyBoard", partyBoardVo);
+		
+		RESULT_LOGGER.info("■■■ DAO [목록 수] : " + partyBoardList.size());
+		return partyBoardList;
+	}
 }

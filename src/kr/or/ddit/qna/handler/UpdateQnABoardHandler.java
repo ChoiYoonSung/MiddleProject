@@ -77,7 +77,7 @@ public class UpdateQnABoardHandler implements CommandHandler{
 			
 			qnaService.updateQnABoard(qna);
 			
-			String redirectUrl = req.getContextPath() + "/qnaBoard/select.do?boardSeq=" + boardSeq;
+			String redirectUrl = req.getContextPath() + "/QNA/select.do?boardSeq=" + boardSeq;
 			
 			return redirectUrl;
 		}

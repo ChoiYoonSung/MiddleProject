@@ -25,7 +25,7 @@
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<h2 class="card-title support"><a href="faqGetAll.do">FAQ(자주 묻는 질문)</a></h2>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<h2 class="card-title support"><a href="<%=request.getContextPath() %>/qnaBoard/list.do">Q&A</a></h2>
+							<h2 class="card-title support"><a href="<%=request.getContextPath() %>/QNA/list.do">Q&A</a></h2>
 						</div>
 						<h2 class="card-title">FAQ(자주 묻는 질문)</h2>
 <!-- 						<p class="card-text">온통 너의 생각 뿐야~</p> -->

@@ -8,8 +8,8 @@ public class AdminBoardVO {
 	private String boardDate;
 	private String boardContent;
 	private String atchFileId;
-	private long boardHits;
-	private String boardDelete;
+	private long boardHits = 1;
+	private String boardDelete = "N";
 	
 	public String getCode() {
 		return code;

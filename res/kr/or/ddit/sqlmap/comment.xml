@@ -58,7 +58,7 @@
 	<select id="getCommentList" parameterClass="kr.or.ddit.comment.vo.CommentVO" resultClass="kr.or.ddit.comment.vo.CommentVO">
 	
 		SELECT USER_ID         userId
-			 , TO_CHAR(REPLY_DATE, 'YY/MM/DD HH24:MM')      replyDate
+			 , TO_CHAR(REPLY_DATE, 'YY/MM/DD HH24:MI')      replyDate
 			 , REPLY_CONTENT   replyContent
 			 , REPLY_SEQ	   replySeq
 		FROM   TB_COMMENT
@@ -83,7 +83,7 @@
 	<select id="getCommentListAdmin" parameterClass="kr.or.ddit.comment.vo.CommentVO" resultClass="kr.or.ddit.comment.vo.CommentVO">
 	
 		SELECT USER_ID         userId
-			 , TO_CHAR(REPLY_DATE, 'YY/MM/DD HH24:MM')      replyDate
+			 , TO_CHAR(REPLY_DATE, 'YY/MM/DD HH24:MI')      replyDate
 			 , REPLY_CONTENT   replyContent
 			 , REPLY_SEQ	   replySeq
 		FROM   TB_COMMENT
@@ -97,7 +97,7 @@
 	<select id="getBoardCommentList" parameterClass="String" resultClass="kr.or.ddit.comment.vo.CommentVO">
 	
 		SELECT USER_ID         userId
-			 , TO_CHAR(REPLY_DATE, 'YY/MM/DD HH24:MM')      replyDate
+			 , TO_CHAR(REPLY_DATE, 'YY/MM/DD HH24:MI')      replyDate
 			 , REPLY_CONTENT   replyContent
 			 , REPLY_SEQ	   replySeq
 			 , REPLY_DELETE    replyDelete

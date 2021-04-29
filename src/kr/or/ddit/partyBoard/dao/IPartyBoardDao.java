@@ -13,7 +13,7 @@ public interface IPartyBoardDao {
 	
 	public int updatePartyBoard(SqlMapClient smc, PartyBoardVO pv) throws SQLException;
 	
-	public int deletePartyBoard(SqlMapClient smc, PartyBoardVO pv) throws SQLException;
+	public int deletePartyBoard(SqlMapClient smc, long boardSeq) throws SQLException;
 	
 	public PartyBoardVO getPartyBoard(SqlMapClient smc, long boardSeq) throws SQLException;
 	

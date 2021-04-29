@@ -24,7 +24,7 @@ public class DeleteQnABoardHandler implements CommandHandler{
 		IQnABoardService qnaService = QnABoardServiceImpl.getInstance();
 		
 		qnaService.deleteQnABoard(boardSeq);
-		String redirectUrl = req.getContextPath() + "/qnaBoard/list.do";
+		String redirectUrl = req.getContextPath() + "/QNA/list.do";
 		
 		return redirectUrl;
 	}

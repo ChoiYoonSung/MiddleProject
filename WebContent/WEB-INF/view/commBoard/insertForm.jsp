@@ -28,9 +28,9 @@ String msg = request.getParameter("msg") == null ? "" : request.getParameter("ms
 					<div class="card-body">
 						<h2 class="card-title">
 								<select name="code">
-									<option name="code" value="개발">개발</option>
-									<option name="code" value="취업">취업</option>
-									<option name="code" value="잡담">잡담</option>
+									<option value="DEV">개발</option>
+									<option value="JOB">취업</option>
+									<option value="SOCIAL">잡담</option>
 								</select>
 							게시판</h2>
 						<table class="table" >
@@ -60,9 +60,7 @@ String msg = request.getParameter("msg") == null ? "" : request.getParameter("ms
 					</div>
 					<div class="card-footer d-flex justify-content-end">
 						<button class="btn btn-lg btn-secondary" type="submit">게시물 등록</button>
-						&nbsp;&nbsp;
-						&nbsp;&nbsp;
-						<a class="btn btn-lg btn-secondary" href="<%=request.getContextPath() %>/<%=cv.getCode() %>/main.do">목록으로 돌아가기</a>
+						<a class="btn btn-lg btn-secondary ml-3" href="<%=request.getContextPath() %>/commBoard/main.do">목록으로 돌아가기</a>
 					</div>
 				</div>
 			</div>

@@ -63,7 +63,7 @@ public class InsertQnABoardHandler implements CommandHandler{
 			
 			qnaService.insertQnABoard(qna);
 			
-			String redirectUrl = req.getContextPath() + "/qnaBoard/list.do";
+			String redirectUrl = req.getContextPath() + "/QNA/list.do";
 			
 			return redirectUrl;
 		}

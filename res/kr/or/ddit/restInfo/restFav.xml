@@ -11,11 +11,19 @@
 	
 	<select id="getRestAboutUser" parameterClass="String" resultClass="kr.or.ddit.restInfo.vo.RestFavVO">
 		SELECT REST_CODE restCode
-			 , USER_ID userId
 		FROM TB_FAVORITE
 		WHERE 1=1
 		AND USER_ID = #userId#
 		
+	</select>
+	
+	<select id="getRestInfoAboutUser" parameterClass="String" resultClass="kr.or.ddit.restInfo.vo.RestInfoVO">
+		SELECT A.REST_CODE restCode 
+			 , (select B.REST_NAME from TB_REST_INFO B where B.REST_CODE = A.REST_CODE) restName
+			 , (select B.REST_TEL from TB_REST_INFO B where B.REST_CODE = A.REST_CODE) restTel
+		FROM TB_FAVORITE A
+		WHERE 1=1 
+		AND A.USER_ID= #userId#
 	</select>
 	
 	<insert id="insertDips" parameterClass="kr.or.ddit.restInfo.vo.RestFavVO">

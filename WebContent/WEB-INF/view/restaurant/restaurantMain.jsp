@@ -129,7 +129,6 @@
 		var inputrestName = $("#inputrestName").val();
 		
 		$("#restName").val(inputrestName);
-		alert($("#restName").val());
 		var fm = document.getElementById("fm2")
 		fm.method = "post"
 		fm.action = "/DPJ/searchRest/listSearch.do?searchType=name";

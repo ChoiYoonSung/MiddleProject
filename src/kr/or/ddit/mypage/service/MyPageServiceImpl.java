@@ -7,10 +7,12 @@ import org.apache.log4j.Logger;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
+import kr.or.ddit.comment.vo.CommentVO;
 import kr.or.ddit.mypage.dao.IMyPageDao;
 import kr.or.ddit.mypage.dao.MyPageDaoImpl;
+import kr.or.ddit.partyBoard.vo.PartyBoardVO;
 import kr.or.ddit.qna.vo.QnABoardVO;
-import kr.or.ddit.userAll.vo.UserAllVO;
+import kr.or.ddit.review.vo.ReviewVO;
 import kr.or.ddit.util.SqlMapClientUtil;
 
 public class MyPageServiceImpl implements IMyPageService {
@@ -40,5 +42,35 @@ public class MyPageServiceImpl implements IMyPageService {
 		} catch (SQLException ex) { ex.printStackTrace(); } 
 		RESULT_LOGGER.info("■■■ Service [목록 수] : " + qnaBoardList.size());
 		return qnaBoardList;
+	}
+
+	@Override
+	public List<CommentVO> getAllMyPageComment(CommentVO commentVo) {
+		List<CommentVO> commentList = null;
+		try {
+			commentList = myPageDao.getAllMyPageComment(smc, commentVo);
+		} catch (SQLException ex) { ex.printStackTrace(); } 
+		RESULT_LOGGER.info("■■■ Service [목록 수] : " + commentList.size());
+		return commentList;
+	}
+
+	@Override
+	public List<ReviewVO> getAllMyPageReview(ReviewVO reviewVo) {
+		List<ReviewVO> reviewList = null;
+		try {
+			reviewList = myPageDao.getAllMyPageReview(smc, reviewVo);
+		} catch (SQLException ex) { ex.printStackTrace(); }
+		RESULT_LOGGER.info("■■■ Service [목록 수] : " + reviewList.size());
+		return reviewList;
+	}
+
+	@Override
+	public List<PartyBoardVO> getAllMyPagePartyBoard(PartyBoardVO partyBoardVo) {
+		List<PartyBoardVO> partyBoardList = null;
+		try {
+			partyBoardList = myPageDao.getAllMyPagePartyBoard(smc, partyBoardVo);
+		} catch (SQLException ex) { ex.printStackTrace(); }
+		RESULT_LOGGER.info("■■■ Service [목록 수] : " + partyBoardList.size());
+		return partyBoardList;
 	}
 }

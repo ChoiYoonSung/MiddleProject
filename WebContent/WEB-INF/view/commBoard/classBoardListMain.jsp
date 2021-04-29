@@ -125,7 +125,7 @@
 					else if(userType.equals("일반회원") || userType.equals("관리자")){
 					%>
 					<div class="d-flex justify-content-center mb-4">
-						<div class="btn-info"><a class="btn btn-lg" href="<%=request.getContextPath() %>/classBoard/insert.do?">게시글 등록</a></div>
+						<div class="btn-info"><a class="btn btn-lg" href="<%=request.getContextPath() %>/CLASS401/insert.do?">게시글 등록</a></div>
 					</div>
 					<% }
 					else{}%>

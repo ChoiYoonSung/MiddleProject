@@ -5,7 +5,7 @@
 <sqlMap namespace="review">
 
 	<insert id="insertReview" parameterClass="kr.or.ddit.review.vo.ReviewVO">
-		INSERT into(
+		INSERT into TB_REVIEW_BOARD(
 			  CODE			
 			, BOARD_SEQ    
 			, REST_CODE

@@ -18,6 +18,7 @@ String msg = request.getParameter("msg") == null ? "" : request.getParameter("ms
 <input  type="hidden" value="<%=userId %>" name="userId">
 <input  type="hidden" value="<%=cv.getBoardSeq() %>" name="boardSeq">
 <input  type="hidden" value="<%=cv.getAtchFileId() %>" name="atchFileId">
+<input  type="hidden" value="<%=cv.getCode() %>" name="code">
 
 	<div class="container">
 		<div class="row">
@@ -37,28 +38,28 @@ String msg = request.getParameter("msg") == null ? "" : request.getParameter("ms
 						boardCode = "잡담";
 					}
 					else if(cv.getCode().equals("CLASS401")){
-						boardCode = "401호 12월반";
+						boardCode = "401호";
 					}
 					else if(cv.getCode().equals("CLASS402")){
-						boardCode = "402호 3월반";
+						boardCode = "402호";
 					}
 					else if(cv.getCode().equals("CLASS403")){
-						boardCode = "403호 1월반";
+						boardCode = "403호";
 					}
 					else if(cv.getCode().equals("CLASS404")){
-						boardCode = "404호 2월반";
+						boardCode = "404호";
 					}			
 					else if(cv.getCode().equals("CLASS405")){
-						boardCode = "405호 3월반";
+						boardCode = "405호";
 					}			
 					else if(cv.getCode().equals("CLASS406")){
-						boardCode = "406호 11월반";
+						boardCode = "406호";
 					}			
 					else if(cv.getCode().equals("CLASS407")){
-						boardCode = "407호 10월반";
+						boardCode = "407호";
 					}			
 					else if(cv.getCode().equals("CLASS408")){
-						boardCode = "408호 ?월반";
+						boardCode = "408호";
 					}			
 					%><%=boardCode %> 게시판
 				</h1>

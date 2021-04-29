@@ -12,9 +12,10 @@
 	List<AtchFileVO> atchFileList = (List<AtchFileVO>) request.getAttribute("atchFileList");
 %>
 <%@include file="/WEB-INF/view/common/top.jsp"%>
-<main>
-<div class="container-fluid">
-	<h1 class="mt-4 mb-4">글 보기 테스트</h1>
+<%@include file="/WEB-INF/view/common/boardSubNav.jsp"%>
+<!-- <main> -->
+<!-- <div class="container-fluid"> -->
+<!-- 	<h1 class="mt-4 mb-4">글 보기 테스트</h1> -->
 		<div class="card mb-4">
 			<div class="card-body">
 				중프 게시판 테스트용 임시 페이지 입니다.

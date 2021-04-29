@@ -97,7 +97,7 @@
 						</table>
 						<div class="card-footer d-flex justify-content-center">
 					<div class="d-flex justify-content-center mb-4">
-							<a id="list" class="btn btn-lg btn-secondary" type="button" href="main.do">목록</a>
+							<a id="list" class="btn btn-lg btn-secondary" type="button" href="<%=request.getContextPath() %>/<%=cv.getCode() %>/list.do">목록</a>
 								&nbsp;&nbsp;
 					<% if(userId ==null){
 						

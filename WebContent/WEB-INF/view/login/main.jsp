@@ -48,8 +48,9 @@
         
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="<%=request.getContextPath() %>/css/styles.css" rel="stylesheet" />
+        <script src="<%=request.getContextPath() %>/js/jquery-3.6.0.js"></script>
         <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-                <!-- Bootstrap core JS-->
+      	 <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Third party plugin JS-->
@@ -95,10 +96,10 @@
                          
             <div class="collapse navbar-collapse col-lg-7 h1" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath() %>/eventBoard/list.do">이벤트</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath() %>/searchRest/list.do">식당검색</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath() %>/PARTY/main.do">Meal파티</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath() %>/commBoard/main.do">커뮤니티 게시판</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath() %>/commBoard/main.do">커뮤니티</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath() %>/eventBoard/list.do">이벤트</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath() %>/adminBoardMain/noticeGetAll.do">고객센터</a></li>
                         <% if("일반회원".equals(userType) || "식당회원".equals(userType)){ %>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath() %>/mypage/main.do">마이페이지</a></li>
@@ -194,7 +195,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <div>
+                                <div style="min-height: 250px; display: flex">
 	                                <img class="img-fluid" src="<%=request.getContextPath() %>/assets/img/restau/<%=restList.get(i).getRestCode() %>_rest.jpg" alt="" />
                                 </div>
                             </a>
@@ -258,7 +259,7 @@
                                 <h4>4. 같이 먹을 사람 모집하기 <h4>
                                 <h4 class="subheading">같이 밥먹으러 갈 사람. 통칭 밀파티</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">혼자 밥먹기 애매하면? <br>같이 먹을 친구를 구하면 되죠! <br> 메로나고려해서 4인까지!</p></div>
+                            <div class="timeline-body"><p class="text-muted">혼자 밥먹기 애매하면? <br>같이 먹을 친구를 구하면 되죠! <br> 코시국 고려해서 4인까지!</p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted ">
@@ -284,39 +285,44 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="<%=request.getContextPath() %>/assets/img/profile/0.jpg" alt="" />
-                            <h4>Yujin Jung</h4>
-                            <p class="text-muted">403호</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="<%=request.getContextPath() %>/assets/img/profile/A.png" alt="" />
-                            <h4>Ihyeon Kim</h4>
-                            <p class="text-muted">402호</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="<%=request.getContextPath() %>/assets/img/profile/1.png.jpg" alt="" />
-                            <h4>Yeajim Park</h4>
-                            <p class="text-muted">401호</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
+						<div class="team-member">
+							<img class="img-fluid img-thumbnail rounded-circle" src="<%=request.getContextPath()%>/assets/img/profile/C.png"/>
+							<h4>IHYEON KIM</h4>
+							<p class="text-muted">Project Leader</p>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="team-member">
+							<img class="img-fluid img-thumbnail rounded-circle" src="<%=request.getContextPath()%>/assets/img/profile/B.png"/>
+							<h4>EUNJI YOO</h4>
+							<p class="text-muted">Application Architect</p>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="team-member">
+							<img class="img-fluid img-thumbnail rounded-circle" src="<%=request.getContextPath()%>/assets/img/profile/G.png"/>
+							<h4>YOONSUNG CHOI</h4>
+							<p class="text-muted">Data Architect</p>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="team-member">
+							<img class="img-fluid img-thumbnail rounded-circle" src="<%=request.getContextPath()%>/assets/img/profile/E.png"/>
+							<h4>YOOJIN JEONG</h4>
+							<p class="text-muted">Technical Architect</p>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="team-member">
+							<img class="img-fluid img-thumbnail rounded-circle" src="<%=request.getContextPath()%>/assets/img/profile/A.png"/>
+							<h4>YEJIN PARK</h4>
+							<p class="text-muted">UI Architecture</p>
+						</div>
+					</div>
                 </div>
                 <div class="row">
                     <div class="col-lg-8 mx-auto text-center"><p class="large">커뮤니티를 통해<br>같이 공부하고 정보를 나눠요.<br>내친김에 프로젝트까지?
-                    <br>대덕인재개발원 100% 이용하기 쌉possible!</p></div>
+                    <br>대덕인재개발원 100% 이용하기 완전 Possible!</p></div>
                 </div>
             </div>
         </section>
@@ -341,14 +347,9 @@
         <footer class="footer py-4">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-left">Copyright © 그런거 없어요.</div>
-                    <div class="col-lg-4 my-3 my-lg-0">
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                    <div class="col-lg-4 text-lg-right">
-                        <span>대덕인재개발원  ddit 202101 </span>
+                    <div class="col-lg-6 text-lg-left">Copyright &copy 2021. Eat Your Meal Right On Time</div>
+                    <div class="col-lg-6 text-lg-right">
+                        <span>DDIT 202101 #403</span>
                     </div>
                 </div>
             </div>
@@ -373,7 +374,7 @@
                                     <h2 class="text-uppercase"><%=restList.get(i).getRestName() %></h2>
                                     <p class="item-intro text-muted"><%=eventList.get(i).getBoardTitle() %></p>
                                     <img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/restau/<%=cntM %>_rest.jpg" alt="" />
-                                    <p><%=eventList.get(i).getBoardContent() %></p>
+                                    <pre><p><%=eventList.get(i).getBoardContent() %></p></pre>
                                     <ul class="list-inline">
                                         <li>이벤트 기간 : <%=(eventList.get(i).getBoardStart()) %> ~ <%=(eventList.get(i).getBoardEnd()) %></li>
                                         <li>Category: <%=restList.get(i).getRestType() %></li>
@@ -394,73 +395,5 @@
         	}
         }
         %>
-<!--         Modal 2 -->
-<!--         <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true"> -->
-<!--             <div class="modal-dialog"> -->
-<!--                 <div class="modal-content"> -->
-<%--                     <div class="close-modal" data-dismiss="modal"><img src="<%=request.getContextPath() %>/assets/img/close-icon.svg" alt="Close modal" /></div> --%>
-<!--                     <div class="container"> -->
-<!--                         <div class="row justify-content-center"> -->
-<!--                             <div class="col-lg-8"> -->
-<!--                                 <div class="modal-body"> -->
-<!--                                     Project Details Go Here -->
-<!--                                     <h2 class="text-uppercase">Project Name</h2> -->
-<!--                                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p> -->
-<%--                                     <img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/portfolio/02-full.jpg" alt="" /> --%>
-<!--                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p> -->
-<!--                                     <ul class="list-inline"> -->
-<!--                                         <li>Date: January 2020</li> -->
-<!--                                         <li>Client: Explore</li> -->
-<!--                                         <li>Category: Graphic Design</li> -->
-<!--                                     </ul> -->
-<!--                                     <button class="btn btn-primary" data-dismiss="modal" type="button"> -->
-<!--                                         <i class="fas fa-times mr-1"></i> -->
-<!--                                         Close Project -->
-<!--                                     </button> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--         </div> -->
-<!--         Modal 3 -->
-<!--         <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true"> -->
-<!--             <div class="modal-dialog"> -->
-<!--                 <div class="modal-content"> -->
-<%--                     <div class="close-modal" data-dismiss="modal"><img src="<%=request.getContextPath() %>/assets/img/close-icon.svg" alt="Close modal" /></div> --%>
-<!--                     <div class="container"> -->
-<!--                         <div class="row justify-content-center"> -->
-<!--                             <div class="col-lg-8"> -->
-<!--                                 <div class="modal-body"> -->
-<!--                                     Project Details Go Here -->
-<!--                                     <h2 class="text-uppercase">Project Name</h2> -->
-<!--                                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p> -->
-<%--                                     <img class="img-fluid d-block mx-auto" src="<%=request.getContextPath() %>/assets/img/portfolio/03-full.jpg" alt="" /> --%>
-<!--                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p> -->
-<!--                                     <ul class="list-inline"> -->
-<!--                                         <li>Date: January 2020</li> -->
-<!--                                         <li>Client: Finish</li> -->
-<!--                                         <li>Category: Identity</li> -->
-<!--                                     </ul> -->
-<!--                                     <button class="btn btn-primary" data-dismiss="modal" type="button"> -->
-<!--                                         <i class="fas fa-times mr-1"></i> -->
-<!--                                         Close Project -->
-<!--                                     </button> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--         </div> -->
-        <!-- Bootstrap core JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Third party plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="<%=request.getContextPath() %>/js/scripts.js"></script>
-        
     </body>
 </html>

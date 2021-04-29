@@ -59,6 +59,13 @@ public interface IRestInfoService {
 	public List<RestFavVO> getRestAboutUser(String userId);
 	
 	/**
+	 * userId를 이용해 해당 유저가 찜한 식당의 코드로 식당정보를 가져오는 메서드
+	 * @param userId
+	 * @return 검색결과 : List<RestFavVO>
+	 */
+	public List<RestInfoVO> getRestInfoAboutUser(String userId);
+	
+	/**
 	 * 찜한 정보(userId와 restCode)를 db에 저장하는 메서드
 	 * @param rfv
 	 * @return 작업 성공 : 1, 작업 실패 : 0

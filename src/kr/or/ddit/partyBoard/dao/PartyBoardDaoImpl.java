@@ -40,8 +40,8 @@ public class PartyBoardDaoImpl implements IPartyBoardDao {
 	}
 
 	@Override
-	public int deletePartyBoard(SqlMapClient smc, PartyBoardVO pv) throws SQLException {
-		return (int) smc.update("partyBoard.deletePartyBoard", pv);
+	public int deletePartyBoard(SqlMapClient smc, long boardSeq) throws SQLException {
+		return (int) smc.update("partyBoard.deletePartyBoard", boardSeq);
 	}
 
 	@Override

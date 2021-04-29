@@ -61,18 +61,10 @@
 		UPDATE TB_PARTY_BOARD
 		SET	   BOARD_TITLE = #boardTitle#
 			   , BOARD_CONTENT = #boardContent#
-			     <isNotEmpty property="restCode">
 			   , REST_CODE = #restCode#
-			     </isNotEmpty>
-			     <isNotEmpty property="price">
 			   , PRICE = #price#
-			     </isNotEmpty>
-			     <isNotEmpty property="distance">
 			   , DISTANCE = #distance#
-			     </isNotEmpty>
-			     <isNotEmpty property="distance">
 			   , REST_TYPE = #restType#
-			     </isNotEmpty>
 			   , PARTY_END = #partyEnd#
 		WHERE  USER_ID = #userId#
 		AND    BOARD_SEQ = #boardSeq#
@@ -84,33 +76,33 @@
 		WHERE  BOARD_SEQ = #boardSeq#
 	</update>
 	
-	<update id="deletePartyBoard" parameterClass="kr.or.ddit.partyBoard.vo.PartyBoardVO">
+	<update id="deletePartyBoard" parameterClass="long">
 		UPDATE TB_PARTY_BOARD
 		SET    BOARD_DELETE = 'Y'
-		WHERE  USER_ID = #userId#
-		AND    BOARD_SEQ = #boardSeq#
+		WHERE  BOARD_SEQ = #boardSeq#
 	</update>
 	
 	<select id="getPartyBoard" parameterClass="long" resultClass="kr.or.ddit.partyBoard.vo.PartyBoardVO">
 		SELECT 
-		CODE                								code
-		,BOARD_SEQ          								boardSeq
-		,USER_ID            								userId
-		,USER_PROFILE										userProfile
-		,BOARD_TITLE        								boardTitle
-		,TO_CHAR(BOARD_DATE, 'MM/DD')         				boardDate
-		,BOARD_CONTENT      								boardContent
-		,REST_CODE          								restCode
-		,PRICE              								price
-		,DISTANCE           								distance
-		,REST_TYPE											restType
-		,PARTY_YN           								partyYn
-		,TO_CHAR(PARTY_END, 'MM/DD')  						partyEnd
-		,BOARD_HIT          								boardHit
-		,BOARD_DELETE       								boardDelete
-		FROM   TB_PARTY_BOARD
+		A.CODE                								code
+		,A.BOARD_SEQ          								boardSeq
+		,A.USER_ID            								userId
+		,A.USER_PROFILE										userProfile
+		,A.BOARD_TITLE        								boardTitle
+		,TO_CHAR(A.BOARD_DATE, 'MM-DD')         				boardDate
+		,A.BOARD_CONTENT      								boardContent
+		,A.REST_CODE          								restCode
+		,(SELECT REST_NAME FROM TB_REST_INFO WHERE REST_CODE = A.REST_CODE) restName
+		,A.PRICE              								price
+		,A.DISTANCE           								distance
+		,A.REST_TYPE											restType
+		,A.PARTY_YN           								partyYn
+		,TO_CHAR(A.PARTY_END, 'MM-DD')  						partyEnd
+		,A.BOARD_HIT          								boardHit
+		,A.BOARD_DELETE       								boardDelete
+		FROM   TB_PARTY_BOARD A
 		WHERE  1 = 1
-		AND    BOARD_SEQ = #boardSeq#
+		AND    A.BOARD_SEQ = #boardSeq#
 	</select>
 	
 	<select id="getPartyBoardList" parameterClass="kr.or.ddit.partyBoard.vo.PartyBoardVO" resultClass="kr.or.ddit.partyBoard.vo.PartyBoardVO">
@@ -120,21 +112,22 @@
 		,A.USER_ID            								userId
 		,A.USER_PROFILE										userProfile
 		,A.BOARD_TITLE        								boardTitle
-		,TO_CHAR(A.BOARD_DATE, 'MM/DD')         			boardDate
+		,TO_CHAR(A.BOARD_DATE, 'MM-DD')         			boardDate
 		,A.BOARD_CONTENT      								boardContent
 		,A.REST_CODE          								restCode
 		,A.PRICE              								price
 		,A.DISTANCE           								distance
 		,A.REST_TYPE										restType
+		,(SELECT REST_NAME FROM TB_REST_INFO WHERE REST_CODE = A.REST_CODE) restName
 		,A.PARTY_YN           								partyYn
-		,TO_CHAR(A.PARTY_END, 'MM/DD')          			partyEnd
+		,TO_CHAR(A.PARTY_END, 'MM-DD')          			partyEnd
 		,A.BOARD_HIT          								boardHit
 		,A.BOARD_DELETE       								boardDelete
 		,(SELECT COUNT(*) FROM TB_PARTY_JOIN WHERE BOARD_SEQ = A.BOARD_SEQ) countList
 		FROM   TB_PARTY_BOARD A
 		WHERE  1 = 1
-		AND    BOARD_DELETE = 'N'
-		ORDER BY PARTY_YN ASC, BOARD_SEQ DESC
+		AND    A.BOARD_DELETE = 'N'
+		ORDER BY A.PARTY_YN ASC, A.BOARD_SEQ DESC
 	</select>
 	
 	<select id="getPartyBoardAllList" parameterClass="kr.or.ddit.partyBoard.vo.PartyBoardVO" resultClass="kr.or.ddit.partyBoard.vo.PartyBoardVO">

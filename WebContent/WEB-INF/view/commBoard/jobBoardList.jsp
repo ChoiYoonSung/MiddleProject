@@ -46,7 +46,7 @@
 		%>
 
 								<tr class="d-flex col-12">
-									<td class="col-2"><a href="<%=request.getContextPath() %>/commBoard/select.do?boardSeq=<%=boardList.get(i).getBoardSeq()%>"><%=boardList.get(i).getBoardSeq()%></a></td>
+									<td class="col-2"><a href="<%=request.getContextPath() %>/<%=boardList.get(i).getCode() %>/select.do?boardSeq=<%=boardList.get(i).getBoardSeq()%>"><%=boardList.get(i).getBoardSeq()%></a></td>
 									<td class="col-5"><%=boardList.get(i).getBoardTitle() %></td>
 									<td class="col-2"><%=boardList.get(i).getUserId() %></td>
 									<td class="col-2"><%=boardList.get(i).getBoardDate() %></td>
@@ -86,7 +86,7 @@
 					else if(userType.equals("일반회원") || userType.equals("관리자")){
 					%>
 					<div class="d-flex justify-content-center mb-4">
-						<div class="btn-info"><a class="btn btn-lg" href="<%=request.getContextPath() %>/commBoard/insert.do?code=개발">게시글 등록</a></div>
+						<div class="btn-info"><a class="btn btn-lg" href="<%=request.getContextPath() %>/DEV/insert.do">게시글 등록</a></div>
 					</div>
 					<% }
 					else{}%>

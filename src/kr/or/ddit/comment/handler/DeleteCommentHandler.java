@@ -35,7 +35,6 @@ public class DeleteCommentHandler implements CommandHandler {
 			
 			// 세션가져오기
 			String userId = (String) req.getSession().getAttribute("USERID");
-			System.out.println("세션 : " + userId);
 			
 			// 세션에 따라 VIEW 달라짐
 //			String redirectUrl = "";
@@ -45,9 +44,7 @@ public class DeleteCommentHandler implements CommandHandler {
 //				redirectUrl = req.getContextPath() + "/qnaBoard/select.do?boardSeq=" + boardSeq;
 //			}
 			
-//			String redirectUrl = req.getContextPath() + "/" + code + "/select.do?boardSeq=" + boardSeq;
-			
-			String redirectUrl = req.getContextPath() + "/commBoard/select.do?boardSeq=" + boardSeq;	
+			String redirectUrl = req.getContextPath() + "/" + code + "/select.do?boardSeq=" + boardSeq;
 			
 			return redirectUrl;
 		}

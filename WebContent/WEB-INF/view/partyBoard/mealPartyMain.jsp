@@ -33,24 +33,24 @@ int countJoin = (Integer) request.getAttribute("countJoin");
 			<!-- Blog Entries Column -->
 			<div class="col-md-12">
 				<h1 class="my-4">
-					Meal파티 게시판
+					<i class="fas fa-utensils mr-3"></i>Meal파티 게시판
 				</h1>
 				
 				<!-- Blog Post -->
 				<div class="card mb-4">
 					<div class="card-footer text-muted col-12">
 					<h2 class="card-title">모집중인 밀파티 목록</h2>
-						<table class="table col-12 ">
+						<table class="table col-12">
 							<tbody class="col-12">
 								<tr class="col-12 d-flex justify-content-start">
 									<th class="p-1 col-1"></th>
-									<th class="p-2 col-1">인원</th>
-									<th class="p-2 col-2">파티마감일</th>
-									<th class="p-2 col-2">거리</th>
-									<th class="p-2 col-2">가격</th>
-									<th class="p-2 col-1">분류</th>
-									<th class="p-2 col-2">식당</th>
-									<th class="p-2 col-1"></th>
+									<th class="p-2 col-1 text-center">인원</th>
+									<th class="p-2 col-2 text-center">파티마감일</th>
+									<th class="p-2 col-2 text-center">거리</th>
+									<th class="p-2 col-2 text-center">가격</th>
+									<th class="p-2 col-1 text-center">분류</th>
+									<th class="p-2 col-2 text-center">식당</th>
+									<th class="p-2 col-1 text-center"></th>
 								</tr>
 								
 								
@@ -58,12 +58,11 @@ int countJoin = (Integer) request.getAttribute("countJoin");
 								int partySize = partyList.size();
 								if(partySize > 0) {
 									for(int i = 0; i < partySize; i++) {
-								System.out.println("모집중 : " + partyList.get(i).getCountList());
 							%>
 								
 								
 								<tr class="col-12 d-flex justify-content-start">
-									<td class="col-1">
+									<td class="p-2 col-1 text-center">
 									<%
 										if(partyList.get(i).getCountList() < 3 && partyList.get(i).getPartyYn().equals("N")) {
 									%>
@@ -80,13 +79,23 @@ int countJoin = (Integer) request.getAttribute("countJoin");
 										} else {}
 									%>											
 									</td>
-									<td class="p-2 col-1"><%=partyList.get(i).getCountList() + 1%>/4</td>
-									<td class="p-2 col-2"><%=partyList.get(i).getBoardDate() %></td>
-									<td class="p-2 col-2"><%=partyList.get(i).getDistance() %></td>
-									<td class="p-2 col-2"><%=partyList.get(i).getPrice() %></td>
-									<td class="p-2 col-1"><%=partyList.get(i).getRestType() %></td>
-									<td class="p-2 col-2"><%=partyList.get(i).getRestCode() %></td>
-									<td class="p-2 col-1">
+									<td class="p-2 col-1 text-center"><%=partyList.get(i).getCountList() + 1%>/4</td>
+									<td class="p-2 col-2 text-center"><%=partyList.get(i).getPartyEnd() %></td>
+									<td class="p-2 col-2 text-center"><%=partyList.get(i).getDistance() %></td>
+									<td class="p-2 col-2 text-center"><%=partyList.get(i).getPrice() %></td>
+									<td class="p-2 col-1 text-center"><%=partyList.get(i).getRestType() %></td>
+									<%
+										if(partyList.get(i).getRestName() != null) {
+									%>
+											<td class="p-2 col-2 text-center"><%=partyList.get(i).getRestName() %></td>
+									<%
+										} else {
+									%>
+											<td class="p-2 col-2 text-center">아무거나</td>
+									<%		
+										}
+									%>
+									<td class="p-2 col-1 text-center">
 										<a id="seq" class="btn btn-info" href="select.do?boardSeq=<%=partyList.get(i).getBoardSeq()%>">
 											조회
 										</a>
@@ -131,6 +140,6 @@ int countJoin = (Integer) request.getAttribute("countJoin");
 
 	</div>
 
-        </section>
+</section>
 	
 <%@include file="/WEB-INF/view/common/mainFooter.jsp"%>

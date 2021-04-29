@@ -70,12 +70,12 @@
 									<div class="form-group"><!-- 프로필 사진 시작 -->
 										<label class="small mb-1" for="userPhoto">프로필 사진</label><br>
 										<input class="form-control py-4" id="userPhoto" type="hidden" name="userPhoto" value="A" readonly/>
-										<img src="/DPJ/assets/images/profile/1.png" id="defaultImg" class="rounded profileImg" alt="A" name="A">
-										<img src="/DPJ/assets/images/profile/2.png" class="rounded profileImg" alt="B" name="B">
-										<img src="/DPJ/assets/images/profile/3.png" class="rounded profileImg" alt="C" name="C">
-										<img src="/DPJ/assets/images/profile/4.png" class="rounded profileImg" alt="D" name="D">
-										<img src="/DPJ/assets/images/profile/5.png" class="rounded profileImg" alt="E" name="E">
-										<img src="/DPJ/assets/images/profile/6.png" class="rounded profileImg" alt="F" name="F">
+										<img src="/DPJ/assets/img/profile/A.png" id="defaultImg" class="rounded profileImg" alt="A" name="A">
+										<img src="/DPJ/assets/img/profile/B.png" class="rounded profileImg" alt="B" name="B">
+										<img src="/DPJ/assets/img/profile/C.png" class="rounded profileImg" alt="C" name="C">
+										<img src="/DPJ/assets/img/profile/D.png" class="rounded profileImg" alt="D" name="D">
+										<img src="/DPJ/assets/img/profile/E.png" class="rounded profileImg" alt="E" name="E">
+										<img src="/DPJ/assets/img/profile/F.png" class="rounded profileImg" alt="F" name="F">
 									</div><!-- 프로필 사진 종료 --><br>
 									
 									<div class="form-group"><!-- 소속반 시작 -->

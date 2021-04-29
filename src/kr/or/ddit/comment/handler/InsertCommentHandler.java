@@ -40,20 +40,18 @@ public class InsertCommentHandler implements CommandHandler{
 			// 게시글 번호
 			long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
 			String code = req.getParameter("code");
-			System.out.println("보드시퀀스 : " + code + " / " + boardSeq);
 			
 			cv.setCode(req.getParameter("code"));
 			cv.setUserId(req.getParameter("userId"));
 			cv.setReplyContent(req.getParameter("replyContent"));
-			cv.setReplyDate("replyDate");
 			cv.setBoardSeq(boardSeq);
 			
 			service.insertComment(cv);
 			
 			// URL 통합 필요 (게시판코드로)
-//			String redirectUrl = req.getContextPath() + "/" + code + "/select.do?boardSeq=" + boardSeq;
+			String redirectUrl = req.getContextPath() + "/" + code + "/select.do?boardSeq=" + boardSeq;
 			
-			String redirectUrl = req.getContextPath() + "/commBoard/select.do?boardSeq=" + boardSeq;
+//			String redirectUrl = req.getContextPath() + "/commBoard/select.do?boardSeq=" + boardSeq;
 			return redirectUrl;
 			
 		}

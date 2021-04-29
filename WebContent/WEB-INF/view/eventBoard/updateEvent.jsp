@@ -8,7 +8,7 @@
 <%@include file="/WEB-INF/view/common/mainNav.jsp"%>
 
 	<!-- Page Content -->
-<form method="post" action="insert.do" enctype="multipart/form-data">
+<form id="fm" method="post" action="update.do" enctype="multipart/form-data">
 <input  type="hidden" value="<%=userId %>" name="userId">
 	<div class="container">
 		<div class="row">
@@ -62,8 +62,9 @@
 							</tbody>
 						</table>
 					</div>
+					<input type="hidden" name="boardSeq" value="<%=eventVO.getBoardSeq() %>">
 					<div class="card-footer d-flex justify-content-end">
-						<button  type="submit" class="btn btn-lg btn-secondary"><a>게시물 등록</a></button>
+						<button type="submit" class="btn btn-lg btn-secondary">게시물 등록</button>
 						&nbsp;&nbsp;
 						&nbsp;&nbsp;
 						<a class="btn btn-lg btn-secondary" href="list.do">목록으로 돌아가기</a>

@@ -65,7 +65,7 @@
 									<td class="col-2"><%=qnaList.get(i).getBoardSeq() %></td>
 									<td class="col-5"><a href="select.do?boardSeq=<%=qnaList.get(i).getBoardSeq() %>"><%=qnaList.get(i).getBoardTitle() %></a></td>
 									<td class="col-2"><%=qnaList.get(i).getUserId() %></td>
-									<td class="col-2"><%=(qnaList.get(i).getBoardDate()).substring(0,10) %></td>
+									<td class="col-2"><%=(qnaList.get(i).getBoardDate()) %></td>
 									<td class="col-1"><%=qnaList.get(i).getBoardHits() %></td>
 								</tr>
 								<% 
@@ -79,7 +79,7 @@
 					if(userId != null){
 						%>
 					<div class="card-footer d-flex justify-content-end">
-						<a class="btn btn-lg btn-secondary" type="submit" href="<%=request.getContextPath() %>/qnaBoard/insert.do">게시글 작성하기</a>
+						<a class="btn btn-lg btn-secondary" type="submit" href="<%=request.getContextPath() %>/QNA/insert.do">게시글 작성하기</a>
 						&nbsp;&nbsp;
 					</div>
 						<%
@@ -111,12 +111,12 @@
 	<script type="text/javascript">
 		function fnGet(data) {
 	    	
-			$("#fm").attr("action", "<%=request.getContextPath()%>/qnaBoard/select.do");
+			$("#fm").attr("action", "<%=request.getContextPath()%>/QNA/select.do");
 			$("#boardSeq").val(data);
 			$("#fm").submit();
 		}
 		function fnSearch() {
-			$("#fm").attr("action", "<%=request.getContextPath()%>/qnaBoard/list.do");
+			$("#fm").attr("action", "<%=request.getContextPath()%>/QNA/list.do");
 			
 			if($("#searchKey option:selected").val() == 'boardTitle'){
 				$("#boardTitle").val($("#searchValue").val());

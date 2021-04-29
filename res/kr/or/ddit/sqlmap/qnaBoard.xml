@@ -71,7 +71,7 @@
 			, BOARD_TYPE    boardType   
 			, BOARD_TITLE   boardTitle  
 			, BOARD_CONTENT boardContent
-			, BOARD_DATE    boardDate   
+			, TO_CHAR(BOARD_DATE,'MM-DD')    boardDate   
 			, BOARD_SECRET  boardSecret 
 			, BOARD_PW      boardPw     
 			, BOARD_ANSWER  boardAnswer 
@@ -80,6 +80,7 @@
 			, BOARD_DELETE  boardDelete 
 		FROM TB_QNA_BOARD 
 		WHERE BOARD_DELETE = 'N'
+		ORDER BY BOARD_SEQ DESC
 	</select>
 	
 	<select id="getQnABoard" parameterClass="long" resultClass="kr.or.ddit.qna.vo.QnABoardVO">
@@ -89,7 +90,7 @@
 			, BOARD_TYPE    boardType   
 			, BOARD_TITLE   boardTitle  
 			, BOARD_CONTENT boardContent
-			, BOARD_DATE    boardDate   
+			, TO_CHAR(BOARD_DATE,'MM-DD')    boardDate   
 			, BOARD_SECRET  boardSecret 
 			, BOARD_PW      boardPw     
 			, BOARD_ANSWER  boardAnswer 

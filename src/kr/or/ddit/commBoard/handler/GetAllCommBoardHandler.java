@@ -33,8 +33,8 @@ public class GetAllCommBoardHandler implements CommandHandler{
 		int totalCount = boardService.getAllBoardListCount();
 		pagingVO.setTotalCount(totalCount);
 		pagingVO.setCurrentPageNo(pageNo);
-		pagingVO.setCountPerPage(5);
-		pagingVO.setPageSize(5);
+		pagingVO.setCountPerPage(10);
+		pagingVO.setPageSize(10);
 		
 		List<CommBoardVO> boardList = boardService.getAllBoardList(pagingVO);
 		

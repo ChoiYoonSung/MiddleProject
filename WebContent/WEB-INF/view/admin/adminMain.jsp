@@ -14,7 +14,7 @@
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">Member Management</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="<%=request.getContextPath()%>/userAll/getAllUserAll.do">가입회원 및 블랙 리스트 관리</a>
+                        <a class="small text-white stretched-link" href="<%=request.getContextPath()%>/userAll/listUserAllList.do">가입회원 및 블랙 리스트 관리</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>

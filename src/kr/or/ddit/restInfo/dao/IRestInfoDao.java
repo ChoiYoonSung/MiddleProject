@@ -71,6 +71,15 @@ public interface IRestInfoDao {
 	public List<RestFavVO> getRestAboutUser(SqlMapClient smc, String userId) throws SQLException;
 	
 	/**
+	 * userId를 이용해 해당 유저가 찜한 식당의 정보를 가져오는 메서드
+	 * @param smc
+	 * @param userId
+	 * @return 검색결과 : List<RestFavVO>
+	 * @throws SQLException
+	 */
+	public List<RestInfoVO> getRestInfoAboutUser(SqlMapClient smc, String userId) throws SQLException;
+	
+	/**
 	 * 찜한 정보(userId와 restCode)를 db에 저장하는 메서드
 	 * @param smc
 	 * @param rfv

@@ -70,7 +70,7 @@ public class InsertClassBoardHandler implements CommandHandler{
 				msg = "실패";
 			}
 			
-			String redirectUrl = req.getContextPath() + "/commBoard/main.do?msg" + URLEncoder.encode(msg, "UTF-8");
+			String redirectUrl = req.getContextPath() + "/classBoard/main.do?msg" + URLEncoder.encode(msg, "UTF-8");
 			
 			return redirectUrl;
 		}

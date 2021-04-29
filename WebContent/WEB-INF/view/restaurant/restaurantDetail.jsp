@@ -33,7 +33,7 @@
 	              		</tr>
 						<tr class="d-flex">
 			              	<td class="col-lg-4">거리&nbsp;</td>
-			              	<td class="col-lg-5"><a class="btn btn-md btn-info">10분(600m)</a></td>
+			              	<td class="col-lg-5"><a class="btn btn-md btn-info">5분(415m)</a></td>
 			              	<td class="col-lg-3"></td>
 	              		</tr>
 						<tr class="d-flex">
@@ -52,7 +52,7 @@
 	              		</tr>
 						<tr class="d-flex">
 			              	<td class="col-lg-4">주력메뉴&nbsp;</td>
-			              	<td class="col-lg-5"><a class="btn btn-md btn-warning">뚝불</a></td>
+			              	<td class="col-lg-5"><a class="btn btn-md btn-warning">불고기 백반</a></td>
 			              	<td class="col-lg-3"></td>
 	              		</tr>
 	              	</table>
@@ -92,14 +92,14 @@
 								<tr class="d-flex text-left">
 
 									<th class="col-2 " >식당 이름</th>
-									<th class="col-3 "><%=rv.getRestName() %></th>
+									<th class="col-3 " name="boardTitle"><%=rv.getRestName() %></th>
 									<th class="col-3 "></th>
 									<th class="col-2 "><small>찜</small></th>
 									<th class="col-1 ">
 									<%
 										Boolean chkdips = false;
 										for(int i=0; i<favList.size(); i++){
-											if("1".equals(favList.get(i).getRestCode())){//식당코드 :1은 세호불백임
+											if(rv.getRestCode().equals(favList.get(i).getRestCode())){//식당코드 :1은 세호불백임
 												chkdips = true;
 											}
 										}
@@ -163,10 +163,13 @@
 								%>
 							<tbody>
 								<tr class="d-flex text-left">
+									<th class="col-5"><small id="rboardTitle<%=reviewList.get(i).getBoardSeq() %>"><%=reviewList.get(i).getBoardTitle() %></small></th>
 									<th class="col-3"><small id="userId">작성자 : <%=reviewList.get(i).getUserId() %></small></th>
-									<th class="col-3"><small id="rboardTitle<%=reviewList.get(i).getBoardSeq() %>"><%=reviewList.get(i).getBoardTitle() %></small></th>
 									<th class="col-2"><small id="score<%=reviewList.get(i).getBoardSeq() %>">평점 : <%=reviewList.get(i).getRestScore() %></small></th>
 									<th class="col-2"><small ><%=reviewList.get(i).getBoardDate().substring(0,10) %></small></th>
+								</tr>
+								<tr class="d-flex text-left">
+									<th class="col-10" id="rboardContent<%=reviewList.get(i).getBoardSeq() %>" ><%=reviewList.get(i).getBoardContent() %></th>
 									<%
 									if(reviewList.get(i).getUserId().equals(session.getAttribute("USERID"))){
 									%>
@@ -181,9 +184,6 @@
 										<%
 									}
 									%>
-								</tr>
-								<tr class="d-flex text-left">
-									<th class="col-12" id="rboardContent<%=reviewList.get(i).getBoardSeq() %>" ><%=reviewList.get(i).getBoardContent() %></th>
 								</tr>
 							</tbody>
 								<%
@@ -250,14 +250,7 @@
 						$('#score' + seq).html($('#tmpScore').val());
 					}
 					</script>
-					
-					<!-- Pagination -->
-					<ul class="pagination justify-content-center mb-4">
-						<li class="page-item"><a class="page-link" href="#">&larr;
-								Older</a></li>
-						<li class="page-item disabled"><a class="page-link" href="#">Newer
-								&rarr;</a></li>
-					</ul>
+
 				</div>
 
 			</div>

@@ -22,6 +22,9 @@ public class PartyBoardVO extends ConstVO{
 	private long boardHit = 1;
 	private String boardDelete = N;
 	private long countList;
+	private String restName;
+	
+	
 	
 	public String getCode() {
 		return code;
@@ -130,6 +133,12 @@ public class PartyBoardVO extends ConstVO{
 	}
 	public void setCountList(long countList) {
 		this.countList = countList;
+	}
+	public String getRestName() {
+		return restName;
+	}
+	public void setRestName(String restName) {
+		this.restName = restName;
 	}
 	
 }

@@ -51,7 +51,48 @@
 
 							<tr class="d-flex justify-content-start">
 								<td class="col-2"><a href="<%=request.getContextPath() %>/<%=boardList.get(i).getCode() %>/select.do?boardSeq=<%=boardList.get(i).getBoardSeq()%>"><%=boardList.get(i).getBoardSeq()%></a></td>
-								<td class="col-2"><%=boardList.get(i).getCode() %></td>
+								<td class="col-2">
+								
+								<%
+					String boardCode ="";
+					if(boardList.get(i).getCode().equals("DEV")){
+						boardCode = "개발";
+					}
+					else if(boardList.get(i).getCode().equals("JOB")){
+						boardCode = "취업";
+					}
+					else if(boardList.get(i).getCode().equals("SOCIAL")){
+						boardCode = "잡담";
+					}
+					else if(boardList.get(i).getCode().equals("CLASS401")){
+						boardCode = "401호";
+					}
+					else if(boardList.get(i).getCode().equals("CLASS402")){
+						boardCode = "402호";
+					}
+					else if(boardList.get(i).getCode().equals("CLASS403")){
+						boardCode = "403호";
+					}
+					else if(boardList.get(i).getCode().equals("CLASS404")){
+						boardCode = "404호";
+					}			
+					else if(boardList.get(i).getCode().equals("CLASS405")){
+						boardCode = "405호";
+					}			
+					else if(boardList.get(i).getCode().equals("CLASS406")){
+						boardCode = "406호";
+					}			
+					else if(boardList.get(i).getCode().equals("CLASS407")){
+						boardCode = "407호";
+					}			
+					else if(boardList.get(i).getCode().equals("CLASS408")){
+						boardCode = "408호";
+					}			
+					%>
+								<%=boardCode %>
+								
+								
+								</td>
 								<td class="col-4"><%=boardList.get(i).getBoardTitle() %></td>
 								<td class="col-2"><%=boardList.get(i).getUserId() %></td>
 								<td class="col-2"><%=boardList.get(i).getBoardHitsNumber() %></td>
@@ -90,7 +131,7 @@
 					else if(userType.equals("일반회원") || userType.equals("관리자")){
 					%>
 					<div class="d-flex justify-content-center mb-4">
-						<div class="btn-info"><a class="btn btn-lg" href="insert.do">게시글 등록</a></div>
+						<div class="btn-info"><a class="btn btn-lg" href="<%=request.getContextPath() %>/DEV/insert.do">게시글 등록</a></div>
 					</div>
 					<% }
 					else{}%>

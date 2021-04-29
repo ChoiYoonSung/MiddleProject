@@ -36,21 +36,15 @@
 			  ,BOARD_SEQ     boardSeq   
 			  ,USER_ID       userId      
 			  ,BOARD_TITLE   boardTitle  
-			  ,BOARD_DATE    boardDate   
+			  ,BOARD_DATE    boardDate  
 			  ,BOARD_CONTENT boardContent
 			  ,ATCH_FILE_ID  atchFileId 
 			  ,BOARD_HITS    boardHitsNumber   
 			  ,BOARD_DELETE  boardDelete 
  		FROM TB_COMM_BOARD
  		WHERE BOARD_DELETE = 'N'
- 		AND CODE = '401'
- 		OR CODE = '402'
- 		OR CODE = '403'
- 		OR CODE = '404'
- 		OR CODE = '405'
- 		OR CODE = '406'
- 		OR CODE = '407'
- 		OR CODE = '408'
+ 		AND CODE = 'CLASS403'
+ 		OR CODE = 'CLASS404'
  		ORDER BY BOARD_SEQ DESC) AA)BB
  		WHERE RNUM BETWEEN #firstRecNo# and #lastRecNo#
  	</select>	
@@ -68,7 +62,7 @@
 			  ,BOARD_DELETE  boardDelete 
  		FROM TB_COMM_BOARD
  		WHERE BOARD_DELETE = 'N'
- 		AND CODE = '개발'
+ 		AND CODE = 'DEV'
  		ORDER BY BOARD_SEQ DESC) AA)BB
  		WHERE RNUM BETWEEN #firstRecNo# and #lastRecNo#
  	</select>	
@@ -79,14 +73,14 @@
 			  ,BOARD_SEQ     boardSeq   
 			  ,USER_ID       userId      
 			  ,BOARD_TITLE   boardTitle  
-			  ,BOARD_DATE    boardDate   
+			  ,BOARD_DATE    boardDate 
 			  ,BOARD_CONTENT boardContent
 			  ,ATCH_FILE_ID  atchFileId 
 			  ,BOARD_HITS    boardHitsNumber   
 			  ,BOARD_DELETE  boardDelete 
  		FROM TB_COMM_BOARD
  		WHERE BOARD_DELETE = 'N'
- 		AND CODE = '취업'
+ 		AND CODE = 'JOB'
  		ORDER BY BOARD_SEQ DESC) AA)BB
  		WHERE RNUM BETWEEN #firstRecNo# and #lastRecNo#
  	</select>	
@@ -104,7 +98,7 @@
 			  ,BOARD_DELETE  boardDelete 
  		FROM TB_COMM_BOARD
  		WHERE BOARD_DELETE = 'N'
- 		AND CODE = '잡담'
+ 		AND CODE = 'SOCIAL'
  		ORDER BY BOARD_SEQ DESC) AA)BB
  		WHERE RNUM BETWEEN #firstRecNo# and #lastRecNo#
  	</select>	
@@ -115,14 +109,14 @@
 			  ,BOARD_SEQ     boardSeq   
 			  ,USER_ID       userId      
 			  ,BOARD_TITLE   boardTitle  
-			  ,BOARD_DATE    boardDate   
+			  ,BOARD_DATE    boardDate 
 			  ,BOARD_CONTENT boardContent
 			  ,ATCH_FILE_ID  atchFileId 
 			  ,BOARD_HITS    boardHitsNumber   
 			  ,BOARD_DELETE  boardDelete 
  		FROM TB_COMM_BOARD
  		WHERE BOARD_DELETE = 'N'
- 		AND CODE = '401'
+ 		AND CODE = 'CLASS401'
  		ORDER BY BOARD_SEQ DESC) AA)BB
  		WHERE RNUM BETWEEN #firstRecNo# and #lastRecNo#
  	</select>	
@@ -133,14 +127,14 @@
 			  ,BOARD_SEQ     boardSeq   
 			  ,USER_ID       userId      
 			  ,BOARD_TITLE   boardTitle  
-			  ,BOARD_DATE    boardDate   
+			  ,BOARD_DATE    boardDate  
 			  ,BOARD_CONTENT boardContent
 			  ,ATCH_FILE_ID  atchFileId 
 			  ,BOARD_HITS    boardHitsNumber   
 			  ,BOARD_DELETE  boardDelete 
  		FROM TB_COMM_BOARD
  		WHERE BOARD_DELETE = 'N'
- 		AND CODE = '402'
+ 		AND CODE = 'CLASS402'
  		ORDER BY BOARD_SEQ DESC) AA)BB
  		WHERE RNUM BETWEEN #firstRecNo# and #lastRecNo#
  	</select>	
@@ -151,14 +145,14 @@
 			  ,BOARD_SEQ     boardSeq   
 			  ,USER_ID       userId      
 			  ,BOARD_TITLE   boardTitle  
-			  ,BOARD_DATE    boardDate   
+			  ,BOARD_DATE    boardDate  
 			  ,BOARD_CONTENT boardContent
 			  ,ATCH_FILE_ID  atchFileId 
 			  ,BOARD_HITS    boardHitsNumber   
 			  ,BOARD_DELETE  boardDelete 
  		FROM TB_COMM_BOARD
  		WHERE BOARD_DELETE = 'N'
- 		AND CODE = '403'
+ 		AND CODE = 'CLASS403'
  		ORDER BY BOARD_SEQ DESC) AA)BB
  		WHERE RNUM BETWEEN #firstRecNo# and #lastRecNo#
  	</select>	
@@ -169,14 +163,14 @@
 			  ,BOARD_SEQ     boardSeq   
 			  ,USER_ID       userId      
 			  ,BOARD_TITLE   boardTitle  
-			  ,BOARD_DATE    boardDate   
+			  ,BOARD_DATE    boardDate 
 			  ,BOARD_CONTENT boardContent
 			  ,ATCH_FILE_ID  atchFileId 
 			  ,BOARD_HITS    boardHitsNumber   
 			  ,BOARD_DELETE  boardDelete 
  		FROM TB_COMM_BOARD
  		WHERE BOARD_DELETE = 'N'
- 		AND CODE = '404'
+ 		AND CODE = 'CLASS404'
  		ORDER BY BOARD_SEQ DESC) AA)BB
  		WHERE RNUM BETWEEN #firstRecNo# and #lastRecNo#
  	</select>	
@@ -187,14 +181,14 @@
 			  ,BOARD_SEQ     boardSeq   
 			  ,USER_ID       userId      
 			  ,BOARD_TITLE   boardTitle  
-			  ,BOARD_DATE    boardDate   
+			  ,BOARD_DATE    boardDate 
 			  ,BOARD_CONTENT boardContent
 			  ,ATCH_FILE_ID  atchFileId 
 			  ,BOARD_HITS    boardHitsNumber   
 			  ,BOARD_DELETE  boardDelete 
  		FROM TB_COMM_BOARD
  		WHERE BOARD_DELETE = 'N'
- 		AND CODE = '405'
+ 		AND CODE = 'CLASS405'
  		ORDER BY BOARD_SEQ DESC) AA)BB
  		WHERE RNUM BETWEEN #firstRecNo# and #lastRecNo#
  	</select>	
@@ -205,14 +199,14 @@
 			  ,BOARD_SEQ     boardSeq   
 			  ,USER_ID       userId      
 			  ,BOARD_TITLE   boardTitle  
-			  ,BOARD_DATE    boardDate   
+			  ,BOARD_DATE    boardDate 
 			  ,BOARD_CONTENT boardContent
 			  ,ATCH_FILE_ID  atchFileId 
 			  ,BOARD_HITS    boardHitsNumber   
 			  ,BOARD_DELETE  boardDelete 
  		FROM TB_COMM_BOARD
  		WHERE BOARD_DELETE = 'N'
- 		AND CODE = '406'
+ 		AND CODE = 'CLASS406'
  		ORDER BY BOARD_SEQ DESC) AA)BB
  		WHERE RNUM BETWEEN #firstRecNo# and #lastRecNo#
  	</select>	
@@ -223,14 +217,14 @@
 			  ,BOARD_SEQ     boardSeq   
 			  ,USER_ID       userId      
 			  ,BOARD_TITLE   boardTitle  
-			  ,BOARD_DATE    boardDate   
+			  ,BOARD_DATE    boardDate 
 			  ,BOARD_CONTENT boardContent
 			  ,ATCH_FILE_ID  atchFileId 
 			  ,BOARD_HITS    boardHitsNumber   
 			  ,BOARD_DELETE  boardDelete 
  		FROM TB_COMM_BOARD
  		WHERE BOARD_DELETE = 'N'
- 		AND CODE = '407'
+ 		AND CODE = 'CLASS407'
  		ORDER BY BOARD_SEQ DESC) AA)BB
  		WHERE RNUM BETWEEN #firstRecNo# and #lastRecNo#
  	</select>	
@@ -241,14 +235,14 @@
 			  ,BOARD_SEQ     boardSeq   
 			  ,USER_ID       userId      
 			  ,BOARD_TITLE   boardTitle  
-			  ,BOARD_DATE    boardDate   
+			  ,BOARD_DATE    boardDate  
 			  ,BOARD_CONTENT boardContent
 			  ,ATCH_FILE_ID  atchFileId 
 			  ,BOARD_HITS    boardHitsNumber   
 			  ,BOARD_DELETE  boardDelete 
  		FROM TB_COMM_BOARD
  		WHERE BOARD_DELETE = 'N'
- 		AND CODE = '408'
+ 		AND CODE = 'CLASS408'
  		ORDER BY BOARD_SEQ DESC) AA)BB
  		WHERE RNUM BETWEEN #firstRecNo# and #lastRecNo#
  	</select>	
@@ -280,7 +274,7 @@
 			  ,BOARD_SEQ     boardSeq    
 			  ,USER_ID       userId      
 			  ,BOARD_TITLE   boardTitle  
-			  ,BOARD_DATE    boardDate   
+			  ,BOARD_DATE    boardDate 
 			  ,BOARD_CONTENT boardContent
 			  ,ATCH_FILE_ID  atchFileId 
 			  ,BOARD_HITS    boardHitsNumber   

@@ -1,6 +1,7 @@
 package kr.or.ddit.commBoard.vo;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import kr.or.ddit.common.vo.PagingVO;
 
@@ -39,8 +40,12 @@ public class CommBoardVO extends PagingVO {
 	public void setBoardTitle(String boardTitle) {
 		this.boardTitle = boardTitle;
 	}
-	public Date getBoardDate() {
-		return boardDate;
+	public String getBoardDate() {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
+		String bordDateStr = sdf.format(boardDate);
+		
+		return bordDateStr;
 	}
 	public void setBoardDate(Date boardDate) {
 		this.boardDate = boardDate;

@@ -1,15 +1,30 @@
 package kr.or.ddit.partyBoard.handler;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
+
 import kr.or.ddit.common.handler.CommandHandler;
+import kr.or.ddit.common.service.AtchFileServiceImpl;
+import kr.or.ddit.common.service.IAtchFileService;
+import kr.or.ddit.common.vo.AtchFileVO;
 import kr.or.ddit.partyBoard.service.IPartyBoardService;
 import kr.or.ddit.partyBoard.service.PartyBoardServiceImpl;
 import kr.or.ddit.partyBoard.vo.PartyBoardVO;
 import kr.or.ddit.partyJoin.service.IPartyJoinService;
 import kr.or.ddit.partyJoin.service.PartyJoinServiceImpl;
 import kr.or.ddit.partyJoin.vo.PartyJoinVO;
+import kr.or.ddit.restInfo.dao.IRestInfoDao;
+import kr.or.ddit.restInfo.service.IRestInfoService;
+import kr.or.ddit.restInfo.service.RestInfoServiceImpl;
+import kr.or.ddit.restInfo.vo.RestInfoVO;
+import kr.or.ddit.review.service.IReviewService;
+import kr.or.ddit.review.service.ReviewServiceImpl;
+import kr.or.ddit.review.vo.ReviewVO;
+import kr.or.ddit.util.FileUploadRequestWrapper;
 
 public class InsertPartyHandler implements CommandHandler {
 
@@ -27,6 +42,11 @@ public class InsertPartyHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		if(req.getMethod().equals("GET")) {
+			// 식당 리스트
+			IRestInfoService iService = RestInfoServiceImpl.getInstance();
+			List<RestInfoVO> rs = iService.getAllRestInfoList();
+			req.setAttribute("list", rs);
+			
 			return VIEW_PAGE;
 		}else {
 			
@@ -45,6 +65,8 @@ public class InsertPartyHandler implements CommandHandler {
 			pv.setUserProfile(req.getParameter("userProfile"));
 			
 			service.insertPartyBoard(pv);			
+			
+			
 			
 			return req.getContextPath() + "/PARTY/main.do";
 		}

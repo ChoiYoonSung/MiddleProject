@@ -25,7 +25,6 @@ public class UpdatePartyStatusHandler implements CommandHandler {
 			return null;
 		} else {
 			long boardSeq = Long.parseLong(req.getParameter("boardSeq"));
-			System.out.println("boardSeq : " + boardSeq);
 			PartyBoardVO pv = new PartyBoardVO();
 			pv.setBoardSeq(Long.parseLong(req.getParameter("boardSeq")));
 			

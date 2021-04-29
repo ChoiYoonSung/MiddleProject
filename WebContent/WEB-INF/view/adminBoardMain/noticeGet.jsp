@@ -30,25 +30,19 @@
 								<tr class="d-flex text-left">
 									<th class="col-1 ">제목</th>
 									<th class="col-3 " name="boardTitle"><%=abv.getBoardTitle() %></th>
-									<th class="col-6 "></th>
+									<th class="col-5 "></th>
 									<th class="col-1 "><small>조회수</small></th>
-									<th class="col-1 "name="boardHitsNumber"><small><%=abv.getBoardHits() %></small></th>
+									<th class="col-2 "name="boardHitsNumber"><small><%=abv.getBoardHits() %></small></th>
 								</tr>
 								<tr class="d-flex text-left">
 									<td class="col-1 ">작성자</td>
 									<td class="col-3 "name="userId"><%=abv.getUserId()%></td>
-									<th class="col-6 "></th>
+									<th class="col-5 "></th>
 									<td class="col-1 "><small>작성일</small></td>
-									<td class="col-1 "name="boardDate"><small><%=abv.getBoardDate() %></small></td>
+									<td class="col-2 "name="boardDate"><small><%=abv.getBoardDate() %></small></td>
 								</tr>
 								<tr class="d-flex text-left">
-									<td class="col-12"><img class="col-12" src="../filedownload.do?fileId=<%=abv.getAtchFileId() %>">
-									</td>
-								</tr>
-								<tr class="d-flex text-left">
-									<td class="col-12">
-								<%=abv.getBoardContent() %>
-									</td>
+									<td class="col-12"><pre><%=abv.getBoardContent() %></pre></td>
 								</tr>
 							</tbody>
 						</table>

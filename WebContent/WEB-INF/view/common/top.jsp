@@ -36,7 +36,7 @@
 					<a class="dropdown-item" href="<%=request.getContextPath() %>/main/main.do">HOME MAIN</a>
 					<a class="dropdown-item" href="#">Activity Log</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="login.html">로그아웃</a>
+					<a class="dropdown-item" href="#" onclick="logout('<%=request.getContextPath() %>/logInOut/logout.do')">로그아웃</a>
 				</div>
 			</li>
 		</ul>
@@ -154,4 +154,14 @@
 	                    </div>
 	                </nav>
 	            </div>
+	            <script> // 로그아웃 JS
+			        function movePageByGet(url){
+			        	  location.href = url;
+			        }
+					function logout(url){ 
+						alert("로그아웃 합니다.");
+						movePageByGet(url);
+					}
+			    </script>
+	            
 	            <div id="layoutSidenav_content">
