@@ -29,7 +29,7 @@
 								<td class="col-lg-1">가격</td>
 								<td class="col-lg-2">
 									<select class="custom-select" id="price" name="price">
-										<option value="-" selected>아무거나</option>
+										<option value="아무거나" selected>아무거나</option>
 										<option value="5000원">5000원</option>
 										<option value="6000원">6000원</option>
 										<option value="7000원">7000원</option>
@@ -41,7 +41,7 @@
 								<td class="col-lg-1">거리</td>
 								<td class="col-lg-2">
 									<select class="custom-select" id="distance" name="distance">
-										<option value="-" selected>아무거나</option>
+										<option value="아무거나" selected>아무거나</option>
 										<option value="3분(100m)">3분(100m)</option>
 										<option value="5분(300m)">5분(300m)</option>
 										<option value="10분(600m)">10분(600m)</option>
@@ -51,7 +51,7 @@
 								<td class="col-lg-1">분류</td>
 								<td class="col-lg-2">
 									<select class="custom-select" id="restType" name="restType">
-										<option value="-" selected>아무거나</option>
+										<option value="아무거나" selected>아무거나</option>
 										<option value="한식">한식</option>
 										<option value="양식">양식</option>
 										<option value="중식">중식</option>

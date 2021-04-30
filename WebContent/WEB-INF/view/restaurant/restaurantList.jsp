@@ -238,9 +238,9 @@ for (var i = 0; i < positions.length; i ++) {
     kakao.maps.event.addListener(marker1, 'mouseover', makeOverListener(map, marker1, infowindow));
     kakao.maps.event.addListener(marker1, 'mouseout', makeOutListener(infowindow));
     kakao.maps.event.addListener(marker1, 'click', function() {
-    	<% for(int i = 0 ; i < menuListSize ; i++) { %>
-    	location.href="https://map.kakao.com/link/to/<%= menuList.get(i).getRestName() %>,<%= menuList.get(i).getRestLat() %>,<%= menuList.get(i).getRestLng() %>"; 
-    	<%}%> // close for문
+<%--     	<% for(int i = 0 ; i < menuListSize ; i++) { %> --%>
+    	location.href="https://map.kakao.com/link/to/세호불백,36.32804796422512,127.41902128213523"; 
+<%--     	<%}%> // close for문 --%>
   });
 }
 

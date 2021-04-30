@@ -76,6 +76,7 @@
 					<%if(pagingVO.getLastPageNo() < pagingVO.getTotalPageCount()) {%>
 					<a href="list.do?pageNo=<%=pagingVO.getFirstPageNo() + pagingVO.getPageSize() %>">[다음]</a>
 					<%} %>
+					<a class="btn btn-lg btn-secondary ml-3" href="<%=request.getContextPath() %>/classBoard/main.do">목록으로 돌아가기</a>
 				</td>
 			</tr>
 		<%} %>

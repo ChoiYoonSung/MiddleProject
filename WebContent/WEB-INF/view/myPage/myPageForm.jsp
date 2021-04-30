@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="kr.or.ddit.userDdit.vo.UserDditVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -48,22 +50,32 @@
 			          			<td class="p-2 col-6">이름 : </td>
 			          			<td class="p-2 col-6"><%= userDdit.getDditName() %></td>
 			          		</tr>
+			          		<%
+			          		Date nowDate = new Date(); 
+			          		System.out.println("포맷 지정 전 : " + userDdit.getDditBir()); 
+			          		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); //원하는 데이터 포맷 지정 
+			          		String strNowDate = simpleDateFormat.format(nowDate); //지정한 포맷으로 변환 
+			          		System.out.println("포맷 지정 후 : " + strNowDate);
+
+			          		%>
+
 			          		<tr class="d-flex text-center col-12">
 			          			<td class="p-2 col-6">생년월일 : </td>
 			          			<td class="p-2 col-6">
-			          				<input class="form-control py-4" id="dditBir" name="dditBir" type="date" value="<%= userDdit.getDditBir() %>" />
+			          				<input class="form-control py-4" id="dditBir" name="dditBir" type="date" value="<%= strNowDate %>" />
 			          			</td>
 			          		</tr>
+			    
 			          		<tr class="d-flex text-center col-12">
 			          			<td class="p-2 col-6">휴대폰번호 : </td>
 			          			<td class="p-2 col-6">
-			          				<input class="form-control py-4" id="dditHp" name="dditHp" type="text" />
+			          				<input class="form-control py-4" id="dditHp" name="dditHp" type="text" value="<%= userDdit.getDditHp()%>"/>
 			          			</td>
 			          		</tr>
 			          		<tr class="d-flex text-center col-12">
 			          			<td class="p-2 col-6">이메일 : </td>
 			          			<td class="p-2 col-6">
-			          				<input class="form-control py-4" id="dditHp" name="dditMail" type="text" />
+			          				<input class="form-control py-4" id="dditHp" name="dditMail" type="text" value="<%= userDdit.getDditMail()%>"/>
 			          			</td>
 			          		</tr>
 			          		<tr class="d-flex text-center col-12">
@@ -182,4 +194,5 @@
 	  		fm.action = url;
 	  		fm.submit();
 	  	}
+	  	
 	  </script>

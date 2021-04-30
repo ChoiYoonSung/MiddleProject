@@ -118,16 +118,16 @@
 					<%
 						if("null".equals(userId)){
 					%>       
-						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#" onclick="movePageByGet('<%=request.getContextPath() %>/logInOut/login.do')">로그인</a></li>
-						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#" onclick="movePageByGet('<%=request.getContextPath() %>/register/registerType.do')">회원가입</a></li>
+						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:movePageByGet('<%=request.getContextPath() %>/logInOut/login.do');" >로그인</a></li>
+						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:movePageByGet('<%=request.getContextPath() %>/register/registerType.do');">회원가입</a></li>
 					<%
 						} else {
 					%>
-							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#" onclick="movePageByGet('<%=request.getContextPath() %>/logInOut/logout.do')">로그아웃</a></li>
+							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:movePageByGet('<%=request.getContextPath() %>/logInOut/logout.do');">로그아웃</a></li>
 						<%
 							if("관리자".equals(userType)){
 						%>
-							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#" onclick="movePageByGet('<%=request.getContextPath() %>/admin/main.do')">관리자메뉴</a></li>
+							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:movePageByGet('<%=request.getContextPath() %>/admin/main.do');">관리자메뉴</a></li>
 						<%
 							}
 						%>

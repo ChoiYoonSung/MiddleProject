@@ -53,7 +53,7 @@
 	          	
 	          	<table class="table col-12" id="favBoard">
 	          		<thead>
-						<tr class="d-flex justify-content-start">
+						<tr class="d-flex text-center justify-content-start">
 							<th class="col-2">#</th>
 							<th class="col-5">식당 이름</th>
 							<th class="col-5">전화번호</th>

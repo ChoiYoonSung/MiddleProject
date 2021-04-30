@@ -61,9 +61,9 @@
 			, BOARD_TYPE	boardType
 			, BOARD_TITLE	boardTitle
 			, BOARD_CONTENT	boardContent
-			, BOARD_DATE	boardDate
-			, BOARD_START	boardStart
-			, BOARD_END		boardEnd
+			, TO_CHAR(BOARD_DATE, 'MM-DD')	boardDate
+			, TO_CHAR(BOARD_START, 'MM-DD')	boardStart
+			, TO_CHAR(BOARD_END, 'MM-DD'	)		boardEnd
 			, ATCH_FILE_ID	atchFileId
 			, BOARD_HITS	boardHits
 			, BOARD_DELETE 	boardDelete

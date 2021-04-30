@@ -43,7 +43,7 @@
 	          	
 	          	<table class="table col-12" id="#">
 	          		<thead>
-						<tr class="d-flex justify-content-start">
+						<tr class="d-flex text-center justify-content-start">
 							<th class="col-1">#</th>
 							<th class="col-3">댓글 위치</th> <!-- CODE -->
 							<th class="col-5">댓글 내용</th> <!-- REPLY_CONTENT -->

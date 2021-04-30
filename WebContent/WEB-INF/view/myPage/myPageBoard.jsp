@@ -43,7 +43,7 @@
 	          	
 	          	<table class="table col-12" id="qnaBoard">
 	          		<thead>
-						<tr class="d-flex justify-content-start">
+						<tr class="d-flex text-center justify-content-start">
 							<th class="col-1">#</th>
 							<th class="col-8">게시글 제목</th>
 							<th class="col-3">게시글 작성일</th>

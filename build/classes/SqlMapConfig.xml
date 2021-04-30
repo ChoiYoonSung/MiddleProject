@@ -47,10 +47,10 @@
       	<sqlMap resource="kr/or/ddit/sqlmap/groupCode.xml" /> <!-- 그룹코드 -->
       	<sqlMap resource="kr/or/ddit/sqlmap/code.xml" /> <!-- 코드 -->
       	<sqlMap resource="kr/or/ddit/blackList/blackList.xml" /> <!-- 블랙리스트 목록 -->
-      	<sqlMap resource="kr/or/ddit/restInfo/restInfo.xml" /> 
-       	<sqlMap resource="kr/or/ddit/restInfo/menu.xml" /> <!-- 메뉴 -->
-        <sqlMap resource="kr/or/ddit/restInfo/restFav.xml" />
-        	<sqlMap resource="kr/or/ddit/restInfo/reviewBoard.xml" /> 
+      	<sqlMap resource="kr/or/ddit/restInfo/restInfo.xml" />
+      	<sqlMap resource="kr/or/ddit/restInfo/reviewBoard.xml" /> <!-- 식당 리뷰 -->
+      	<sqlMap resource="kr/or/ddit/restInfo/menu.xml" /> <!-- 메뉴 -->
+      	<sqlMap resource="kr/or/ddit/restInfo/restFav.xml" /> <!-- 메뉴 -->
       	
       	<sqlMap resource="kr/or/ddit/mypage/myPage.xml" /> <!-- 마이페이지-->
       	

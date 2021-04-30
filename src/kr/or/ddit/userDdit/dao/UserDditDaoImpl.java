@@ -50,7 +50,11 @@ public class UserDditDaoImpl implements IUserDditDao {
 	public int updateUserDdit(SqlMapClient smc, UserDditVO userDditVo) throws SQLException {
 		int cnt = 0;
 		cnt = smc.update("userddit.updateUserDdit", userDditVo);
-		RESULT_LOGGER.info("■■■ DAO [0:수정실패] : " + cnt);
+		if(cnt<0) {
+			RESULT_LOGGER.info("■■■ DAO [-1:수정실패] : " + cnt);
+		}else {
+			RESULT_LOGGER.info("■■■ DAO [1:성공] : " + cnt);
+		}
 		return cnt;
 	}
 

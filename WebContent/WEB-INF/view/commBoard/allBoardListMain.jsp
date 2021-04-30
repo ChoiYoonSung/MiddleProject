@@ -27,7 +27,7 @@
 
 				<div class="card-body">
 					<h2 class="card-title">통합 커뮤니티</h2>
-					<p class="card-text">굿끼제먹 공식 BGM 브레이브걸스 - rollin</p>
+					<p>통합 커뮤니티 게시판에 오신걸 환영합니다!</p>
 				</div>
 				<div class="card-footer text-muted">
 					<table class="table col-12">
@@ -121,6 +121,7 @@
 					<%if(pagingVO.getLastPageNo() < pagingVO.getTotalPageCount()) {%>
 					<a href="main.do?pageNo=<%=pagingVO.getFirstPageNo() + pagingVO.getPageSize() %>">[다음]</a>
 					<%} %>
+					
 				</td>
 			</tr>
 		<%} %>
@@ -143,6 +144,8 @@
 		<!-- Sidebar Widgets Column -->
 		<div class="col-md-4">
 			<img class = "col-md-12" src="/DPJ/assets/img/about/9.png">
+			<p class="card-text">BGM 브레이브걸스 - rollin(1시간)</p>
+			<audio autoplay controls> <source src="<%=request.getContextPath() %>/assets/audio/lollin.mp4" type="audio/mp4"></audio>
 			<!-- Categories Widget -->
 			<div class="card my-4">
 				<h5 class="card-header">게시판 카테고리</h5>

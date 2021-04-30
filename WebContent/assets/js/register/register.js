@@ -337,7 +337,7 @@ function validate(){ // 저장 버튼 클릭 시 유효성 검사
 	    currdate.setFullYear(currdate.getFullYear() - age);
 	    
 	    if ((currdate - mydate) < 0){
-	    	var str = "가입할 수 없는 연령입니다.";
+	    	var str = "2003년 1월 1일 이후 출생자만 가입 가능합니다.";
 	        formSetting(str,"#spDditBir",false);
 	        return;
 	    }
